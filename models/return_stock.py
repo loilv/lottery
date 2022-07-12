@@ -163,7 +163,7 @@ class ReturnStockLine(models.Model):
             plan = self.env['planed.line'].search(
                 [('planed_id.date', '=', r.return_stock_id.date), ('customer_id', '=', r.customer_id.id)])
             total = sum(plan.mapped('total'))
-            r.consume = total - r.sum_return
+            r.consume = total - r.sum_return * 10000
 
     @api.depends('return_stock_id', 'return_stock_id.day_of_week')
     def _compute_ticket_receive(self):
