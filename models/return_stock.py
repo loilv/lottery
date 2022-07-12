@@ -1,5 +1,6 @@
 from odoo import fields, api, models
 from datetime import datetime
+from odoo.exceptions import UserError, ValidationError
 
 
 class ReturnStock(models.Model):
@@ -38,6 +39,12 @@ class ReturnStock(models.Model):
         ('5', 'Thứ 7'),
         ('6', 'Chủ nhật')
     ])
+
+    def unlink(self):
+        for rec in self:
+            if rec.state == 'done':
+                raise ValidationError('Không thể xóa phiếu trả ế đã hoàn thành')
+        return super(ReturnStock, self).unlink()
 
 
 class ReturnStockLine(models.Model):

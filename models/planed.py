@@ -2,7 +2,7 @@ import json
 
 from lxml import etree
 from datetime import datetime
-
+from odoo.exceptions import UserError, ValidationError
 from odoo import fields, api, models, _
 
 
@@ -57,6 +57,23 @@ class Planed(models.Model):
         ('5', 'Thứ 7'),
         ('6', 'Chủ nhật')
     ])
+
+    def update_state_lottery(self):
+        plan = self.search([('state', '!=', 'done')])
+        for item in plan:
+            item.state = 'done'
+        purchase = self.env['purchase.inventory'].search([('state', '!=', 'done')])
+        for item in purchase:
+            item.state = 'done'
+        re_stock = self.env['return.stock'].search([('state', '!=', 'done')])
+        for item in re_stock:
+            item.state = 'done'
+
+    def unlink(self):
+        for rec in self:
+            if rec.state == 'done':
+                raise ValidationError('Không thể xóa kế hoạch đã hoàn thành')
+        return super(Planed, self).unlink()
 
 
 class PlanedLine(models.Model):

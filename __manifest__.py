@@ -25,6 +25,7 @@
         'data/province_lottery_data.xml',
         'data/data_tele_data.xml',
         'data/data_planed.xml',
+        'data/schedule.xml',
     ],
     'assets': {
         'web.assets_backend': {
