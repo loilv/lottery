@@ -58,7 +58,6 @@ class ProvinceLottery(models.Model):
 
     name = fields.Char(string='Tên đài')
     code = fields.Char(string='Mã đài', readonly=1)
-    price = fields.Float(string='Đơn giá', required=1)
     group = fields.Selection([
         ('0', 'Thứ 2'),
         ('1', 'Thứ 3'),

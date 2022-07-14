@@ -44,7 +44,6 @@
             <tree create="false" editable="bottom">
                 <field name="code"/>
                 <field name="name"/>
-                <field name="price"/>
                 <field name="group"/>
             </tree>
         </field>
