@@ -28,7 +28,9 @@ class Planed(models.Model):
                 'ST': customer.ST,
                 'CT': customer.CT,
                 'DN': customer.DN,
+                'TN': customer.TN,
                 'AG': customer.AG,
+                'BTH': customer.BTH,
                 'BD': customer.BD,
                 'TV': customer.TV,
                 'VL': customer.VL,
@@ -41,13 +43,23 @@ class Planed(models.Model):
                 'TG': customer.TG,
             }
             val_lines.append((0, 0, vals))
-        res.update({'lines': val_lines})
+        inventory = self.env['purchase.inventory'].search([('date', '=', self._context.get('default_date'))], limit=1)
+        stock_vals = []
+        quantities = self.env['purchase.inventory'].get_total(date=self._context.get('default_date'))
+        for item in inventory.lines:
+            vals = {
+                'province_id': item.province_id.id,
+                'quantity_in': quantities[item.province_id.code]
+            }
+            stock_vals.append((0, 0, vals))
+        res.update({'stock_info': stock_vals, 'lines': val_lines})
         return res
 
     name = fields.Char(string='Tên kế hoạch', default='')
     date = fields.Date(string='Ngày', default=datetime.now())
     lines = fields.One2many('planed.line', 'planed_id', string='Chi tiết')
     state = fields.Selection([('draft', 'Dự thảo'), ('done', 'Đã hoàn thành')], default='draft')
+    stock_info = fields.One2many('stock.information', 'planed_id', string='Tồn kho')
 
     day_of_week = fields.Selection([
         ('0', 'Thứ 2'),
@@ -75,66 +87,6 @@ class Planed(models.Model):
             if rec.state == 'done':
                 raise ValidationError('Không thể xóa kế hoạch đã hoàn thành')
         return super(Planed, self).unlink()
-
-    # def write(self, vals):
-    #     raise ValidationError(self.field_two)
-    #     HCM_PS = self.HCM_PS
-    #     DT_PS = self.DT_PS
-    #     CM_PS = self.CM_PS
-    #     BL_PS = self.BL_PS
-    #     BT_PS = self.BT_PS
-    #     VT_PS = self.VT_PS
-    #     ST_PS = self.ST_PS
-    #     CT_PS = self.CT_PS
-    #     DN_PS = self.DN_PS
-    #     TN_PS = self.TN_PS
-    #     AG_PS = self.AG_PS
-    #     BTH_PS = self.BTH_PS
-    #     BD_PS = self.BD_PS
-    #     TV_PS = self.TV_PS
-    #     VL_PS = self.VL_PS
-    #     HCM_2_PS = self.HCM_2_PS
-    #     LA_PS = self.LA_PS
-    #     BP_PS = self.BP_PS
-    #     HG_PS = self.HG_PS
-    #     KG_PS = self.KG_PS
-    #     DL_PS = self.DL_PS
-    #     TG_PS = self.TG_PS
-    #     res = super(Planed, self).write(vals)
-    #     if 'lines' in vals:
-    #         for item in vals.get('lines'):
-    #             if not item:
-    #                 continue
-    #             if self.day_of_week == '0':
-    #                 self.message_post(body=f"TP HCM(PS): {HCM_PS} -> {self.HCM_PS}")
-    #                 self.message_post(body=f"DT(PS): {DT_PS} -> {self.DT_PS}")
-    #                 self.message_post(body=f"CM(PS): {CM_PS} -> {self.CM_PS}")
-    #             if self.day_of_week == '1':
-    #                 self.message_post(body=f"BL(PS): {BL_PS} -> {self.BL_PS}")
-    #                 self.message_post(body=f"BT(PS): {BT_PS} -> {self.BT_PS}")
-    #                 self.message_post(body=f"VT(PS): {VT_PS} -> {self.VT_PS}")
-    #             if self.day_of_week == '2':
-    #                 self.message_post(body=f"ST(PS): {ST_PS} -> {self.ST_PS}")
-    #                 self.message_post(body=f"CT(PS): {CT_PS} -> {self.CT_PS}")
-    #                 self.message_post(body=f"DN(PS): {DN_PS} -> {self.DN_PS}")
-    #             if self.day_of_week == '3':
-    #                 self.message_post(body=f"TN(PS): {TN_PS} -> {self.TN_PS}")
-    #                 self.message_post(body=f"AG(PS): {AG_PS} -> {self.AG_PS}")
-    #                 self.message_post(body=f"BTH(PS): {BTH_PS} -> {self.BTH_PS}")
-    #             if self.day_of_week == '4':
-    #                 self.message_post(body=f"BD(PS): {BD_PS} -> {self.BD_PS}")
-    #                 self.message_post(body=f"TV(PS): {TV_PS} -> {self.TV_PS}")
-    #                 self.message_post(body=f"VL(PS): {VL_PS} -> {self.VL_PS}")
-    #             if self.day_of_week == '5':
-    #                 self.message_post(body=f"TP HCM(PS): {HCM_2_PS} -> {self.HCM_2_PS}")
-    #                 self.message_post(body=f"LA(PS): {LA_PS} -> {self.LA_PS}")
-    #                 self.message_post(body=f"BP(PS): {BP_PS} -> {self.BP_PS}")
-    #                 self.message_post(body=f"HG(PS): {HG_PS} -> {self.HG_PS}")
-    #             if self.day_of_week == '6':
-    #                 self.message_post(body=f"KG(PS): {KG_PS} -> {self.KG_PS}")
-    #                 self.message_post(body=f"DL(PS): {DL_PS} -> {self.DL_PS}")
-    #                 self.message_post(body=f"TG(PS): {TG_PS} -> {self.TG_PS}")
-    #     return res
 
 
 class PlanedLine(models.Model):
@@ -225,7 +177,8 @@ class PlanedLine(models.Model):
     @api.depends('date')
     def _compute_day_of_week(self):
         for r in self:
-            r.day_of_week = str(r.date.get_weekday())
+            if r.date:
+                r.day_of_week = str(r.date.weekday())
 
     @api.depends(
         'HCM_PS', 'DT_PS', 'CM_PS', 'BL_PS', 'BT_PS',
@@ -448,3 +401,24 @@ class PlanedLine(models.Model):
                                               subtype_id=self.env.ref('mail.mt_note').id)
         res = super(PlanedLine, self).write(vals)
         return res
+
+
+class StockInformation(models.Model):
+    _name = 'stock.information'
+
+    planed_id = fields.Many2one('planed', string='Kế hoạch')
+    province_id = fields.Many2one('province.lottery', string='Tên đài', readonly=1)
+    quantity_in = fields.Integer(string='Tổng nhập', readonly=1)
+    quantity_out = fields.Integer(string='Tồn cuối', readonly=1, compute='handle_quantity', store=True)
+
+    @api.depends('quantity_in')
+    def handle_quantity(self):
+        for item in self:
+            if item.planed_id:
+                try:
+                    sum_amount = sum(item.planed_id.lines.mapped(item.province_id.code))
+                    item.quantity_out = item.quantity_in - sum_amount
+                except Exception as e:
+                    item.quantity_out = 0
+            else:
+                item.quantity_out = 0

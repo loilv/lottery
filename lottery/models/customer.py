@@ -19,7 +19,6 @@ class Customer(models.Model):
                               string='Trạng thái',
                               default='active', tracking=True)
     note = fields.Char(string='Ghi chú', tracking=True)
-    price = fields.Float(string='Đơn giá', required=1, tracking=True)
     planed = fields.Many2one('customer.plan', string='Kế hoạch lãnh', required=1, tracking=True)
 
     HCM = fields.Integer(string='TP HCM', tracking=True)
@@ -44,6 +43,30 @@ class Customer(models.Model):
     KG = fields.Integer(string='KG', tracking=True)
     DL = fields.Integer(string='ĐL', tracking=True)
     TG = fields.Integer(string='TG', tracking=True)
+
+    # đơn giá theo đài
+    HCM_price = fields.Float(string='TP HCM', tracking=True, default=None)
+    DT_price = fields.Float(string='ĐT', tracking=True)
+    CM_price = fields.Float(string='CM', tracking=True)
+    BL_price = fields.Float(string='CM', tracking=True)
+    BT_price = fields.Float(string='BT', tracking=True)
+    VT_price = fields.Float(string='VT', tracking=True)
+    ST_price = fields.Float(string='ST', tracking=True)
+    CT_price = fields.Float(string='ST', tracking=True)
+    DN_price = fields.Float(string='ĐN', tracking=True)
+    TN_price = fields.Float(string='TN', tracking=True)
+    AG_price = fields.Float(string='AG', tracking=True)
+    BTH_price = fields.Float(string='BTH', tracking=True)
+    BD_price = fields.Float(string='BD', tracking=True)
+    TV_price = fields.Float(string='TV', tracking=True)
+    VL_price = fields.Float(string='VL', tracking=True)
+    HCM_2_price = fields.Float(string='TP HCM', tracking=True)
+    LA_price = fields.Float(string='LA', tracking=True)
+    BP_price = fields.Float(string='BP', tracking=True)
+    HG_price = fields.Float(string='HG', tracking=True)
+    KG_price = fields.Float(string='KG', tracking=True)
+    DL_price = fields.Float(string='ĐL', tracking=True)
+    TG_price = fields.Float(string='TG', tracking=True)
 
     def create_customer(self):
         return {

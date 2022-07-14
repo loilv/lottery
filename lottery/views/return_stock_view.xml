@@ -169,7 +169,8 @@
 
     <menuitem id="return_stock_menu_view"
               name="Trả ế"
-              web_icon="lottery,static/src/img/icons_green/expenses.png"
+              sequence="2"
+              web_icon="lottery,static/src/img/icons/Expenses.png"
               action="return_stock_action_view"/>
 
     <menuitem id="create_return_stock_menu_view"

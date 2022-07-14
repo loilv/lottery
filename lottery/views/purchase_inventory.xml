@@ -21,18 +21,16 @@
                     <label for="date" string="Ngày" attrs="{'readonly': [('state', '=', 'done')]}"/>
                     <field name="date" readonly="1" nolabel="1" attrs="{'readonly': [('state', '=', 'done')]}"/>
                 </div>
-                <notebook>
-                    <page string="Chi tiết">
-                        <field name="lines" attrs="{'readonly': [('state', '=', 'done')]}">
-                            <tree editable="bottom" create="false" delete="false">
-                                <field name="province_id" force_save="1"/>
-                                <field name="in_company"/>
-                                <field name="in_province"/>
-                                <field name="total" sum="Tổng" force_save="1"/>
-                            </tree>
-                        </field>
-                    </page>
-                </notebook>
+                <group string="Thông tin phiếu nhập">
+                    <field name="lines" attrs="{'readonly': [('state', '=', 'done')]}" nolabel="1">
+                        <tree editable="bottom" create="false" delete="false">
+                            <field name="province_id" force_save="1"/>
+                            <field name="in_company"/>
+                            <field name="in_province"/>
+                            <field name="total" sum="Tổng" force_save="1"/>
+                        </tree>
+                    </field>
+                </group>
             </form>
         </field>
     </record>
@@ -73,7 +71,8 @@
 
     <menuitem id="purchase_inventory_menu_view"
               name="Nhập kho"
-              web_icon="lottery,static/src/img/icons_green/purchase.png"
+              sequence="3"
+              web_icon="lottery,static/src/img/icons/Purchase.png"
               action="purchase_inventory_action_view"/>
 
     <menuitem id="create_purchase_inventory_menu_view"

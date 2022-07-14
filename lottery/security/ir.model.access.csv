@@ -13,3 +13,4 @@ access_return_stock,access_return_stock,model_return_stock,base.group_user,1,1,1
 access_return_stock_line,access_return_stock_line,model_return_stock_line,base.group_user,1,1,1,1
 access_return_stock_tele,access_return_stock_tele,model_return_stock_tele,base.group_user,1,1,1,1
 access_data_tele,access_data_tele,model_data_tele,base.group_user,1,1,1,1
+access_stock.information,access_stock.information,model_stock_information,base.group_user,1,1,1,1

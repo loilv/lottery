@@ -37,6 +37,37 @@ class PurchaseInventory(models.Model):
                 raise ValidationError('Không thể xóa phiếu nhập kho đã hoàn thành')
         return super(PurchaseInventory, self).unlink()
 
+    def get_total(self, date):
+        inventory = self.search([('date', '=', date)], limit=1)
+        vals = {}
+        for item in inventory.lines:
+            vals.update({
+                item.province_id.code: item.total
+            })
+        return vals
+
+    def cron_create_inventory(self):
+        old = self.search([], limit=1, order='id desc')
+        if not old:
+            return False
+        province_ids = self.env['province.lottery'].search([('group', '=', datetime.now().weekday())])
+        val_lines = []
+        for p in province_ids:
+            for item in old.lines:
+                if item.province_id == p:
+                    val_lines.append((0, 0, {
+                        'province_id': p.id,
+                        'in_company': item.in_company,
+                        'in_province': item.in_province,
+                        'total': item.total,
+                    }))
+        self.create({
+            'name': f'Nhập kho ngày: {datetime.now().strftime("%d-%m-%Y")}',
+            'date': datetime.now(),
+            'lines': val_lines
+        })
+        return True
+
 
 class PurchaseInventoryLine(models.Model):
     _name = 'purchase.inventory.line'

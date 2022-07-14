@@ -6,7 +6,7 @@ from odoo.exceptions import UserError, ValidationError
 class ReturnStock(models.Model):
     _name = 'return.stock'
 
-    name = fields.Char('Tên trả ế')
+    name = fields.Char('Tên chứng từ trả ế')
     date = fields.Date(string='Ngày', default=datetime.now())
     lines = fields.One2many('return.stock.line', 'return_stock_id')
     tele_ids = fields.One2many('return.stock.tele', 'return_stock_id')
@@ -198,73 +198,50 @@ class ReturnStockLine(models.Model):
         for r in self:
             province = self.env['province.lottery'].search([('group', '=', r.return_stock_id.day_of_week)])
             revenues = r.ticket_receive
-            list_code = []
             if r.HCM > 0:
-                price = province.filtered(lambda x: x.code == 'HCM').price
-                revenues -= ((r.sum_return * 10000) + r.du_thieu)  * price
+                revenues -= ((r.sum_return * 10000) + r.du_thieu)  * r.customer_id.HCM_price
             if r.DT > 0:
-                price = province.filtered(lambda x: x.code == 'DT').price
-                revenues -= ((r.sum_return * 10000) + r.du_thieu)  * price
+                revenues -= ((r.sum_return * 10000) + r.du_thieu)  * r.customer_id.DT_price
             if r.CM > 0:
-                price = province.filtered(lambda x: x.code == 'CM').price
-                revenues -= ((r.sum_return * 10000) + r.du_thieu)  * price
+                revenues -= ((r.sum_return * 10000) + r.du_thieu)  * r.customer_id.CM_price
             if r.BL > 0:
-                price = province.filtered(lambda x: x.code == 'BL').price
-                revenues -= ((r.sum_return * 10000) + r.du_thieu)  * price
+                revenues -= ((r.sum_return * 10000) + r.du_thieu)  * r.customer_id.BL_price
             if r.BT > 0:
-                price = province.filtered(lambda x: x.code == 'BT').price
-                revenues -= ((r.sum_return * 10000) + r.du_thieu)  * price
+                revenues -= ((r.sum_return * 10000) + r.du_thieu)  * r.customer_id.BT_price
             if r.VT > 0:
-                price = province.filtered(lambda x: x.code == 'VT').price
-                revenues -= ((r.sum_return * 10000) + r.du_thieu)  * price
+                revenues -= ((r.sum_return * 10000) + r.du_thieu)  * r.customer_id.VT_price
             if r.ST > 0:
-                price = province.filtered(lambda x: x.code == 'ST').price
-                revenues -= ((r.sum_return * 10000) + r.du_thieu) * price
+                revenues -= ((r.sum_return * 10000) + r.du_thieu) * r.customer_id.ST_price
             if r.CT > 0:
-                price = province.filtered(lambda x: x.code == 'CT').price
-                revenues -= ((r.sum_return * 10000) + r.du_thieu) * price
+                revenues -= ((r.sum_return * 10000) + r.du_thieu) * r.customer_id.CT_price
             if r.DN > 0:
-                price = province.filtered(lambda x: x.code == 'DN').price
-                revenues -= ((r.sum_return * 10000) + r.du_thieu) * price
+                revenues -= ((r.sum_return * 10000) + r.du_thieu) * r.customer_id.DN_price
             if r.TN > 0:
-                price = province.filtered(lambda x: x.code == 'TN').price
-                revenues -= ((r.sum_return * 10000) + r.du_thieu) * price
+                revenues -= ((r.sum_return * 10000) + r.du_thieu) * r.customer_id.TN_price
             if r.AG > 0:
-                price = province.filtered(lambda x: x.code == 'AG').price
-                revenues -= ((r.sum_return * 10000) + r.du_thieu) * price
+                revenues -= ((r.sum_return * 10000) + r.du_thieu) * r.customer_id.AG_price
             if r.BTH > 0:
-                price = province.filtered(lambda x: x.code == 'BTH').price
-                revenues -= ((r.sum_return * 10000) + r.du_thieu) * price
+                revenues -= ((r.sum_return * 10000) + r.du_thieu) * r.customer_id.BTH_price
             if r.BD > 0:
-                price = province.filtered(lambda x: x.code == 'BD').price
-                revenues -= ((r.sum_return * 10000) + r.du_thieu) * price
+                revenues -= ((r.sum_return * 10000) + r.du_thieu) * r.customer_id.BD_price
             if r.TV > 0:
-                price = province.filtered(lambda x: x.code == 'TV').price
-                revenues -= ((r.sum_return * 10000) + r.du_thieu) * price
+                revenues -= ((r.sum_return * 10000) + r.du_thieu) * r.customer_id.TV_price
             if r.VL > 0:
-                price = province.filtered(lambda x: x.code == 'VL').price
-                revenues -= ((r.sum_return * 10000) + r.du_thieu) * price
+                revenues -= ((r.sum_return * 10000) + r.du_thieu) * r.customer_id.VL_price
             if r.HCM_2 > 0:
-                price = province.filtered(lambda x: x.code == 'HCM_2').price
-                revenues -= ((r.sum_return * 10000) + r.du_thieu) * price
+                revenues -= ((r.sum_return * 10000) + r.du_thieu) * r.customer_id.HCM_2_price
             if r.LA > 0:
-                price = province.filtered(lambda x: x.code == 'LA').price
-                revenues -= ((r.sum_return * 10000) + r.du_thieu) * price
+                revenues -= ((r.sum_return * 10000) + r.du_thieu) * r.customer_id.LA_price
             if r.BP > 0:
-                price = province.filtered(lambda x: x.code == 'BP').price
-                revenues -= ((r.sum_return * 10000) + r.du_thieu) * price
+                revenues -= ((r.sum_return * 10000) + r.du_thieu) * r.customer_id.BP_price
             if r.HG > 0:
-                price = province.filtered(lambda x: x.code == 'HG').price
-                revenues -= ((r.sum_return * 10000) + r.du_thieu) * price
+                revenues -= ((r.sum_return * 10000) + r.du_thieu) * r.customer_id.HG_price
             if r.KG > 0:
-                price = province.filtered(lambda x: x.code == 'KG').price
-                revenues -= ((r.sum_return * 10000) + r.du_thieu) * price
+                revenues -= ((r.sum_return * 10000) + r.du_thieu) * r.customer_id.KG_price
             if r.DL > 0:
-                price = province.filtered(lambda x: x.code == 'DL').price
-                revenues -= ((r.sum_return * 10000) + r.du_thieu) * price
+                revenues -= ((r.sum_return * 10000) + r.du_thieu) * r.customer_id.DL_price
             if r.TG > 0:
-                price = province.filtered(lambda x: x.code == 'TG').price
-                revenues -= ((r.sum_return * 10000) + r.du_thieu) * price
+                revenues -= ((r.sum_return * 10000) + r.du_thieu) * r.customer_id.TG_price
             r.revenues = revenues
 
     @api.depends('HCM', 'DT', 'CM', 'BL', 'BT', 'VT', 'ST', 'CT', 'DN', 'TN', 'AG',

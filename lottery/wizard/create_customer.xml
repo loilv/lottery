@@ -2,6 +2,7 @@
     <record id="customer_form_view_wz" model="ir.ui.view">
         <field name="name">Khách Hàng</field>
         <field name="model">customer</field>
+        <field name="priority">2</field>
         <field name="arch" type="xml">
             <form create="false">
                 <group>
@@ -9,7 +10,6 @@
                         <field name="name" string="Họ tên"/>
                         <field name="phone"/>
                         <field name="status"/>
-                        <field name="price"/>
                     </group>
                     <group>
                         <field name="gender"/>
@@ -27,50 +27,248 @@
                         <div class="table">
                             <table class="table table-bordered">
                                 <tbody>
-                                        <tr>
-                                            <td>Thứ 2:</td>
-                                            <td><label for="HCM" string="TP HCM"/><field name="HCM"/></td>
-                                            <td><label for="DT" string="ĐT"/><field name="DT"/></td>
-                                            <td><label for="CM" string="CM"/><field name="CM"/></td>
-                                        </tr>
-                                        <tr>
-                                            <td>THỨ 3:</td>
-                                            <td><label for="BL" string="BL"/><field name="BL"/></td>
-                                            <td><label for="BT" string="BT"/><field name="BT"/></td>
-                                            <td><label for="VT" string="VT"/><field name="VT"/></td>
-                                        </tr>
-                                        <tr>
-                                            <td>THỨ 4:</td>
-                                            <td><label for="ST" string="ST"/><field name="ST"/></td>
-                                            <td><label for="CT" string="CT"/><field name="CT"/></td>
-                                            <td><label for="DN" string="ĐN"/><field name="DN"/></td>
-                                        </tr>
-                                        <tr>
-                                            <td>THỨ 5:</td>
-                                            <td><label for="TN" string="TN"/><field name="TN"/></td>
-                                            <td><label for="AG" string="AG"/><field name="AG"/></td>
-                                            <td><label for="BTH" string="BTH"/><field name="BTH"/></td>
-                                        </tr>
-                                        <tr>
-                                            <td>THỨ 6:</td>
-                                            <td><label for="BD" string="BD"/><field name="BD"/></td>
-                                            <td><label for="TV" string="TV"/><field name="TV"/></td>
-                                            <td><label for="VL" string="VL"/><field name="VL"/></td>
-                                        </tr>
-                                        <tr>
-                                            <td>THỨ 7:</td>
-                                            <td><label for="HCM_2" string="TP HCM"/><field name="HCM_2"/></td>
-                                            <td><label for="LA" string="LA"/><field name="LA"/></td>
-                                            <td><label for="BP" string="BP"/><field name="BP"/></td>
-                                            <td><label for="HG" string="HG"/><field name="HG"/></td>
-                                        </tr>
-                                        <tr>
-                                            <td>CHỦ NHẬT:</td>
-                                            <td><label for="KG" string="KG"/><field name="KG"/></td>
-                                            <td><label for="DL" string="ĐL"/><field name="DL"/></td>
-                                            <td><label for="TG" string="TG"/><field name="TG"/></td>
-                                        </tr>
-                                    </tbody>
+                                    <tr>
+                                        <td>Thứ 2:</td>
+                                        <td>
+                                            <div class="d-flex justify-content-between justify-content-between">
+                                                <label for="HCM" string="TP HCM"/>
+                                                <label for="HCM_price" string="Đơn giá"/>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <field name="HCM"/>
+                                                <field class="ml-5" name="HCM_price" placeholder="Đơn giá"/>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex justify-content-between justify-content-between">
+                                                <label for="DT" string="ĐT"/>
+                                                <label for="DT_price" string="Đơn giá"/>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <field name="DT"/>
+                                                <field class="ml-5" name="DT_price" placeholder="Đơn giá"/>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex justify-content-between justify-content-between">
+                                                <label for="CM" string="CM"/>
+                                                <label for="CM_price" string="Đơn giá"/>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <field name="CM"/>
+                                                <field class="ml-5" name="CM_price" placeholder="Đơn giá"/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>THỨ 3:</td>
+                                        <td>
+                                            <div class="d-flex justify-content-between justify-content-between">
+                                                <label for="BL" string="BL"/>
+                                                <label for="BL_price" string="Đơn giá"/>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <field name="BL"/>
+                                                <field class="ml-5" name="BL_price" placeholder="Đơn giá"/>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex justify-content-between justify-content-between">
+                                                <label for="BT" string="BT"/>
+                                                <label for="BT_price" string="Đơn giá"/>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <field name="BT"/>
+                                                <field class="ml-5" name="BT_price" placeholder="Đơn giá"/>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex justify-content-between justify-content-between">
+                                                <label for="VT" string="VT"/>
+                                                <label for="VT_price" string="Đơn giá"/>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <field name="VT"/>
+                                                <field class="ml-5" name="VT_price" placeholder="Đơn giá"/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>THỨ 4:</td>
+                                        <td>
+                                            <div class="d-flex justify-content-between justify-content-between">
+                                                <label for="ST" string="ST"/>
+                                                <label for="ST_price" string="Đơn giá"/>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <field name="ST"/>
+                                                <field class="ml-5" name="ST_price" placeholder="Đơn giá"/>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex justify-content-between justify-content-between">
+                                                <label for="CT" string="CT"/>
+                                                <label for="CT_price" string="Đơn giá"/>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <field name="CT"/>
+                                                <field class="ml-5" name="CT_price" placeholder="Đơn giá"/>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex justify-content-between justify-content-between">
+                                                <label for="DN" string="ĐN"/>
+                                                <label for="DN_price" string="Đơn giá"/>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <field name="DN"/>
+                                                <field class="ml-5" name="DN_price" placeholder="Đơn giá"/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>THỨ 5:</td>
+                                        <td>
+                                            <div class="d-flex justify-content-between justify-content-between">
+                                                <label for="TN" string="TN"/>
+                                                <label for="TN_price" string="Đơn giá"/>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <field name="TN"/>
+                                                <field class="ml-5" name="TN_price" placeholder="Đơn giá"/>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex justify-content-between justify-content-between">
+                                                <label for="AG" string="AG"/>
+                                                <label for="AG_price" string="Đơn giá"/>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <field name="AG"/>
+                                                <field class="ml-5" name="AG_price" placeholder="Đơn giá"/>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex justify-content-between justify-content-between">
+                                                <label for="BTH" string="BTH"/>
+                                                <label for="BTH_price" string="Đơn giá"/>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <field name="BTH"/>
+                                                <field class="ml-5" name="BTH_price" placeholder="Đơn giá"/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>THỨ 6:</td>
+                                        <td>
+                                            <div class="d-flex justify-content-between justify-content-between">
+                                                <label for="BD" string="BD"/>
+                                                <label for="BD_price" string="Đơn giá"/>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <field name="BD"/>
+                                                <field class="ml-5" name="BD_price" placeholder="Đơn giá"/>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex justify-content-between justify-content-between">
+                                                <label for="TV" string="TV"/>
+                                                <label for="TV_price" string="Đơn giá"/>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <field name="TV"/>
+                                                <field class="ml-5" name="TV_price" placeholder="Đơn giá"/>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex justify-content-between justify-content-between">
+                                                <label for="VL" string="VL"/>
+                                                <label for="VL_price" string="Đơn giá"/>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <field name="VL"/>
+                                                <field class="ml-5" name="VL_price" placeholder="Đơn giá"/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>THỨ 7:</td>
+                                        <td>
+                                            <div class="d-flex justify-content-between justify-content-between">
+                                                <label for="HCM_2" string="HCM_2"/>
+                                                <label for="HCM_2_price" string="Đơn giá"/>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <field name="HCM_2"/>
+                                                <field class="ml-5" name="HCM_2_price" placeholder="Đơn giá"/>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex justify-content-between justify-content-between">
+                                                <label for="LA" string="LA"/>
+                                                <label for="LA_price" string="Đơn giá"/>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <field name="LA"/>
+                                                <field class="ml-5" name="LA_price" placeholder="Đơn giá"/>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex justify-content-between justify-content-between">
+                                                <label for="BP" string="BP"/>
+                                                <label for="BP_price" string="Đơn giá"/>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <field name="BP"/>
+                                                <field class="ml-5" name="BP_price" placeholder="Đơn giá"/>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex justify-content-between justify-content-between">
+                                                <label for="HG" string="HG"/>
+                                                <label for="HG_price" string="Đơn giá"/>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <field name="HG"/>
+                                                <field class="ml-5" name="HG_price" placeholder="Đơn giá"/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>CHỦ NHẬT:</td>
+                                        <td>
+                                            <div class="d-flex justify-content-between justify-content-between">
+                                                <label for="KG" string="KG"/>
+                                                <label for="KG_price" string="Đơn giá"/>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <field name="KG"/>
+                                                <field class="ml-5" name="KG_price" placeholder="Đơn giá"/>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex justify-content-between justify-content-between">
+                                                <label for="DL" string="DL"/>
+                                                <label for="DL_price" string="Đơn giá"/>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <field name="DL"/>
+                                                <field class="ml-5" name="DL_price" placeholder="Đơn giá"/>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex justify-content-between justify-content-between">
+                                                <label for="TG" string="TG"/>
+                                                <label for="TG_price" string="Đơn giá"/>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <field name="TG"/>
+                                                <field class="ml-5" name="TG_price" placeholder="Đơn giá"/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
                     </div>

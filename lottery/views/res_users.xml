@@ -1,6 +1,7 @@
 <odoo>
     <menuitem id="user_menu_view"
+              sequence="4"
               name="Tài khoản"
-              web_icon="lottery,static/src/img/icons_green/members.png"
+              web_icon="lottery,static/src/img/icons/Members.png"
               action="base.action_res_users"/>
 </odoo>
