@@ -4,67 +4,118 @@
         <field name="model">planed</field>
         <field name="arch" type="xml">
             <form create="false">
-                <field name="day_of_week" invisible="1"/>
-                <field name="state" invisible="1"/>
-                <div class="d-flex">
-                    <label for="date" string="Ngày" attrs="{'readonly': [('state', '=', 'done')]}"/>
-                    <field name="date" readonly="1" nolabel="1" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                <sheet>
+                    <field name="day_of_week" invisible="1"/>
+                    <field name="state" invisible="1"/>
+                    <div class="d-flex">
+                        <label for="date" string="Ngày" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                        <field name="date" readonly="1" nolabel="1" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                    </div>
+                    <notebook>
+                        <page string="Chi tiết">
+                            <field name="lines" attrs="{'readonly': [('state', '=', 'done')]}">
+                                <tree editable="bottom" create="false" delete="false">
+                                    <field name="customer_id" force_save="1"/>
+                                    <field name="HCM" sum="Tổng" force_save="1"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '0')]}"/>
+                                    <field name="DT" sum="Tổng" force_save="1"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '0')]}"/>
+                                    <field name="CM" sum="Tổng" force_save="1"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '0')]}"/>
+                                    <field name="BL" sum="Tổng" force_save="1"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '1')]}"/>
+                                    <field name="BT" sum="Tổng" force_save="1"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '1')]}"/>
+                                    <field name="VT" sum="Tổng" force_save="1"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '1')]}"/>
+                                    <field name="ST" sum="Tổng" force_save="1"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '2')]}"/>
+                                    <field name="CT" sum="Tổng" force_save="1"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '2')]}"/>
+                                    <field name="DN" sum="Tổng" force_save="1"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '2')]}"/>
+                                    <field name="TN" sum="Tổng" force_save="1"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '3')]}"/>
+                                    <field name="AG" sum="Tổng" force_save="1"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '3')]}"/>
+                                    <field name="BTH" sum="Tổng" force_save="1"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '3')]}"/>
+                                    <field name="BD" sum="Tổng" force_save="1"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '4')]}"/>
+                                    <field name="TV" sum="Tổng" force_save="1"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '4')]}"/>
+                                    <field name="VL" sum="Tổng" force_save="1"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '4')]}"/>
+                                    <field name="HCM_2" sum="Tổng" force_save="1"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '5')]}"/>
+                                    <field name="LA" sum="Tổng" force_save="1"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '5')]}"/>
+                                    <field name="BP" sum="Tổng" force_save="1"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '5')]}"/>
+                                    <field name="HG" sum="Tổng" force_save="1"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '5')]}"/>
+                                    <field name="KG" sum="Tổng" force_save="1"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '6')]}"/>
+                                    <field name="DL" sum="Tổng" force_save="1"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '6')]}"/>
+                                    <field name="TG" sum="Tổng" force_save="1"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '6')]}"/>
+                                    <!-- Phát sinh-->
+                                    <field name="HCM_PS"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '0')]}"/>
+                                    <field name="DT_PS"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '0')]}"/>
+                                    <field name="CM_PS"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '0')]}"/>
+                                    <field name="BL_PS"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '1')]}"/>
+                                    <field name="BT_PS"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '1')]}"/>
+                                    <field name="VT_PS"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '1')]}"/>
+                                    <field name="ST_PS"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '2')]}"/>
+                                    <field name="CT_PS"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '2')]}"/>
+                                    <field name="DN_PS"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '2')]}"/>
+                                    <field name="TN_PS"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '3')]}"/>
+                                    <field name="AG_PS"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '3')]}"/>
+                                    <field name="BTH_PS"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '3')]}"/>
+                                    <field name="BD_PS"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '4')]}"/>
+                                    <field name="TV_PS"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '4')]}"/>
+                                    <field name="VL_PS"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '4')]}"/>
+                                    <field name="HCM_2_PS"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '5')]}"/>
+                                    <field name="LA_PS"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '5')]}"/>
+                                    <field name="BP_PS"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '5')]}"/>
+                                    <field name="HG_PS"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '5')]}"/>
+                                    <field name="KG_PS"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '6')]}"/>
+                                    <field name="DL_PS"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '6')]}"/>
+                                    <field name="TG_PS"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '6')]}"/>
+                                    <field name="total" force_save="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
                 </div>
-                <notebook>
-                    <page string="Chi tiết">
-                        <field name="lines" attrs="{'readonly': [('state', '=', 'done')]}">
-                            <tree editable="bottom" create="false" delete="false">
-                                <field name="customer_id" force_save="1"/>
-                                <field name="HCM" sum="Tổng" force_save="1" attrs="{'column_invisible': [('parent.day_of_week', '!=', '0')]}"/>
-                                <field name="DT" sum="Tổng" force_save="1" attrs="{'column_invisible': [('parent.day_of_week', '!=', '0')]}"/>
-                                <field name="CM" sum="Tổng" force_save="1" attrs="{'column_invisible': [('parent.day_of_week', '!=', '0')]}"/>
-                                <field name="BL" sum="Tổng" force_save="1" attrs="{'column_invisible': [('parent.day_of_week', '!=', '1')]}"/>
-                                <field name="BT" sum="Tổng" force_save="1" attrs="{'column_invisible': [('parent.day_of_week', '!=', '1')]}"/>
-                                <field name="VT" sum="Tổng" force_save="1" attrs="{'column_invisible': [('parent.day_of_week', '!=', '1')]}"/>
-                                <field name="ST" sum="Tổng" force_save="1" attrs="{'column_invisible': [('parent.day_of_week', '!=', '2')]}"/>
-                                <field name="CT" sum="Tổng" force_save="1" attrs="{'column_invisible': [('parent.day_of_week', '!=', '2')]}"/>
-                                <field name="DN" sum="Tổng" force_save="1" attrs="{'column_invisible': [('parent.day_of_week', '!=', '2')]}"/>
-                                <field name="TN" sum="Tổng" force_save="1" attrs="{'column_invisible': [('parent.day_of_week', '!=', '3')]}"/>
-                                <field name="AG" sum="Tổng" force_save="1" attrs="{'column_invisible': [('parent.day_of_week', '!=', '3')]}"/>
-                                <field name="BTH" sum="Tổng" force_save="1" attrs="{'column_invisible': [('parent.day_of_week', '!=', '3')]}"/>
-                                <field name="BD" sum="Tổng" force_save="1" attrs="{'column_invisible': [('parent.day_of_week', '!=', '4')]}"/>
-                                <field name="TV" sum="Tổng" force_save="1" attrs="{'column_invisible': [('parent.day_of_week', '!=', '4')]}"/>
-                                <field name="VL" sum="Tổng" force_save="1" attrs="{'column_invisible': [('parent.day_of_week', '!=', '4')]}"/>
-                                <field name="HCM_2" sum="Tổng" force_save="1" attrs="{'column_invisible': [('parent.day_of_week', '!=', '5')]}"/>
-                                <field name="LA" sum="Tổng" force_save="1" attrs="{'column_invisible': [('parent.day_of_week', '!=', '5')]}"/>
-                                <field name="BP" sum="Tổng" force_save="1" attrs="{'column_invisible': [('parent.day_of_week', '!=', '5')]}"/>
-                                <field name="HG" sum="Tổng" force_save="1" attrs="{'column_invisible': [('parent.day_of_week', '!=', '5')]}"/>
-                                <field name="KG" sum="Tổng" force_save="1" attrs="{'column_invisible': [('parent.day_of_week', '!=', '6')]}"/>
-                                <field name="DL" sum="Tổng" force_save="1" attrs="{'column_invisible': [('parent.day_of_week', '!=', '6')]}"/>
-                                <field name="TG" sum="Tổng" force_save="1" attrs="{'column_invisible': [('parent.day_of_week', '!=', '6')]}"/>
-                                <!-- Phát sinh-->
-                                <field name="HCM_PS" attrs="{'column_invisible': [('parent.day_of_week', '!=', '0')]}"/>
-                                <field name="DT_PS" attrs="{'column_invisible': [('parent.day_of_week', '!=', '0')]}"/>
-                                <field name="CM_PS" attrs="{'column_invisible': [('parent.day_of_week', '!=', '0')]}"/>
-                                <field name="BL_PS" attrs="{'column_invisible': [('parent.day_of_week', '!=', '1')]}"/>
-                                <field name="BT_PS" attrs="{'column_invisible': [('parent.day_of_week', '!=', '1')]}"/>
-                                <field name="VT_PS" attrs="{'column_invisible': [('parent.day_of_week', '!=', '1')]}"/>
-                                <field name="ST_PS" attrs="{'column_invisible': [('parent.day_of_week', '!=', '2')]}"/>
-                                <field name="CT_PS" attrs="{'column_invisible': [('parent.day_of_week', '!=', '2')]}"/>
-                                <field name="DN_PS" attrs="{'column_invisible': [('parent.day_of_week', '!=', '2')]}"/>
-                                <field name="TN_PS" attrs="{'column_invisible': [('parent.day_of_week', '!=', '3')]}"/>
-                                <field name="AG_PS" attrs="{'column_invisible': [('parent.day_of_week', '!=', '3')]}"/>
-                                <field name="BTH_PS" attrs="{'column_invisible': [('parent.day_of_week', '!=', '3')]}"/>
-                                <field name="BD_PS" attrs="{'column_invisible': [('parent.day_of_week', '!=', '4')]}"/>
-                                <field name="TV_PS" attrs="{'column_invisible': [('parent.day_of_week', '!=', '4')]}"/>
-                                <field name="VL_PS" attrs="{'column_invisible': [('parent.day_of_week', '!=', '4')]}"/>
-                                <field name="HCM_2_PS" attrs="{'column_invisible': [('parent.day_of_week', '!=', '5')]}"/>
-                                <field name="LA_PS" attrs="{'column_invisible': [('parent.day_of_week', '!=', '5')]}"/>
-                                <field name="BP_PS" attrs="{'column_invisible': [('parent.day_of_week', '!=', '5')]}"/>
-                                <field name="HG_PS" attrs="{'column_invisible': [('parent.day_of_week', '!=', '5')]}"/>
-                                <field name="KG_PS" attrs="{'column_invisible': [('parent.day_of_week', '!=', '6')]}"/>
-                                <field name="DL_PS" attrs="{'column_invisible': [('parent.day_of_week', '!=', '6')]}"/>
-                                <field name="TG_PS" attrs="{'column_invisible': [('parent.day_of_week', '!=', '6')]}"/>
-                                <field name="total" force_save="1"/>
-                            </tree>
-                        </field>
-                    </page>
-                </notebook>
             </form>
         </field>
     </record>
@@ -72,9 +123,7 @@
         <field name="name">Kế hoạch lãnh vé</field>
         <field name="model">planed</field>
         <field name="arch" type="xml">
-            <tree create="false" edit="false"
-                decoration-info="state == 'done'" default_order="date desc"
-            >
+            <tree create="false" edit="false" decoration-info="state == 'done'" default_order="date desc">
                 <field name="name"/>
                 <field name="date"/>
                 <field name="state" invisible="1"/>
@@ -97,6 +146,14 @@
         <field name="view_mode">form</field>
         <field name="target">new</field>
     </record>
+
+    <template id="message_change_ps">
+        <p>Khách hàng '<t t-esc="cus"/>' thay đổi kế hoạch <t t-esc="name"/> phát sinh từ
+            <t t-esc="ps_old"/>
+            -->
+            <t t-esc="ps_new"/> vé
+        </p>
+    </template>
 
     <menuitem id="planed_menu_view"
               name="Kế hoạch lãnh vé"

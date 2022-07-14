@@ -1,13 +1,14 @@
 import json
 
 from lxml import etree
-from datetime import datetime
+from datetime import datetime, date
 from odoo.exceptions import UserError, ValidationError
 from odoo import fields, api, models, _
 
 
 class Planed(models.Model):
     _name = 'planed'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _rec_name = 'name'
 
     @api.model
@@ -59,13 +60,13 @@ class Planed(models.Model):
     ])
 
     def update_state_lottery(self):
-        plan = self.search([('state', '!=', 'done'), ('date', '<', datetime.now())])
+        plan = self.search([('state', '!=', 'done')])
         for item in plan:
             item.state = 'done'
-        purchase = self.env['purchase.inventory'].search([('state', '!=', 'done'), ('date', '<', datetime.now())])
+        purchase = self.env['purchase.inventory'].search([('state', '!=', 'done')])
         for item in purchase:
             item.state = 'done'
-        re_stock = self.env['return.stock'].search([('state', '!=', 'done'), ('date', '<', datetime.now())])
+        re_stock = self.env['return.stock'].search([('state', '!=', 'done')])
         for item in re_stock:
             item.state = 'done'
 
@@ -74,6 +75,66 @@ class Planed(models.Model):
             if rec.state == 'done':
                 raise ValidationError('Không thể xóa kế hoạch đã hoàn thành')
         return super(Planed, self).unlink()
+
+    # def write(self, vals):
+    #     raise ValidationError(self.field_two)
+    #     HCM_PS = self.HCM_PS
+    #     DT_PS = self.DT_PS
+    #     CM_PS = self.CM_PS
+    #     BL_PS = self.BL_PS
+    #     BT_PS = self.BT_PS
+    #     VT_PS = self.VT_PS
+    #     ST_PS = self.ST_PS
+    #     CT_PS = self.CT_PS
+    #     DN_PS = self.DN_PS
+    #     TN_PS = self.TN_PS
+    #     AG_PS = self.AG_PS
+    #     BTH_PS = self.BTH_PS
+    #     BD_PS = self.BD_PS
+    #     TV_PS = self.TV_PS
+    #     VL_PS = self.VL_PS
+    #     HCM_2_PS = self.HCM_2_PS
+    #     LA_PS = self.LA_PS
+    #     BP_PS = self.BP_PS
+    #     HG_PS = self.HG_PS
+    #     KG_PS = self.KG_PS
+    #     DL_PS = self.DL_PS
+    #     TG_PS = self.TG_PS
+    #     res = super(Planed, self).write(vals)
+    #     if 'lines' in vals:
+    #         for item in vals.get('lines'):
+    #             if not item:
+    #                 continue
+    #             if self.day_of_week == '0':
+    #                 self.message_post(body=f"TP HCM(PS): {HCM_PS} -> {self.HCM_PS}")
+    #                 self.message_post(body=f"DT(PS): {DT_PS} -> {self.DT_PS}")
+    #                 self.message_post(body=f"CM(PS): {CM_PS} -> {self.CM_PS}")
+    #             if self.day_of_week == '1':
+    #                 self.message_post(body=f"BL(PS): {BL_PS} -> {self.BL_PS}")
+    #                 self.message_post(body=f"BT(PS): {BT_PS} -> {self.BT_PS}")
+    #                 self.message_post(body=f"VT(PS): {VT_PS} -> {self.VT_PS}")
+    #             if self.day_of_week == '2':
+    #                 self.message_post(body=f"ST(PS): {ST_PS} -> {self.ST_PS}")
+    #                 self.message_post(body=f"CT(PS): {CT_PS} -> {self.CT_PS}")
+    #                 self.message_post(body=f"DN(PS): {DN_PS} -> {self.DN_PS}")
+    #             if self.day_of_week == '3':
+    #                 self.message_post(body=f"TN(PS): {TN_PS} -> {self.TN_PS}")
+    #                 self.message_post(body=f"AG(PS): {AG_PS} -> {self.AG_PS}")
+    #                 self.message_post(body=f"BTH(PS): {BTH_PS} -> {self.BTH_PS}")
+    #             if self.day_of_week == '4':
+    #                 self.message_post(body=f"BD(PS): {BD_PS} -> {self.BD_PS}")
+    #                 self.message_post(body=f"TV(PS): {TV_PS} -> {self.TV_PS}")
+    #                 self.message_post(body=f"VL(PS): {VL_PS} -> {self.VL_PS}")
+    #             if self.day_of_week == '5':
+    #                 self.message_post(body=f"TP HCM(PS): {HCM_2_PS} -> {self.HCM_2_PS}")
+    #                 self.message_post(body=f"LA(PS): {LA_PS} -> {self.LA_PS}")
+    #                 self.message_post(body=f"BP(PS): {BP_PS} -> {self.BP_PS}")
+    #                 self.message_post(body=f"HG(PS): {HG_PS} -> {self.HG_PS}")
+    #             if self.day_of_week == '6':
+    #                 self.message_post(body=f"KG(PS): {KG_PS} -> {self.KG_PS}")
+    #                 self.message_post(body=f"DL(PS): {DL_PS} -> {self.DL_PS}")
+    #                 self.message_post(body=f"TG(PS): {TG_PS} -> {self.TG_PS}")
+    #     return res
 
 
 class PlanedLine(models.Model):
@@ -150,6 +211,7 @@ class PlanedLine(models.Model):
     TG_PS = fields.Integer(string='TG(PS)')
 
     total = fields.Integer(string='Tổng số vé', compute='_compute_total')
+    date = fields.Date(string='Ngày', related='planed_id.date')
     day_of_week = fields.Selection([
         ('0', 'Thứ 2'),
         ('1', 'Thứ 3'),
@@ -158,7 +220,12 @@ class PlanedLine(models.Model):
         ('4', 'Thứ 6'),
         ('5', 'Thứ 7'),
         ('6', 'Chủ nhật')
-    ])
+    ], compute="_compute_day_of_week", store=True)
+
+    @api.depends('date')
+    def _compute_day_of_week(self):
+        for r in self:
+            r.day_of_week = str(r.date.get_weekday())
 
     @api.depends(
         'HCM_PS', 'DT_PS', 'CM_PS', 'BL_PS', 'BT_PS',
@@ -180,9 +247,204 @@ class PlanedLine(models.Model):
             elif item.planed_id.day_of_week == '4':
                 item.total = (item.BD + item.TV + item.VL) + (item.BD_PS + item.TV_PS + item.VL_PS)
             elif item.planed_id.day_of_week == '5':
-                item.total = (item.HCM_2 + item.LA + item.BP + item.HG) + (item.HCM_2_PS + item.LA_PS + item.BP_PS + item.HG_PS)
+                item.total = (item.HCM_2 + item.LA + item.BP + item.HG) + (
+                        item.HCM_2_PS + item.LA_PS + item.BP_PS + item.HG_PS)
             elif item.planed_id.day_of_week == '6':
                 item.total = (item.KG + item.DL + item.TG) + (item.KG_PS + item.DL_PS + item.TG_PS)
             else:
                 item.total = 0
             item.total = item.total
+
+    def write(self, vals):
+        d = self.total
+        if self.day_of_week == '0':
+            a = self.HCM_PS
+            b = self.DT_PS
+            c = self.CM_PS
+            if vals.get('HCM_PS'):
+                self.planed_id.message_post_with_view('lottery.message_change_ps',
+                                                      values={'cus': self.customer_id.name,
+                                                              'name': 'TP HCM(PS)',
+                                                              'ps_old': a,
+                                                              'ps_new': vals.get('HCM_PS')},
+                                                      subtype_id=self.env.ref('mail.mt_note').id)
+            if vals.get('DT_PS'):
+                self.planed_id.message_post_with_view('lottery.message_change_ps',
+                                                      values={'cus': self.customer_id.name,
+                                                              'name': 'DT(PS)',
+                                                              'ps_old': b,
+                                                              'ps_new': vals.get('DT_PS')},
+                                                      subtype_id=self.env.ref('mail.mt_note').id)
+            if vals.get('CM_PS'):
+                self.planed_id.message_post_with_view('lottery.message_change_ps',
+                                                      values={'cus': self.customer_id.name,
+                                                              'name': 'CM(PS)',
+                                                              'ps_old': c,
+                                                              'ps_new': vals.get('CM_PS')},
+                                                      subtype_id=self.env.ref('mail.mt_note').id)
+        if self.day_of_week == '1':
+            a = self.BL_PS
+            b = self.BT_PS
+            c = self.VT_PS
+            if vals.get('BL_PS'):
+                self.planed_id.message_post_with_view('lottery.message_change_ps',
+                                                      values={'cus': self.customer_id.name,
+                                                              'name': 'BL(PS)',
+                                                              'ps_old': a,
+                                                              'ps_new': vals.get('BL_PS')},
+                                                      subtype_id=self.env.ref('mail.mt_note').id)
+            if vals.get('BT_PS'):
+                self.planed_id.message_post_with_view('lottery.message_change_ps',
+                                                      values={'cus': self.customer_id.name,
+                                                              'name': 'BT(PS)',
+                                                              'ps_old': b,
+                                                              'ps_new': vals.get('BT_PS')},
+                                                      subtype_id=self.env.ref('mail.mt_note').id)
+            if vals.get('VT_PS'):
+                self.planed_id.message_post_with_view('lottery.message_change_ps',
+                                                      values={'cus': self.customer_id.name,
+                                                              'name': 'VT(PS)',
+                                                              'ps_old': c,
+                                                              'ps_new': vals.get('VT_PS')},
+                                                      subtype_id=self.env.ref('mail.mt_note').id)
+        if self.day_of_week == '2':
+            a = self.ST_PS
+            b = self.CT_PS
+            c = self.DN_PS
+            if vals.get('ST_PS'):
+                self.planed_id.message_post_with_view('lottery.message_change_ps',
+                                                      values={'cus': self.customer_id.name,
+                                                              'name': 'ST(PS)',
+                                                              'ps_old': a,
+                                                              'ps_new': vals.get('ST_PS')},
+                                                      subtype_id=self.env.ref('mail.mt_note').id)
+            if vals.get('CT_PS'):
+                self.planed_id.message_post_with_view('lottery.message_change_ps',
+                                                      values={'cus': self.customer_id.name,
+                                                              'name': 'CT(PS)',
+                                                              'ps_old': b,
+                                                              'ps_new': vals.get('CT_PS')},
+                                                      subtype_id=self.env.ref('mail.mt_note').id)
+            if vals.get('DN_PS'):
+                self.planed_id.message_post_with_view('lottery.message_change_ps',
+                                                      values={'cus': self.customer_id.name,
+                                                              'name': 'DN(PS)',
+                                                              'ps_old': c,
+                                                              'ps_new': vals.get('DN_PS')},
+                                                      subtype_id=self.env.ref('mail.mt_note').id)
+        if self.day_of_week == '3':
+            a = self.TN_PS
+            b = self.AG_PS
+            c = self.BTH_PS
+            if vals.get('TN_PS'):
+                self.planed_id.message_post_with_view('lottery.message_change_ps',
+                                                      values={'cus': self.customer_id.name,
+                                                              'name': 'TN(PS)',
+                                                              'ps_old': a,
+                                                              'ps_new': vals.get('TN_PS')},
+                                                      subtype_id=self.env.ref('mail.mt_note').id)
+            if vals.get('AG_PS'):
+                self.planed_id.message_post_with_view('lottery.message_change_ps',
+                                                      values={'cus': self.customer_id.name,
+                                                              'name': 'AG(PS)',
+                                                              'ps_old': b,
+                                                              'ps_new': vals.get('AG_PS')},
+                                                      subtype_id=self.env.ref('mail.mt_note').id)
+            if vals.get('BTH_PS'):
+                self.planed_id.message_post_with_view('lottery.message_change_ps',
+                                                      values={'cus': self.customer_id.name,
+                                                              'name': 'BTH(PS)',
+                                                              'ps_old': c,
+                                                              'ps_new': vals.get('BTH_PS')},
+                                                      subtype_id=self.env.ref('mail.mt_note').id)
+        if self.day_of_week == '4':
+            a = self.BD_PS
+            b = self.TV_PS
+            c = self.VL_PS
+            if vals.get('BD_PS'):
+                self.planed_id.message_post_with_view('lottery.message_change_ps',
+                                                      values={'cus': self.customer_id.name,
+                                                              'name': 'BD(PS)',
+                                                              'ps_old': a,
+                                                              'ps_new': vals.get('BD_PS')},
+                                                      subtype_id=self.env.ref('mail.mt_note').id)
+            if vals.get('TV_PS'):
+                self.planed_id.message_post_with_view('lottery.message_change_ps',
+                                                      values={'cus': self.customer_id.name,
+                                                              'name': 'TV(PS)',
+                                                              'ps_old': b,
+                                                              'ps_new': vals.get('TV_PS')},
+                                                      subtype_id=self.env.ref('mail.mt_note').id)
+            if vals.get('VL_PS'):
+                self.planed_id.message_post_with_view('lottery.message_change_ps',
+                                                      values={'cus': self.customer_id.name,
+                                                              'name': 'VL(PS)',
+                                                              'ps_old': c,
+                                                              'ps_new': vals.get('VL_PS')},
+                                                      subtype_id=self.env.ref('mail.mt_note').id)
+        if self.day_of_week == '5':
+            a = self.HCM_2_PS
+            b = self.LA_PS
+            c = self.BP_PS
+            e = self.HG_PS
+            if vals.get('HCM_2_PS'):
+                self.planed_id.message_post_with_view('lottery.message_change_ps',
+                                                      values={'cus': self.customer_id.name,
+                                                              'name': 'TP HCM(PS)',
+                                                              'ps_old': a,
+                                                              'ps_new': vals.get('HCM_2_PS')},
+                                                      subtype_id=self.env.ref('mail.mt_note').id)
+            if vals.get('LA_PS'):
+                self.planed_id.message_post_with_view('lottery.message_change_ps',
+                                                      values={'cus': self.customer_id.name,
+                                                              'name': 'LA(PS)',
+                                                              'ps_old': b,
+                                                              'ps_new': vals.get('LA_PS')},
+                                                      subtype_id=self.env.ref('mail.mt_note').id)
+            if vals.get('BP_PS'):
+                self.planed_id.message_post_with_view('lottery.message_change_ps',
+                                                      values={'cus': self.customer_id.name,
+                                                              'name': 'BP(PS)',
+                                                              'ps_old': c,
+                                                              'ps_new': vals.get('BP_PS')},
+                                                      subtype_id=self.env.ref('mail.mt_note').id)
+            if vals.get('HG_PS'):
+                self.planed_id.message_post_with_view('lottery.message_change_ps',
+                                                      values={'cus': self.customer_id.name,
+                                                              'name': 'HG(PS)',
+                                                              'ps_old': e,
+                                                              'ps_new': vals.get('HG_PS')},
+                                                      subtype_id=self.env.ref('mail.mt_note').id)
+        if self.day_of_week == '6':
+            a = self.KG_PS
+            b = self.DL_PS
+            c = self.TG_PS
+            if vals.get('KG_PS'):
+                self.planed_id.message_post_with_view('lottery.message_change_ps',
+                                                      values={'cus': self.customer_id.name,
+                                                              'name': 'KG(PS)',
+                                                              'ps_old': a,
+                                                              'ps_new': vals.get('KG_PS')},
+                                                      subtype_id=self.env.ref('mail.mt_note').id)
+            if vals.get('DL_PS'):
+                self.planed_id.message_post_with_view('lottery.message_change_ps',
+                                                      values={'cus': self.customer_id.name,
+                                                              'name': 'DL(PS)',
+                                                              'ps_old': b,
+                                                              'ps_new': vals.get('DL_PS')},
+                                                      subtype_id=self.env.ref('mail.mt_note').id)
+            if vals.get('TG_PS'):
+                self.planed_id.message_post_with_view('lottery.message_change_ps',
+                                                      values={'cus': self.customer_id.name,
+                                                              'name': 'TG(PS)',
+                                                              'ps_old': c,
+                                                              'ps_new': vals.get('TG_PS')},
+                                                      subtype_id=self.env.ref('mail.mt_note').id)
+        self.planed_id.message_post_with_view('lottery.message_change_ps',
+                                              values={'cus': self.customer_id.name,
+                                                      'name': 'Tổng số vé',
+                                                      'ps_old': d,
+                                                      'ps_new': vals.get('total')},
+                                              subtype_id=self.env.ref('mail.mt_note').id)
+        res = super(PlanedLine, self).write(vals)
+        return res

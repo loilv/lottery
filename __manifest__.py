@@ -10,7 +10,7 @@
     'company': '',
     'maintainer': '',
     'website': "",
-    "depends": ['base'],
+    "depends": ['base', 'mail'],
     "data": [
         'security/ir.model.access.csv',
         'views/planed.xml',
@@ -22,7 +22,7 @@
         'views/purchase_inventory.xml',
         'views/customer.xml',
         'views/return_stock_view.xml',
-        'data/province_lottery_data.xml',
+        # 'data/province_lottery_data.xml',
         'data/data_tele_data.xml',
         'data/data_planed.xml',
         'data/schedule.xml',
