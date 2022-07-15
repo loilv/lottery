@@ -13,7 +13,7 @@ class PurchaseInventoryWZ(models.TransientModel):
             action = {
                 'name': _('Phiếu nhập kho'),
                 'view_mode': 'form',
-                'res_model': 'planed',
+                'res_model': 'purchase.inventory',
                 'type': 'ir.actions.act_window',
                 'res_id': purchase.id,
                 'views': [[self.env.ref('lottery.purchase_inventory_form_view').id, 'form'],
