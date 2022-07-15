@@ -208,6 +208,7 @@ class PlanedLine(models.Model):
                 item.total = 0
             item.total = item.total
 
+
     def write(self, vals):
         d = self.total
         if self.day_of_week == '0':

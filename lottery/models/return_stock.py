@@ -197,7 +197,7 @@ class ReturnStockLine(models.Model):
     def _compute_revenues(self):
         for r in self:
             province = self.env['province.lottery'].search([('group', '=', r.return_stock_id.day_of_week)])
-            revenues = r.ticket_receive
+            revenues = r.consume
             if r.HCM > 0:
                 revenues -= ((r.sum_return * 10000) + r.du_thieu)  * r.customer_id.HCM_price
             if r.DT > 0:
@@ -248,28 +248,29 @@ class ReturnStockLine(models.Model):
                  'BTH', 'BD', 'TV', 'VL', 'HCM_2', 'LA', 'BP', 'HG', 'KG', 'DL', 'TG')
     def _compute_percent_back(self):
         for r in self:
-            r.HCM_PC = ((r.HCM * 10000) / r.customer_id.HCM) * 100 if r.customer_id.HCM > 0 else 0
-            r.DT_PC = ((r.DT * 10000) / r.customer_id.DT) * 100 if r.customer_id.DT > 0 else 0
-            r.CM_PC = ((r.CM * 10000) / r.customer_id.CM) * 100 if r.customer_id.CM > 0 else 0
-            r.BL_PC = ((r.BL * 10000) / r.customer_id.BL) * 100 if r.customer_id.BL > 0 else 0
-            r.BT_PC = ((r.BT * 10000) / r.customer_id.BT) * 100 if r.customer_id.BT > 0 else 0
-            r.VT_PC = ((r.VT * 10000) / r.customer_id.VT) * 100 if r.customer_id.VT > 0 else 0
-            r.ST_PC = ((r.ST * 10000) / r.customer_id.ST) * 100 if r.customer_id.ST > 0 else 0
-            r.CT_PC = ((r.CT * 10000) / r.customer_id.CT) * 100 if r.customer_id.CT > 0 else 0
-            r.DN_PC = ((r.DN * 10000) / r.customer_id.DN) * 100 if r.customer_id.DN > 0 else 0
-            r.TN_PC = ((r.TN * 10000) / r.customer_id.TN) * 100 if r.customer_id.TN > 0 else 0
-            r.AG_PC = ((r.AG * 10000) / r.customer_id.AG) * 100 if r.customer_id.AG > 0 else 0
-            r.BTH_PC = ((r.BTH * 10000) / r.customer_id.BTH) * 100 if r.customer_id.BTH > 0 else 0
-            r.BD_PC = ((r.BD * 10000) / r.customer_id.BD) * 100 if r.customer_id.BD > 0 else 0
-            r.TV_PC = ((r.TV * 10000) / r.customer_id.TV) * 100 if r.customer_id.TV > 0 else 0
-            r.VL_PC = ((r.VL * 10000) / r.customer_id.VL) * 100 if r.customer_id.VL > 0 else 0
-            r.HCM_2_PC = ((r.HCM_2 * 10000) / r.customer_id.HCM_2) * 100 if r.customer_id.HCM_2 > 0 else 0
-            r.LA_PC = ((r.LA * 10000) / r.customer_id.LA) * 100 if r.customer_id.LA > 0 else 0
-            r.BP_PC = ((r.BP * 10000) / r.customer_id.BP) * 100 if r.customer_id.BP > 0 else 0
-            r.HG_PC = ((r.HG * 10000) / r.customer_id.HG) * 100 if r.customer_id.HG > 0 else 0
-            r.KG_PC = ((r.KG * 10000) / r.customer_id.KG) * 100 if r.customer_id.KG > 0 else 0
-            r.DL_PC = ((r.DL * 10000) / r.customer_id.DL) * 100 if r.customer_id.DL > 0 else 0
-            r.TG_PC = ((r.TG * 10000) / r.customer_id.TG) * 100 if r.customer_id.TG > 0 else 0
+            planed = self.env['planed.line'].search([('planed_id.date', '=', self.date), ('customer_id', '=', r.customer_id.id)], limit=1)
+            r.HCM_PC = ((r.HCM * 10000) / (r.customer_id.HCM + planed.HCM_PS)) * 100 if r.customer_id.HCM > 0 else 0
+            r.DT_PC = ((r.DT * 10000) / (r.customer_id.DT + planed.DT_PS)) * 100 if r.customer_id.DT > 0 or planed.DT_PS > 0 else 0
+            r.CM_PC = ((r.CM * 10000) / (r.customer_id.CM + planed.CM_PS)) * 100 if r.customer_id.CM > 0 or planed.CM_PS > 0 else 0
+            r.BL_PC = ((r.BL * 10000) / (r.customer_id.BL + planed.BL_PS)) * 100 if r.customer_id.BL > 0 or planed.BL_PS > 0 else 0
+            r.BT_PC = ((r.BT * 10000) / (r.customer_id.BT + planed.BT_PS)) * 100 if r.customer_id.BT > 0 or planed.BT_PS > 0 else 0
+            r.VT_PC = ((r.VT * 10000) / (r.customer_id.VT + planed.VT_PS)) * 100 if r.customer_id.VT > 0 or planed.VT_PS > 0 else 0
+            r.ST_PC = ((r.ST * 10000) / (r.customer_id.ST + planed.ST_PS)) * 100 if r.customer_id.ST > 0 or planed.ST_PS > 0 else 0
+            r.CT_PC = ((r.CT * 10000) / (r.customer_id.CT + planed.CT_PS)) * 100 if r.customer_id.CT > 0 or planed.CT_PS > 0 else 0
+            r.DN_PC = ((r.DN * 10000) / (r.customer_id.DN + planed.DN_PS)) * 100 if r.customer_id.DN > 0 or planed.DN_PS > 0 else 0
+            r.TN_PC = ((r.TN * 10000) / (r.customer_id.TN + planed.TN_PS)) * 100 if r.customer_id.TN > 0 or planed.TN_PS > 0 else 0
+            r.AG_PC = ((r.AG * 10000) / (r.customer_id.AG + planed.AG_PS)) * 100 if r.customer_id.AG > 0 or planed.AG_PS > 0 else 0
+            r.BTH_PC = ((r.BTH * 10000) / (r.customer_id.BTH + planed.BTH_PS)) * 100 if r.customer_id.BTH > 0 or planed.BTH_PS > 0 else 0
+            r.BD_PC = ((r.BD * 10000) / (r.customer_id.BD + planed.BD_PS)) * 100 if r.customer_id.BD > 0 or planed.BD_PS > 0 else 0
+            r.TV_PC = ((r.TV * 10000) / (r.customer_id.TV + planed.TV_PS)) * 100 if r.customer_id.TV > 0 or planed.TV_PS > 0 else 0
+            r.VL_PC = ((r.VL * 10000) / (r.customer_id.VL + planed.VL_PS)) * 100 if r.customer_id.VL > 0 or planed.VL_PS > 0 else 0
+            r.HCM_2_PC = ((r.HCM_2 * 10000) / (r.customer_id.HCM_2 + planed.HCM_2_PS)) * 100 if r.customer_id.HCM_2 > 0 or planed.HCM_2_PS > 0 else 0
+            r.LA_PC = ((r.LA * 10000) / (r.customer_id.LA + planed.LA_PS)) * 100 if r.customer_id.LA > 0 or planed.LA_PS > 0 else 0
+            r.BP_PC = ((r.BP * 10000) / (r.customer_id.BP + planed.BP_PS)) * 100 if r.customer_id.BP > 0 or planed.BP_PS > 0 else 0
+            r.HG_PC = ((r.HG * 10000) / (r.customer_id.HG + planed.HG_PS)) * 100 if r.customer_id.HG > 0 or planed.HG_PS > 0 else 0
+            r.KG_PC = ((r.KG * 10000) / (r.customer_id.KG + planed.KG_PS)) * 100 if r.customer_id.KG > 0 or planed.KG_PS > 0 else 0
+            r.DL_PC = ((r.DL * 10000) / (r.customer_id.DL + planed.DL_PS)) * 100 if r.customer_id.DL > 0 or planed.DL_PS > 0 else 0
+            r.TG_PC = ((r.TG * 10000) / (r.customer_id.TG + planed.TG_PS)) * 100 if r.customer_id.TG > 0 or planed.TG_PS > 0 else 0
 
     @api.depends('HCM_PC', 'DT_PC', 'CM_PC', 'BL_PC', 'BT_PC', 'VT_PC', 'ST_PC', 'CT_PC', 'DN_PC', 'TN_PC', 'AG_PC',
                  'BTH_PC', 'BD_PC', 'TV_PC', 'VL_PC', 'HCM_2_PC', 'LA_PC', 'BP_PC', 'HG_PC', 'KG_PC', 'DL_PC', 'TG_PC')
