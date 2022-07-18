@@ -54,77 +54,77 @@ class ReturnStockLine(models.Model):
     customer_id = fields.Many2one('customer', string='Khách hàng', readonly=1)
 
     HCM = fields.Integer(string='TP HCM', default=0)
-    HCM_PC = fields.Float(string='TP HCM', readonly=1, compute="_compute_percent_back")
+    HCM_PC = fields.Float(string='TP HCM', readonly=1, compute="_compute_percent_back", store=True)
 
     DT = fields.Integer(string='ĐT', sum="Tổng số")
-    DT_PC = fields.Float(string='ĐT', readonly=1, compute="_compute_percent_back")
+    DT_PC = fields.Float(string='ĐT', readonly=1, compute="_compute_percent_back", store=True)
 
     CM = fields.Integer(string='CM')
-    CM_PC = fields.Float(string='CM', readonly=1, compute="_compute_percent_back")
+    CM_PC = fields.Float(string='CM', readonly=1, compute="_compute_percent_back", store=True)
 
     BL = fields.Integer(string='BL')
-    BL_PC = fields.Float(string='BL', readonly=1, compute="_compute_percent_back")
+    BL_PC = fields.Float(string='BL', readonly=1, compute="_compute_percent_back", store=True)
 
     BT = fields.Integer(string='BT')
-    BT_PC = fields.Float(string='BT', readonly=1, compute="_compute_percent_back")
+    BT_PC = fields.Float(string='BT', readonly=1, compute="_compute_percent_back", store=True)
 
     VT = fields.Integer(string='VT')
-    VT_PC = fields.Float(string='VT', readonly=1, compute="_compute_percent_back")
+    VT_PC = fields.Float(string='VT', readonly=1, compute="_compute_percent_back", store=True)
 
     ST = fields.Integer(string='ST')
-    ST_PC = fields.Float(string='ST', readonly=1, compute="_compute_percent_back")
+    ST_PC = fields.Float(string='ST', readonly=1, compute="_compute_percent_back", store=True)
 
     CT = fields.Integer(string='ST')
-    CT_PC = fields.Float(string='CT', readonly=1, compute="_compute_percent_back")
+    CT_PC = fields.Float(string='CT', readonly=1, compute="_compute_percent_back", store=True)
 
     DN = fields.Integer(string='ĐN')
-    DN_PC = fields.Float(string='ĐN', readonly=1, compute="_compute_percent_back")
+    DN_PC = fields.Float(string='ĐN', readonly=1, compute="_compute_percent_back", store=True)
 
     TN = fields.Integer(string='TN')
-    TN_PC = fields.Float(string='TN', readonly=1, compute="_compute_percent_back")
+    TN_PC = fields.Float(string='TN', readonly=1, compute="_compute_percent_back", store=True)
 
     AG = fields.Integer(string='AG')
-    AG_PC = fields.Float(string='AG', readonly=1, compute="_compute_percent_back")
+    AG_PC = fields.Float(string='AG', readonly=1, compute="_compute_percent_back", store=True)
 
     BTH = fields.Integer(string='BTH')
-    BTH_PC = fields.Float(string='BTH', readonly=1, compute="_compute_percent_back")
+    BTH_PC = fields.Float(string='BTH', readonly=1, compute="_compute_percent_back", store=True)
 
     BD = fields.Integer(string='BD')
-    BD_PC = fields.Float(string='BD', readonly=1, compute="_compute_percent_back")
+    BD_PC = fields.Float(string='BD', readonly=1, compute="_compute_percent_back", store=True)
 
     TV = fields.Integer(string='TV')
-    TV_PC = fields.Float(string='TV', readonly=1, compute="_compute_percent_back")
+    TV_PC = fields.Float(string='TV', readonly=1, compute="_compute_percent_back", store=True)
 
     VL = fields.Integer(string='VL')
-    VL_PC = fields.Float(string='VL', readonly=1, compute="_compute_percent_back")
+    VL_PC = fields.Float(string='VL', readonly=1, compute="_compute_percent_back", store=True)
 
     HCM_2 = fields.Integer(string='TP HCM')
-    HCM_2_PC = fields.Float(string='TP HCM', readonly=1, compute="_compute_percent_back")
+    HCM_2_PC = fields.Float(string='TP HCM', readonly=1, compute="_compute_percent_back", store=True)
 
     LA = fields.Integer(string='LA')
-    LA_PC = fields.Float(string='LA', readonly=1, compute="_compute_percent_back")
+    LA_PC = fields.Float(string='LA', readonly=1, compute="_compute_percent_back", store=True)
 
     BP = fields.Integer(string='BP')
-    BP_PC = fields.Float(string='BP', readonly=1, compute="_compute_percent_back")
+    BP_PC = fields.Float(string='BP', readonly=1, compute="_compute_percent_back", store=True)
 
     HG = fields.Integer(string='HG')
-    HG_PC = fields.Float(string='HG', readonly=1, compute="_compute_percent_back")
+    HG_PC = fields.Float(string='HG', readonly=1, compute="_compute_percent_back", store=True)
 
     KG = fields.Integer(string='KG')
-    KG_PC = fields.Float(string='KG', readonly=1, compute="_compute_percent_back")
+    KG_PC = fields.Float(string='KG', readonly=1, compute="_compute_percent_back", store=True)
 
     DL = fields.Integer(string='ĐL')
-    DL_PC = fields.Float(string='ĐL', readonly=1, compute="_compute_percent_back")
+    DL_PC = fields.Float(string='ĐL', readonly=1, compute="_compute_percent_back", store=True)
 
     TG = fields.Integer(string='TG')
-    TG_PC = fields.Float(string='TG', readonly=1, compute="_compute_percent_back")
+    TG_PC = fields.Float(string='TG', readonly=1, compute="_compute_percent_back", store=True)
 
-    percent = fields.Float("%", compute="_compute_percent")
-    sum_return = fields.Integer("Tổng trả", compute="_compute_sum_return")
-    consume = fields.Integer("Tiêu thụ", compute="_compute_consume")
-    ticket_receive = fields.Integer("Lượng vé lãnh", compute='_compute_ticket_receive')
+    percent = fields.Float("%", compute="_compute_percent", store=True)
+    sum_return = fields.Integer("Tổng trả", compute="_compute_sum_return", store=True)
+    consume = fields.Integer("Tiêu thụ", compute="_compute_consume", store=True)
+    ticket_receive = fields.Integer("Lượng vé lãnh", compute='_compute_ticket_receive', store=True)
     du_thieu = fields.Integer('Dư thiếu')
-    revenues = fields.Integer('Tiền thu', compute="_compute_revenues")
+    revenues = fields.Integer('Tiền thu', compute="_compute_revenues", store=True)
     day_of_week = fields.Selection([
         ('0', 'Thứ 2'),
         ('1', 'Thứ 3'),
@@ -168,29 +168,22 @@ class ReturnStockLine(models.Model):
     @api.depends('return_stock_id', 'return_stock_id.day_of_week')
     def _compute_ticket_receive(self):
         for r in self:
-            day_week = 0
-            if r.customer_id.planed.code == 'now':
-                day_week = str(r.return_stock_id.day_of_week)
-            elif r.customer_id.planed.code == 'now_1':
-                day_week = str(int(r.return_stock_id.day_of_week) + 1)
-            elif r.customer_id.planed.code == 'now_2':
-                day_week = str(int(r.return_stock_id.day_of_week) + 2)
-            elif r.customer_id.planed.code == 'now_3':
-                day_week = str(int(r.return_stock_id.day_of_week) + 3)
+            customer_plan = self.env['customer.plan'].get_val_customer_plan()
+            day_week = customer_plan.get(r.customer_id.planed.code)
 
-            if day_week == '0':
+            if day_week == 0:
                 r.ticket_receive = (r.customer_id.HCM + r.customer_id.DT + r.customer_id.CM)
-            elif day_week == '1':
+            elif day_week == 1:
                 r.ticket_receive = (r.customer_id.BL + r.customer_id.BT + r.customer_id.VT)
-            elif day_week == '2':
+            elif day_week == 2:
                 r.ticket_receive = (r.customer_id.ST + r.customer_id.CT + r.customer_id.DN)
-            elif day_week == '3':
+            elif day_week == 3:
                 r.ticket_receive = (r.customer_id.TN + r.customer_id.AG + r.customer_id.BTH)
-            elif day_week == '4':
+            elif day_week == 4:
                 r.ticket_receive = (r.customer_id.BD + r.customer_id.TV + r.customer_id.VL)
-            elif day_week == '5':
+            elif day_week == 5:
                 r.ticket_receive = (r.customer_id.HCM_2 + r.customer_id.LA + r.customer_id.BP + r.customer_id.HG)
-            else:
+            elif day_week == 6:
                 r.ticket_receive = (r.customer_id.KG + r.customer_id.DL + r.customer_id.TG)
 
     @api.depends('ticket_receive', 'sum_return', 'du_thieu')

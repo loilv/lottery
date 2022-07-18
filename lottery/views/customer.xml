@@ -3,7 +3,7 @@
         <field name="name">Khách Hàng</field>
         <field name="model">customer</field>
         <field name="arch" type="xml">
-            <tree create="false" edit="false">
+            <tree edit="false">
                 <field name="name" string="Họ tên"/>
                 <field name="gender"/>
                 <field name="phone"/>
