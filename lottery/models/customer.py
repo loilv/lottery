@@ -74,6 +74,48 @@ class Customer(models.Model):
             'tag': 'reload',
         }
 
+    def write(self, vals):
+        res = super(Customer, self).write(vals)
+        planed = self.env['planed'].search([('state', '!=', 'done')])
+        val_lines = []
+        for line in planed.lines:
+            if line.customer_id == self:
+                vals = {
+                    'HCM': self.HCM,
+                    'DT': self.DT,
+                    'CM': self.CM,
+                    'BL': self.BL,
+                    'BT': self.BT,
+                    'VT': self.VT,
+                    'ST': self.ST,
+                    'CT': self.CT,
+                    'DN': self.DN,
+                    'TN': self.TN,
+                    'AG': self.AG,
+                    'BTH': self.BTH,
+                    'BD': self.BD,
+                    'TV': self.TV,
+                    'VL': self.VL,
+                    'HCM_2': self.HCM_2,
+                    'LA': self.LA,
+                    'BP': self.BP,
+                    'HG': self.HG,
+                    'KG': self.KG,
+                    'DL': self.DL,
+                    'TG': self.TG,
+                }
+                val_lines.append((1, line.id, vals))
+        planed.write({'lines': val_lines})
+        planed.lines._compute_total()
+        return_planed = self.env['return.stock'].search([('state', '!=', 'done')])
+        return_planed.lines._compute_percent_back()
+        return_planed.lines._compute_percent()
+        return_planed.lines._compute_sum_return()
+        return_planed.lines._compute_consume()
+        return_planed.lines._compute_ticket_receive()
+        return_planed.lines._compute_revenues()
+        return res
+
 
 class CustomerPlan(models.Model):
     _name = 'customer.plan'

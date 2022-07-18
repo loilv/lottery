@@ -162,7 +162,7 @@ class PlanedLine(models.Model):
     TG = fields.Integer(string='TG', readonly=1)
     TG_PS = fields.Integer(string='TG(PS)')
 
-    total = fields.Integer(string='Tổng số vé', compute='_compute_total')
+    total = fields.Integer(string='Tổng số vé', compute='_compute_total', store=True)
     date = fields.Date(string='Ngày', related='planed_id.date')
     day_of_week = fields.Selection([
         ('0', 'Thứ 2'),
