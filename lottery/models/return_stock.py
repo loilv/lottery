@@ -442,7 +442,7 @@ class ReturnStockLine(models.Model):
                  'BTH', 'BD', 'TV', 'VL', 'HCM_2', 'LA', 'BP', 'HG', 'KG', 'DL', 'TG')
     def _compute_percent_back(self):
         for r in self:
-            planed = self.env['planed.line'].search([('planed_id.date', '=', self.date), ('customer_id', '=', r.customer_id.id)], limit=1)
+            planed = self.env['planed.line'].search([('planed_id.date', '=', r.return_stock_id.date), ('customer_id', '=', r.customer_id.id)], limit=1)
             r.HCM_PC = ((r.HCM * 10000) / (r.customer_id.HCM + planed.HCM_PS)) * 100 if r.customer_id.HCM > 0 else 0
             r.DT_PC = ((r.DT * 10000) / (r.customer_id.DT + planed.DT_PS)) * 100 if r.customer_id.DT > 0 or planed.DT_PS > 0 else 0
             r.CM_PC = ((r.CM * 10000) / (r.customer_id.CM + planed.CM_PS)) * 100 if r.customer_id.CM > 0 or planed.CM_PS > 0 else 0
