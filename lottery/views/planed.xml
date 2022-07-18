@@ -13,7 +13,7 @@
                     </div>
                     <group string="Chi tiết kế hoạch">
                         <field name="lines" attrs="{'readonly': [('state', '=', 'done')]}" nolabel="1">
-                            <tree editable="bottom" create="false" delete="false">
+                            <tree editable="bottom" create="false" delete="false" limit="150">
                                 <field name="customer_id" force_save="1"/>
                                 <field name="HCM" sum="Tổng" force_save="1"
                                        attrs="{'column_invisible': [('parent.day_of_week', '!=', '0')]}"/>

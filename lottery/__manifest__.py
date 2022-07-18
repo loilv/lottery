@@ -16,7 +16,6 @@
         'views/planed.xml',
         'wizard/create_plan.xml',
         'wizard/create_return_stock.xml',
-        'views/res_users.xml',
         'wizard/purchase_inventory_wz.xml',
         'wizard/create_customer.xml',
         'views/purchase_inventory.xml',
@@ -26,6 +25,7 @@
         'data/data_planed.xml',
         'data/province_lottery_data.xml',
         'data/schedule.xml',
+        'views/res_users.xml',
     ],
     'assets': {
         'web.assets_backend': {

@@ -1,5 +1,5 @@
 from odoo import fields, api, models
-from datetime import datetime
+from datetime import datetime, timedelta
 from odoo.exceptions import UserError, ValidationError
 
 
@@ -196,53 +196,247 @@ class ReturnStockLine(models.Model):
     @api.depends('ticket_receive', 'sum_return', 'du_thieu')
     def _compute_revenues(self):
         for r in self:
-            province = self.env['province.lottery'].search([('group', '=', r.return_stock_id.day_of_week)])
-            revenues = r.consume
-            if r.HCM > 0:
-                revenues -= ((r.sum_return * 10000) + r.du_thieu)  * r.customer_id.HCM_price
-            if r.DT > 0:
-                revenues -= ((r.sum_return * 10000) + r.du_thieu)  * r.customer_id.DT_price
-            if r.CM > 0:
-                revenues -= ((r.sum_return * 10000) + r.du_thieu)  * r.customer_id.CM_price
-            if r.BL > 0:
-                revenues -= ((r.sum_return * 10000) + r.du_thieu)  * r.customer_id.BL_price
-            if r.BT > 0:
-                revenues -= ((r.sum_return * 10000) + r.du_thieu)  * r.customer_id.BT_price
-            if r.VT > 0:
-                revenues -= ((r.sum_return * 10000) + r.du_thieu)  * r.customer_id.VT_price
-            if r.ST > 0:
-                revenues -= ((r.sum_return * 10000) + r.du_thieu) * r.customer_id.ST_price
-            if r.CT > 0:
-                revenues -= ((r.sum_return * 10000) + r.du_thieu) * r.customer_id.CT_price
-            if r.DN > 0:
-                revenues -= ((r.sum_return * 10000) + r.du_thieu) * r.customer_id.DN_price
-            if r.TN > 0:
-                revenues -= ((r.sum_return * 10000) + r.du_thieu) * r.customer_id.TN_price
-            if r.AG > 0:
-                revenues -= ((r.sum_return * 10000) + r.du_thieu) * r.customer_id.AG_price
-            if r.BTH > 0:
-                revenues -= ((r.sum_return * 10000) + r.du_thieu) * r.customer_id.BTH_price
-            if r.BD > 0:
-                revenues -= ((r.sum_return * 10000) + r.du_thieu) * r.customer_id.BD_price
-            if r.TV > 0:
-                revenues -= ((r.sum_return * 10000) + r.du_thieu) * r.customer_id.TV_price
-            if r.VL > 0:
-                revenues -= ((r.sum_return * 10000) + r.du_thieu) * r.customer_id.VL_price
-            if r.HCM_2 > 0:
-                revenues -= ((r.sum_return * 10000) + r.du_thieu) * r.customer_id.HCM_2_price
-            if r.LA > 0:
-                revenues -= ((r.sum_return * 10000) + r.du_thieu) * r.customer_id.LA_price
-            if r.BP > 0:
-                revenues -= ((r.sum_return * 10000) + r.du_thieu) * r.customer_id.BP_price
-            if r.HG > 0:
-                revenues -= ((r.sum_return * 10000) + r.du_thieu) * r.customer_id.HG_price
-            if r.KG > 0:
-                revenues -= ((r.sum_return * 10000) + r.du_thieu) * r.customer_id.KG_price
-            if r.DL > 0:
-                revenues -= ((r.sum_return * 10000) + r.du_thieu) * r.customer_id.DL_price
-            if r.TG > 0:
-                revenues -= ((r.sum_return * 10000) + r.du_thieu) * r.customer_id.TG_price
-            r.revenues = revenues
+            plan = self.env['planed.line'].search(
+                [('planed_id.date', '=', r.return_stock_id.date), ('customer_id', '=', r.customer_id.id)])
+            p1, p2, p3, p4 = 0, 0, 0, 0
+            customer_plan = self.env['customer.plan'].get_val_customer_plan()
+            day_week = customer_plan.get(r.customer_id.planed.code)
+            if plan.planed_id.day_of_week == '0':
+                p1 = (plan.HCM + plan.HCM_PS) * r.customer_id.HCM_price
+                p2 = (plan.DT + plan.DT_PS) * r.customer_id.DT_price
+                p3 = (plan.CM + plan.CM_PS) * r.customer_id.CM_price
+                if day_week != 0:
+                    plan = self.env['planed.line'].search(
+                        [('planed_id.date', '=', r.return_stock_id.date + timedelta(days=day_week)),
+                         ('customer_id', '=', r.customer_id.id)])
+                if day_week == 1:
+                    p1 = (plan.BL + plan.BL_PS) * r.customer_id.BL_price
+                    p2 = (plan.BT + plan.BT_PS) * r.customer_id.BT_price
+                    p3 = (plan.VT + plan.VT_PS) * r.customer_id.VT_price
+                elif day_week == 2:
+                    p1 = (plan.ST + plan.ST_PS) * r.customer_id.ST_price
+                    p2 = (plan.CT + plan.CT_PS) * r.customer_id.BT_price
+                    p3 = (plan.DN + plan.DN_PS) * r.customer_id.DN_price
+                elif day_week == 3:
+                    p1 = (plan.TN + plan.TN_PS) * r.customer_id.TN_price
+                    p2 = (plan.AG + plan.AG_PS) * r.customer_id.AG_price
+                    p3 = (plan.BTH + plan.BTH_PS) * r.customer_id.BTH_price
+                elif day_week == 4:
+                    p1 = (plan.BD + plan.BD_PS) * r.customer_id.BD_price
+                    p2 = (plan.TV + plan.TV_PS) * r.customer_id.TV_price
+                    p3 = (plan.VL + plan.VL_PS) * r.customer_id.VL_price
+                elif day_week == 5:
+                    p1 = (plan.HCM_2 + plan.HCM_2_PS) * r.customer_id.HCM_2_price
+                    p2 = (plan.LA + plan.LA_PS) * r.customer_id.LA_price
+                    p3 = (plan.BP + plan.BP_PS) * r.customer_id.BP_price
+                    p4 = (plan.HG + plan.HG_PS) * r.customer_id.HG_price
+                elif day_week == 6:
+                    p1 = (plan.KG + plan.KG_PS) * r.customer_id.KG_price
+                    p2 = (plan.BL + plan.BL_PS) * r.customer_id.DL_price
+                    p3 = (plan.TG + plan.TG_PS) * r.customer_id.TG_price
+                p1 = p1 - ((r.HCM * 10000) * r.customer_id.HCM_price)
+                p2 = p2 - ((r.DT * 10000) * r.customer_id.DT_price)
+                p3 = p3 - ((r.CM * 10000) * r.customer_id.CM_price)
+            if plan.planed_id.day_of_week == '1':
+                p1 = (plan.BL + plan.BL_PS) * r.customer_id.BL_price
+                p2 = (plan.BT + plan.BT_PS) * r.customer_id.BT_price
+                p3 = (plan.VT + plan.VT_PS) * r.customer_id.VT_price
+                if day_week == 1:
+                    p1 = (plan.ST + plan.ST_PS) * r.customer_id.ST_price
+                    p2 = (plan.CT + plan.BT_PS) * r.customer_id.CT_price
+                    p3 = (plan.DN + plan.VT_PS) * r.customer_id.DN_price
+                elif day_week == 2:
+                    p1 = (plan.TN + plan.TN_PS) * r.customer_id.TN_price
+                    p2 = (plan.AG + plan.AG_PS) * r.customer_id.AG_price
+                    p3 = (plan.BTH + plan.BTH_PS) * r.customer_id.BTH_price
+                elif day_week == 3:
+                    p1 = (plan.BD + plan.BD_PS) * r.customer_id.BD_price
+                    p2 = (plan.TV + plan.TV_PS) * r.customer_id.TV_price
+                    p3 = (plan.VL + plan.VL_PS) * r.customer_id.VL_price
+                elif day_week == 4:
+                    p1 = (plan.HCM_2 + plan.HCM_2_PS) * r.customer_id.HCM_2_price
+                    p2 = (plan.LA + plan.LA_PS) * r.customer_id.LA_price
+                    p3 = (plan.BP + plan.BP_PS) * r.customer_id.BP_price
+                    p4 = (plan.HG + plan.HG_PS) * r.customer_id.HG_price
+                elif day_week == 5:
+                    p1 = (plan.KG + plan.KG_PS) * r.customer_id.KG_price
+                    p2 = (plan.BL + plan.BL_PS) * r.customer_id.DL_price
+                    p3 = (plan.TG + plan.TG_PS) * r.customer_id.TG_price
+                elif day_week == 6:
+                    p1 = (plan.HCM + plan.HCM_PS) * r.customer_id.HCM_price
+                    p2 = (plan.DT + plan.DT_PS) * r.customer_id.DT_price
+                    p3 = (plan.CM + plan.CM_PS) * r.customer_id.CM_price
+
+                p1 = p1 - ((r.BL * 10000) * r.customer_id.BL_price)
+                p2 = p2 - ((r.BT * 10000) * r.customer_id.BT_price)
+                p3 = p3 - ((r.VT * 10000) * r.customer_id.VT_price)
+            if plan.planed_id.day_of_week == '2':
+                p1 = (plan.ST + plan.ST_PS) * r.customer_id.ST_price
+                p2 = (plan.CT + plan.BT_PS) * r.customer_id.CT_price
+                p3 = (plan.DN + plan.DN_PS) * r.customer_id.DN_price
+                if day_week == 1:
+                    p1 = (plan.TN + plan.TN_PS) * r.customer_id.TN_price
+                    p2 = (plan.AG + plan.AG_PS) * r.customer_id.AG_price
+                    p3 = (plan.BTH + plan.BTH_PS) * r.customer_id.BTH_price
+                elif day_week == 2:
+                    p1 = (plan.BD + plan.BD_PS) * r.customer_id.BD_price
+                    p2 = (plan.TV + plan.TV_PS) * r.customer_id.TV_price
+                    p3 = (plan.VL + plan.VL_PS) * r.customer_id.VL_price
+                elif day_week == 3:
+                    p1 = (plan.HCM_2 + plan.HCM_2_PS) * r.customer_id.HCM_2_price
+                    p2 = (plan.LA + plan.LA_PS) * r.customer_id.LA_price
+                    p3 = (plan.BP + plan.BP_PS) * r.customer_id.BP_price
+                    p4 = (plan.HG + plan.HG_PS) * r.customer_id.HG_price
+                elif day_week == 4:
+                    p1 = (plan.KG + plan.KG_PS) * r.customer_id.KG_price
+                    p2 = (plan.BL + plan.BL_PS) * r.customer_id.DL_price
+                    p3 = (plan.TG + plan.TG_PS) * r.customer_id.TG_price
+                elif day_week == 5:
+                    p1 = (plan.HCM + plan.HCM_PS) * r.customer_id.HCM_price
+                    p2 = (plan.DT + plan.DT_PS) * r.customer_id.DT_price
+                    p3 = (plan.CM + plan.CM_PS) * r.customer_id.CM_price
+                elif day_week == 6:
+                    p1 = (plan.BL + plan.BL_PS) * r.customer_id.BL_price
+                    p2 = (plan.BT + plan.BT_PS) * r.customer_id.BT_price
+                    p3 = (plan.VT + plan.VT_PS) * r.customer_id.VT_price
+
+                p1 = p1 - ((r.ST * 10000) * r.customer_id.ST_price)
+                p2 = p2 - ((r.CT * 10000) * r.customer_id.CT_price)
+                p3 = p3 - ((r.DN * 10000) * r.customer_id.DN_price)
+            if plan.planed_id.day_of_week == '3':
+                p1 = (plan.TN + plan.TN_PS) * r.customer_id.TN_price
+                p2 = (plan.AG + plan.AG_PS) * r.customer_id.AG_price
+                p3 = (plan.BTH + plan.BTH_PS) * r.customer_id.BTH_price
+                if day_week == 1:
+                    p1 = (plan.BD + plan.BD_PS) * r.customer_id.BD_price
+                    p2 = (plan.TV + plan.TV_PS) * r.customer_id.TV_price
+                    p3 = (plan.VL + plan.VL_PS) * r.customer_id.VL_price
+                elif day_week == 2:
+                    p1 = (plan.HCM_2 + plan.HCM_2_PS) * r.customer_id.HCM_2_price
+                    p2 = (plan.LA + plan.LA_PS) * r.customer_id.LA_price
+                    p3 = (plan.BP + plan.BP_PS) * r.customer_id.BP_price
+                    p4 = (plan.HG + plan.HG_PS) * r.customer_id.HG_price
+                elif day_week == 3:
+                    p1 = (plan.KG + plan.KG_PS) * r.customer_id.KG_price
+                    p2 = (plan.BL + plan.BL_PS) * r.customer_id.DL_price
+                    p3 = (plan.TG + plan.TG_PS) * r.customer_id.TG_price
+                elif day_week == 4:
+                    p1 = (plan.HCM + plan.HCM_PS) * r.customer_id.HCM_price
+                    p2 = (plan.DT + plan.DT_PS) * r.customer_id.DT_price
+                    p3 = (plan.CM + plan.CM_PS) * r.customer_id.CM_price
+                elif day_week == 5:
+                    p1 = (plan.BL + plan.BL_PS) * r.customer_id.BL_price
+                    p2 = (plan.BT + plan.BT_PS) * r.customer_id.BT_price
+                    p3 = (plan.VT + plan.VT_PS) * r.customer_id.VT_price
+                elif day_week == 6:
+                    p1 = (plan.ST + plan.ST_PS) * r.customer_id.ST_price
+                    p2 = (plan.BT + plan.BT_PS) * r.customer_id.BT_price
+                    p3 = (plan.VT + plan.VT_PS) * r.customer_id.VT_price
+
+                p1 = p1 - ((r.TN * 10000) * r.customer_id.TN_price)
+                p2 = p2 - ((r.AG * 10000) * r.customer_id.AG_price)
+                p3 = p3 - ((r.BTH * 10000) * r.customer_id.BTH_price)
+            if plan.planed_id.day_of_week == '4':
+                p1 = (plan.BD + plan.BD_PS) * r.customer_id.BD_price
+                p2 = (plan.TV + plan.TV_PS) * r.customer_id.TV_price
+                p3 = (plan.VL + plan.VL_PS) * r.customer_id.VL_price
+                if day_week == 1:
+                    p1 = (plan.HCM_2 + plan.HCM_2_PS) * r.customer_id.HCM_2_price
+                    p2 = (plan.LA + plan.LA_PS) * r.customer_id.LA_price
+                    p3 = (plan.BP + plan.BP_PS) * r.customer_id.BP_price
+                    p4 = (plan.HG + plan.HG_PS) * r.customer_id.HG_price
+                elif day_week == 2:
+                    p1 = (plan.KG + plan.KG_PS) * r.customer_id.KG_price
+                    p2 = (plan.BL + plan.BL_PS) * r.customer_id.DL_price
+                    p3 = (plan.TG + plan.TG_PS) * r.customer_id.TG_price
+                elif day_week == 3:
+                    p1 = (plan.HCM + plan.HCM_PS) * r.customer_id.HCM_price
+                    p2 = (plan.DT + plan.DT_PS) * r.customer_id.DT_price
+                    p3 = (plan.CM + plan.CM_PS) * r.customer_id.CM_price
+                elif day_week == 4:
+                    p1 = (plan.BL + plan.BL_PS) * r.customer_id.BL_price
+                    p2 = (plan.BT + plan.BT_PS) * r.customer_id.BT_price
+                    p3 = (plan.VT + plan.VT_PS) * r.customer_id.VT_price
+                elif day_week == 5:
+                    p1 = (plan.ST + plan.ST_PS) * r.customer_id.ST_price
+                    p2 = (plan.BT + plan.BT_PS) * r.customer_id.BT_price
+                    p3 = (plan.VT + plan.VT_PS) * r.customer_id.VT_price
+                elif day_week == 6:
+                    p1 = (plan.TN + plan.TN_PS) * r.customer_id.TN_price
+                    p2 = (plan.AG + plan.AG_PS) * r.customer_id.AG_price
+                    p3 = (plan.BTH + plan.BTH_PS) * r.customer_id.BTH_price
+
+                p1 = p1 - ((r.BD * 10000) * r.customer_id.BD_price)
+                p2 = p2 - ((r.TV * 10000) * r.customer_id.TV_price)
+                p3 = p3 - ((r.VL * 10000) * r.customer_id.VL_price)
+            if plan.planed_id.day_of_week == '5':
+                p1 = (plan.HCM_2 + plan.HCM_2_PS) * r.customer_id.HCM_2_price
+                p2 = (plan.LA + plan.LA_PS) * r.customer_id.LA_price
+                p3 = (plan.BP + plan.BP_PS) * r.customer_id.BP_price
+                p4 = (plan.HG + plan.HG_PS) * r.customer_id.HG_price
+                if day_week == 1:
+                    p1 = (plan.KG + plan.KG_PS) * r.customer_id.KG_price
+                    p2 = (plan.BL + plan.BL_PS) * r.customer_id.DL_price
+                    p3 = (plan.TG + plan.TG_PS) * r.customer_id.TG_price
+                elif day_week == 2:
+                    p1 = (plan.HCM + plan.HCM_PS) * r.customer_id.HCM_price
+                    p2 = (plan.DT + plan.DT_PS) * r.customer_id.DT_price
+                    p3 = (plan.CM + plan.CM_PS) * r.customer_id.CM_price
+                elif day_week == 3:
+                    p1 = (plan.BL + plan.BL_PS) * r.customer_id.BL_price
+                    p2 = (plan.BT + plan.BT_PS) * r.customer_id.BT_price
+                    p3 = (plan.VT + plan.VT_PS) * r.customer_id.VT_price
+                elif day_week == 4:
+                    p1 = (plan.ST + plan.ST_PS) * r.customer_id.ST_price
+                    p2 = (plan.BT + plan.BT_PS) * r.customer_id.BT_price
+                    p3 = (plan.VT + plan.VT_PS) * r.customer_id.VT_price
+                elif day_week == 5:
+                    p1 = (plan.TN + plan.TN_PS) * r.customer_id.TN_price
+                    p2 = (plan.AG + plan.AG_PS) * r.customer_id.AG_price
+                    p3 = (plan.BTH + plan.BTH_PS) * r.customer_id.BTH_price
+                elif day_week == 6:
+                    p1 = (plan.BD + plan.BD_PS) * r.customer_id.BD_price
+                    p2 = (plan.TV + plan.TV_PS) * r.customer_id.TV_price
+                    p3 = (plan.VL + plan.VL_PS) * r.customer_id.VL_price
+
+                p1 = p1 - ((r.HCM_2 * 10000) * r.customer_id.HCM_2_price)
+                p2 = p2 - ((r.LA * 10000) * r.customer_id.LA_price)
+                p3 = p3 - ((r.BP * 10000) * r.customer_id.BP_price)
+                p4 = p4 - ((r.HG * 10000) * r.customer_id.HG_price)
+            if plan.planed_id.day_of_week == '6':
+                p1 = (plan.KG + plan.KG_PS) * r.customer_id.KG_price
+                p2 = (plan.BL + plan.BL_PS) * r.customer_id.DL_price
+                p3 = (plan.TG + plan.TG_PS) * r.customer_id.TG_price
+                if day_week == 1:
+                    p1 = (plan.HCM + plan.HCM_PS) * r.customer_id.HCM_price
+                    p2 = (plan.DT + plan.DT_PS) * r.customer_id.DT_price
+                    p3 = (plan.CM + plan.CM_PS) * r.customer_id.CM_price
+                elif day_week == 2:
+                    p1 = (plan.BL + plan.BL_PS) * r.customer_id.BL_price
+                    p2 = (plan.BT + plan.BT_PS) * r.customer_id.BT_price
+                    p3 = (plan.VT + plan.VT_PS) * r.customer_id.VT_price
+                elif day_week == 3:
+                    p1 = (plan.BL + plan.BL_PS) * r.customer_id.BL_price
+                    p2 = (plan.BT + plan.BT_PS) * r.customer_id.BT_price
+                    p3 = (plan.VT + plan.VT_PS) * r.customer_id.VT_price
+                elif day_week == 4:
+                    p1 = (plan.ST + plan.ST_PS) * r.customer_id.ST_price
+                    p2 = (plan.BT + plan.BT_PS) * r.customer_id.BT_price
+                    p3 = (plan.VT + plan.VT_PS) * r.customer_id.VT_price
+                elif day_week == 5:
+                    p1 = (plan.BD + plan.BD_PS) * r.customer_id.BD_price
+                    p2 = (plan.TV + plan.TV_PS) * r.customer_id.TV_price
+                    p3 = (plan.VL + plan.VL_PS) * r.customer_id.VL_price
+                elif day_week == 6:
+                    p1 = (plan.HCM_2 + plan.HCM_2_PS) * r.customer_id.HCM_2_price
+                    p2 = (plan.LA + plan.LA_PS) * r.customer_id.LA_price
+                    p3 = (plan.BP + plan.BP_PS) * r.customer_id.BP_price
+                    p4 = (plan.HG + plan.HG_PS) * r.customer_id.HG_price
+
+                p1 = p1 - ((r.KG * 10000) * r.customer_id.KG_price)
+                p2 = p2 - ((r.BL * 10000) * r.customer_id.BL_price)
+                p3 = p3 - ((r.TG * 10000) * r.customer_id.TG_price)
+            r.revenues = (p1 + p2 + p3 + p4)
 
     @api.depends('HCM', 'DT', 'CM', 'BL', 'BT', 'VT', 'ST', 'CT', 'DN', 'TN', 'AG',
                  'BTH', 'BD', 'TV', 'VL', 'HCM_2', 'LA', 'BP', 'HG', 'KG', 'DL', 'TG')

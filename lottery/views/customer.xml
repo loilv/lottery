@@ -40,7 +40,7 @@
                         KẾ HOẠCH LÃNH VÉ THEO ĐÀI
                     </div>
                     <div class="card-body">
-                        <div class="table">
+                        <div class="table-responsive">
                             <table class="table table-bordered">
                                 <tbody>
                                     <tr>

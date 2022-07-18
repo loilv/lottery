@@ -1,5 +1,5 @@
 from odoo import fields, api, models
-from datetime import datetime
+from datetime import datetime, timedelta
 from odoo.exceptions import UserError, ValidationError
 
 
@@ -47,8 +47,9 @@ class PurchaseInventory(models.Model):
         return vals
 
     def cron_create_inventory(self):
-        old = self.search([], limit=1, order='id desc')
-        if not old:
+        old = self.search([('date', '=', datetime.now() - timedelta(days=1))], limit=1, order='id desc')
+        current = self.search([('date', '=', datetime.now())], limit=1, order='id desc')
+        if not old or current:
             return False
         province_ids = self.env['province.lottery'].search([('group', '=', datetime.now().weekday())])
         val_lines = []
