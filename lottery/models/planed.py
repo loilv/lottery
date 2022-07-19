@@ -72,13 +72,13 @@ class Planed(models.Model):
     ])
 
     def update_state_lottery(self):
-        plan = self.search([('state', '!=', 'done')])
+        plan = self.search([('state', '!=', 'done'), ('date', '<', datetime.now())])
         for item in plan:
             item.state = 'done'
-        purchase = self.env['purchase.inventory'].search([('state', '!=', 'done')])
+        purchase = self.env['purchase.inventory'].search([('state', '!=', 'done'), ('date', '<', datetime.now())])
         for item in purchase:
             item.state = 'done'
-        re_stock = self.env['return.stock'].search([('state', '!=', 'done')])
+        re_stock = self.env['return.stock'].search([('state', '!=', 'done'), ('date', '<', datetime.now())])
         for item in re_stock:
             item.state = 'done'
 
