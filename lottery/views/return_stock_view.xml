@@ -89,55 +89,61 @@
                         <field name="revenues"/>
                     </tree>
                 </field>
-                <field name="tele_ids" style="width: 50%" attrs="{'readonly': [('state', '=', 'done')]}">
-                    <tree editable="bottom" create="false" delete="false">
-                        <field name="data_tele_id" force_save="1"/>
-                        <field name="HCM" force_save="1" style="color: red"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '0')]}"/>
-                        <field name="DT" force_save="1" style="color: red"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '0')]}"/>
-                        <field name="CM" force_save="1" style="color: red"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '0')]}"/>
-                        <field name="BL" force_save="1" style="color: red"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '1')]}"/>
-                        <field name="BT" force_save="1" style="color: red"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '1')]}"/>
-                        <field name="VT" force_save="1" style="color: red"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '1')]}"/>
-                        <field name="ST" force_save="1" style="color: red"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '2')]}"/>
-                        <field name="CT" force_save="1" style="color: red"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '2')]}"/>
-                        <field name="DN" force_save="1" style="color: red"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '2')]}"/>
-                        <field name="TN" force_save="1" style="color: red"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '3')]}"/>
-                        <field name="AG" force_save="1" style="color: red"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '3')]}"/>
-                        <field name="BTH" force_save="1" style="color: red"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '3')]}"/>
-                        <field name="BD" force_save="1" style="color: red"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '4')]}"/>
-                        <field name="TV" force_save="1" style="color: red"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '4')]}"/>
-                        <field name="VL" force_save="1" style="color: red"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '4')]}"/>
-                        <field name="HCM_2" force_save="1" style="color: red"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '5')]}"/>
-                        <field name="LA" force_save="1" style="color: red"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '5')]}"/>
-                        <field name="BP" force_save="1" style="color: red"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '5')]}"/>
-                        <field name="HG" force_save="1" style="color: red"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '5')]}"/>
-                        <field name="KG" force_save="1" style="color: red"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '6')]}"/>
-                        <field name="DL" force_save="1" style="color: red"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '6')]}"/>
-                        <field name="TG" force_save="1" style="color: red"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '6')]}"/>
-                    </tree>
-                </field>
+                <group>
+                    <group>
+                        <group>
+                            <field name="tele_ids" attrs="{'readonly': [('state', '=', 'done')]}" nolabel="1">
+                                <tree editable="bottom" create="false" delete="false">
+                                    <field name="data_tele_id" force_save="1"/>
+                                    <field name="HCM" force_save="1" style="color: red"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '0')]}"/>
+                                    <field name="DT" force_save="1" style="color: red"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '0')]}"/>
+                                    <field name="CM" force_save="1" style="color: red"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '0')]}"/>
+                                    <field name="BL" force_save="1" style="color: red"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '1')]}"/>
+                                    <field name="BT" force_save="1" style="color: red"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '1')]}"/>
+                                    <field name="VT" force_save="1" style="color: red"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '1')]}"/>
+                                    <field name="ST" force_save="1" style="color: red"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '2')]}"/>
+                                    <field name="CT" force_save="1" style="color: red"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '2')]}"/>
+                                    <field name="DN" force_save="1" style="color: red"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '2')]}"/>
+                                    <field name="TN" force_save="1" style="color: red"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '3')]}"/>
+                                    <field name="AG" force_save="1" style="color: red"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '3')]}"/>
+                                    <field name="BTH" force_save="1" style="color: red"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '3')]}"/>
+                                    <field name="BD" force_save="1" style="color: red"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '4')]}"/>
+                                    <field name="TV" force_save="1" style="color: red"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '4')]}"/>
+                                    <field name="VL" force_save="1" style="color: red"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '4')]}"/>
+                                    <field name="HCM_2" force_save="1" style="color: red"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '5')]}"/>
+                                    <field name="LA" force_save="1" style="color: red"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '5')]}"/>
+                                    <field name="BP" force_save="1" style="color: red"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '5')]}"/>
+                                    <field name="HG" force_save="1" style="color: red"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '5')]}"/>
+                                    <field name="KG" force_save="1" style="color: red"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '6')]}"/>
+                                    <field name="DL" force_save="1" style="color: red"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '6')]}"/>
+                                    <field name="TG" force_save="1" style="color: red"
+                                           attrs="{'column_invisible': [('parent.day_of_week', '!=', '6')]}"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </group>
+                </group>
             </form>
         </field>
     </record>

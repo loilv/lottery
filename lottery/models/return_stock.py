@@ -53,74 +53,74 @@ class ReturnStockLine(models.Model):
     return_stock_id = fields.Many2one('return.stock')
     customer_id = fields.Many2one('customer', string='Khách hàng', readonly=1)
 
-    HCM = fields.Integer(string='TP HCM', default=0)
+    HCM = fields.Integer(string='TP HCM (Tờ)', default=0)
     HCM_PC = fields.Float(string='TP HCM', readonly=1, compute="_compute_percent_back", store=True)
 
-    DT = fields.Integer(string='ĐT', sum="Tổng số")
+    DT = fields.Integer(string='ĐT (Tờ)', sum="Tổng số")
     DT_PC = fields.Float(string='ĐT', readonly=1, compute="_compute_percent_back", store=True)
 
-    CM = fields.Integer(string='CM')
+    CM = fields.Integer(string='CM (Tờ)')
     CM_PC = fields.Float(string='CM', readonly=1, compute="_compute_percent_back", store=True)
 
-    BL = fields.Integer(string='BL')
+    BL = fields.Integer(string='BL (Tờ)')
     BL_PC = fields.Float(string='BL', readonly=1, compute="_compute_percent_back", store=True)
 
-    BT = fields.Integer(string='BT')
+    BT = fields.Integer(string='BT (Tờ)')
     BT_PC = fields.Float(string='BT', readonly=1, compute="_compute_percent_back", store=True)
 
-    VT = fields.Integer(string='VT')
+    VT = fields.Integer(string='VT (Tờ)')
     VT_PC = fields.Float(string='VT', readonly=1, compute="_compute_percent_back", store=True)
 
-    ST = fields.Integer(string='ST')
+    ST = fields.Integer(string='ST (Tờ)')
     ST_PC = fields.Float(string='ST', readonly=1, compute="_compute_percent_back", store=True)
 
-    CT = fields.Integer(string='ST')
+    CT = fields.Integer(string='ST (Tờ)')
     CT_PC = fields.Float(string='CT', readonly=1, compute="_compute_percent_back", store=True)
 
-    DN = fields.Integer(string='ĐN')
+    DN = fields.Integer(string='ĐN (Tờ)')
     DN_PC = fields.Float(string='ĐN', readonly=1, compute="_compute_percent_back", store=True)
 
-    TN = fields.Integer(string='TN')
+    TN = fields.Integer(string='TN (Tờ)')
     TN_PC = fields.Float(string='TN', readonly=1, compute="_compute_percent_back", store=True)
 
-    AG = fields.Integer(string='AG')
+    AG = fields.Integer(string='AG (Tờ)')
     AG_PC = fields.Float(string='AG', readonly=1, compute="_compute_percent_back", store=True)
 
-    BTH = fields.Integer(string='BTH')
+    BTH = fields.Integer(string='BTH (Tờ)')
     BTH_PC = fields.Float(string='BTH', readonly=1, compute="_compute_percent_back", store=True)
 
-    BD = fields.Integer(string='BD')
+    BD = fields.Integer(string='BD (Tờ)')
     BD_PC = fields.Float(string='BD', readonly=1, compute="_compute_percent_back", store=True)
 
-    TV = fields.Integer(string='TV')
+    TV = fields.Integer(string='TV (Tờ)')
     TV_PC = fields.Float(string='TV', readonly=1, compute="_compute_percent_back", store=True)
 
-    VL = fields.Integer(string='VL')
+    VL = fields.Integer(string='VL (Tờ)')
     VL_PC = fields.Float(string='VL', readonly=1, compute="_compute_percent_back", store=True)
 
-    HCM_2 = fields.Integer(string='TP HCM')
+    HCM_2 = fields.Integer(string='TP HCM (Tờ)')
     HCM_2_PC = fields.Float(string='TP HCM', readonly=1, compute="_compute_percent_back", store=True)
 
-    LA = fields.Integer(string='LA')
+    LA = fields.Integer(string='LA (Tờ)')
     LA_PC = fields.Float(string='LA', readonly=1, compute="_compute_percent_back", store=True)
 
-    BP = fields.Integer(string='BP')
+    BP = fields.Integer(string='BP (Tờ)')
     BP_PC = fields.Float(string='BP', readonly=1, compute="_compute_percent_back", store=True)
 
-    HG = fields.Integer(string='HG')
+    HG = fields.Integer(string='HG (Tờ)')
     HG_PC = fields.Float(string='HG', readonly=1, compute="_compute_percent_back", store=True)
 
-    KG = fields.Integer(string='KG')
+    KG = fields.Integer(string='KG (Tờ)')
     KG_PC = fields.Float(string='KG', readonly=1, compute="_compute_percent_back", store=True)
 
-    DL = fields.Integer(string='ĐL')
+    DL = fields.Integer(string='ĐL (Tờ)')
     DL_PC = fields.Float(string='ĐL', readonly=1, compute="_compute_percent_back", store=True)
 
-    TG = fields.Integer(string='TG')
+    TG = fields.Integer(string='TG (Tờ)')
     TG_PC = fields.Float(string='TG', readonly=1, compute="_compute_percent_back", store=True)
 
     percent = fields.Float("%", compute="_compute_percent", store=True)
-    sum_return = fields.Integer("Tổng trả", compute="_compute_sum_return", store=True)
+    sum_return = fields.Integer("Tổng trả (Tờ)", compute="_compute_sum_return", store=True)
     consume = fields.Integer("Tiêu thụ", compute="_compute_consume", store=True)
     ticket_receive = fields.Integer("Lượng vé lãnh", compute='_compute_ticket_receive', store=True)
     du_thieu = fields.Integer('Dư thiếu')
@@ -533,7 +533,7 @@ class ReturnStockTele(models.Model):
     HCM = fields.Char(string='TP HCM', compute="_compute_tele_value")
     DT = fields.Char(string='ĐT', compute="_compute_tele_value")
     CM = fields.Char(string='CM', compute="_compute_tele_value")
-    BL = fields.Char(string='CM', compute="_compute_tele_value")
+    BL = fields.Char(string='BL', compute="_compute_tele_value")
     BT = fields.Char(string='BT', compute="_compute_tele_value")
     VT = fields.Char(string='VT', compute="_compute_tele_value")
     ST = fields.Char(string='ST', compute="_compute_tele_value")
@@ -580,72 +580,29 @@ class ReturnStockTele(models.Model):
                 r.DL = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('DL')) * 10000)
                 r.TG = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('TG')) * 10000)
             elif r.data_tele_id.code == 'tl':
-                r.HCM = "{:,.0f}%".format((sum(r.return_stock_id.lines.mapped('HCM')) / sum(
-                    r.return_stock_id.lines.mapped('sum_return')) * 100)) if sum(
-                    r.return_stock_id.lines.mapped('sum_return')) > 0 else 0
-                r.DT = "{:,.0f}%".format((sum(r.return_stock_id.lines.mapped('DT')) / sum(
-                    r.return_stock_id.lines.mapped('sum_return')) * 100)) if sum(
-                    r.return_stock_id.lines.mapped('sum_return')) > 0 else 0
-                r.CM = "{:,.0f}%".format((sum(r.return_stock_id.lines.mapped('CM')) / sum(
-                    r.return_stock_id.lines.mapped('sum_return')) * 100)) if sum(
-                    r.return_stock_id.lines.mapped('sum_return')) > 0 else 0
-                r.BL = "{:,.0f}%".format((sum(r.return_stock_id.lines.mapped('BL')) / sum(
-                    r.return_stock_id.lines.mapped('sum_return')) * 100)) if sum(
-                    r.return_stock_id.lines.mapped('sum_return')) > 0 else 0
-                r.BT = "{:,.0f}%".format((sum(r.return_stock_id.lines.mapped('BT')) / sum(
-                    r.return_stock_id.lines.mapped('sum_return')) * 100)) if sum(
-                    r.return_stock_id.lines.mapped('sum_return')) > 0 else 0
-                r.VT = "{:,.0f}%".format((sum(r.return_stock_id.lines.mapped('VT')) / sum(
-                    r.return_stock_id.lines.mapped('sum_return')) * 100)) if sum(
-                    r.return_stock_id.lines.mapped('sum_return')) > 0 else 0
-                r.ST = "{:,.0f}%".format((sum(r.return_stock_id.lines.mapped('ST')) / sum(
-                    r.return_stock_id.lines.mapped('sum_return')) * 100)) if sum(
-                    r.return_stock_id.lines.mapped('sum_return')) > 0 else 0
-                r.CT = "{:,.0f}%".format((sum(r.return_stock_id.lines.mapped('CT')) / sum(
-                    r.return_stock_id.lines.mapped('sum_return')) * 100)) if sum(
-                    r.return_stock_id.lines.mapped('sum_return')) > 0 else 0
-                r.DN = "{:,.0f}%".format((sum(r.return_stock_id.lines.mapped('DN')) / sum(
-                    r.return_stock_id.lines.mapped('sum_return')) * 100)) if sum(
-                    r.return_stock_id.lines.mapped('sum_return')) > 0 else 0
-                r.TN = "{:,.0f}%".format((sum(r.return_stock_id.lines.mapped('TN')) / sum(
-                    r.return_stock_id.lines.mapped('sum_return')) * 100)) if sum(
-                    r.return_stock_id.lines.mapped('sum_return')) > 0 else 0
-                r.AG = "{:,.0f}%".format((sum(r.return_stock_id.lines.mapped('AG')) / sum(
-                    r.return_stock_id.lines.mapped('sum_return')) * 100)) if sum(
-                    r.return_stock_id.lines.mapped('sum_return')) > 0 else 0
-                r.BTH = "{:,.0f}%".format((sum(r.return_stock_id.lines.mapped('BTH')) / sum(
-                    r.return_stock_id.lines.mapped('sum_return')) * 100)) if sum(
-                    r.return_stock_id.lines.mapped('sum_return')) > 0 else 0
-                r.BD = "{:,.0f}%".format((sum(r.return_stock_id.lines.mapped('BD')) / sum(
-                    r.return_stock_id.lines.mapped('sum_return')) * 100)) if sum(
-                    r.return_stock_id.lines.mapped('sum_return')) > 0 else 0
-                r.TV = "{:,.0f}%".format((sum(r.return_stock_id.lines.mapped('TV')) / sum(
-                    r.return_stock_id.lines.mapped('sum_return')) * 100)) if sum(
-                    r.return_stock_id.lines.mapped('sum_return')) > 0 else 0
-                r.VL = "{:,.0f}%".format((sum(r.return_stock_id.lines.mapped('VL')) / sum(
-                    r.return_stock_id.lines.mapped('sum_return')) * 100)) if sum(
-                    r.return_stock_id.lines.mapped('sum_return')) > 0 else 0
-                r.HCM_2 = "{:,.0f}%".format((sum(r.return_stock_id.lines.mapped('HCM_2')) / sum(
-                    r.return_stock_id.lines.mapped('sum_return')) * 100)) if sum(
-                    r.return_stock_id.lines.mapped('sum_return')) > 0 else 0
-                r.LA = "{:,.0f}%".format((sum(r.return_stock_id.lines.mapped('LA')) / sum(
-                    r.return_stock_id.lines.mapped('sum_return')) * 100)) if sum(
-                    r.return_stock_id.lines.mapped('sum_return')) > 0 else 0
-                r.BP = "{:,.0f}%".format((sum(r.return_stock_id.lines.mapped('BP')) / sum(
-                    r.return_stock_id.lines.mapped('sum_return')) * 100)) if sum(
-                    r.return_stock_id.lines.mapped('sum_return')) > 0 else 0
-                r.HG = "{:,.0f}%".format((sum(r.return_stock_id.lines.mapped('HG')) / sum(
-                    r.return_stock_id.lines.mapped('sum_return')) * 100)) if sum(
-                    r.return_stock_id.lines.mapped('sum_return')) > 0 else 0
-                r.KG = "{:,.0f}%".format((sum(r.return_stock_id.lines.mapped('KG')) / sum(
-                    r.return_stock_id.lines.mapped('sum_return')) * 100)) if sum(
-                    r.return_stock_id.lines.mapped('sum_return')) > 0 else 0
-                r.DL = "{:,.0f}%".format((sum(r.return_stock_id.lines.mapped('DL')) / sum(
-                    r.return_stock_id.lines.mapped('sum_return')) * 100)) if sum(
-                    r.return_stock_id.lines.mapped('sum_return')) > 0 else 0
-                r.TG = "{:,.0f}%".format((sum(r.return_stock_id.lines.mapped('TG')) / sum(
-                    r.return_stock_id.lines.mapped('sum_return')) * 100)) if sum(
-                    r.return_stock_id.lines.mapped('sum_return')) > 0 else 0
+                quantities = self.env['purchase.inventory'].get_total(date=self.return_stock_id.date)
+                r.HCM = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('HCM')) * 10000 / quantities['HCM_1']) * 100) if quantities.get('HCM_1', 0)>0 else 0)
+                r.DT = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('DT')) * 10000 / quantities['DT']) * 100) if quantities.get('DT', 0)>0 else 0)
+                r.CM = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('CM')) * 10000 / quantities['CM']) * 100) if quantities.get('CM', 0)>0 else 0)
+                r.BL = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('BL')) * 10000 / quantities['BL']) * 100) if quantities.get('BL', 0)>0 else 0)
+                r.BT = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('BT')) * 10000 / quantities['BT']) * 100) if quantities.get('BT', 0)>0 else 0)
+                r.VT = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('VT')) * 10000 / quantities['VT']) * 100) if quantities.get('VT', 0)>0 else 0)
+                r.ST = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('ST')) * 10000 / quantities['ST']) * 100) if quantities.get('ST', 0)>0 else 0)
+                r.CT = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('CT')) * 10000 / quantities['CT']) * 100) if quantities.get('CT', 0)>0 else 0)
+                r.DN = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('DN')) * 10000 / quantities['DN']) * 100) if quantities.get('DN', 0)>0 else 0)
+                r.TN = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('TN')) * 10000 / quantities['TN']) * 100) if quantities.get('TN', 0)>0 else 0)
+                r.AG = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('AG')) * 10000 / quantities['AG']) * 100) if quantities.get('AG', 0)>0 else 0)
+                r.BTH = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('BTH')) * 10000 / quantities['BTH']) * 100) if quantities.get('BTH', 0)>0 else 0)
+                r.BD = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('BD')) * 10000 / quantities['BD']) * 100) if quantities.get('BD', 0)>0 else 0)
+                r.TV = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('TV')) * 10000 / quantities['TV']) * 100) if quantities.get('TV', 0)>0 else 0)
+                r.VL = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('VL')) * 10000 / quantities['VL']) * 100) if quantities.get('VL', 0)>0 else 0)
+                r.HCM_2 = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('HCM_2')) * 10000 / quantities['HCM_2']) * 100) if quantities.get('HCM_2', 0)>0 else 0)
+                r.LA = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('LA')) * 10000 / quantities['LA']) * 100) if quantities.get('LA', 0)>0 else 0)
+                r.BP = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('BP')) * 10000 / quantities['BP']) * 100) if quantities.get('BP', 0)>0 else 0)
+                r.HG = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('HG')) * 10000 / quantities['HG']) * 100) if quantities.get('HG', 0)>0 else 0)
+                r.KG = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('KG')) * 10000 / quantities['KG']) * 100) if quantities.get('KG', 0)>0 else 0)
+                r.DL = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('DL')) * 10000 / quantities['DL']) * 100) if quantities.get('DL', 0)>0 else 0)
+                r.TG = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('TG')) * 10000 / quantities['TG']) * 100) if quantities.get('TG', 0)>0 else 0)
             else:
                 r.HCM = ''
                 r.DT = ''
