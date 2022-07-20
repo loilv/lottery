@@ -13,6 +13,7 @@
     "depends": ['base', 'mail'],
     "data": [
         'security/ir.model.access.csv',
+        'data/res_group.xml',
         'views/planed.xml',
         'wizard/create_plan.xml',
         'wizard/create_return_stock.xml',
@@ -25,7 +26,6 @@
         'data/data_planed.xml',
         'data/province_lottery_data.xml',
         'data/schedule.xml',
-        'data/res_group.xml',
         'views/res_users.xml',
     ],
     'assets': {
