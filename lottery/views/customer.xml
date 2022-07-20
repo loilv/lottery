@@ -318,6 +318,7 @@
     <menuitem id="customer_menu_view"
               sequence="4"
               name="Khách hàng"
+              groups="group_khach_hang"
               web_icon="lottery,static/src/img/icons/CRM.png"
               action="customer_action_view"/>
 

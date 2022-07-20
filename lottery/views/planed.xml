@@ -173,6 +173,7 @@
 
     <menuitem id="planed_menu_view"
               sequence="1"
+              groups="group_ke_hoach"
               name="Kế hoạch lãnh vé"
               web_icon="lottery,static/src/img/icons/Sales.png"
               action="planed_action_view"/>

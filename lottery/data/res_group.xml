@@ -1,0 +1,31 @@
+<odoo>
+    <record id="group_ke_hoach" model="res.groups">
+        <field name="name">Được phép truy cập kế hoạch lãnh vé</field>
+        <field name="category_id" ref="base.group_user"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="group_tra_e" model="res.groups">
+        <field name="name">Được phép truy cập trả ế</field>
+        <field name="category_id" ref="base.group_user"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="group_nha_kho" model="res.groups">
+        <field name="name">Được phép truy cập nhập kho</field>
+        <field name="category_id" ref="base.group_user"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="group_khach_hang" model="res.groups">
+        <field name="name">Được phép truy cập khách hàng</field>
+        <field name="category_id" ref="base.group_user"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="group_tai_khoan" model="res.groups">
+        <field name="name">Được phép truy cập tài khoản</field>
+        <field name="category_id" ref="base.group_user"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+</odoo>

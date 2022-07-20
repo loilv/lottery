@@ -4,6 +4,9 @@
         <field name="model">return.stock</field>
         <field name="arch" type="xml">
             <form create="false">
+                <header>
+                    <button name="action_show" type="object" string="Tổng kết trả ế"/>
+                </header>
                 <field name="day_of_week" invisible="1"/>
                 <field name="state" invisible="1"/>
                 <div class="d-flex">
@@ -89,7 +92,8 @@
                         <field name="revenues"/>
                     </tree>
                 </field>
-                <group>
+                <field name="is_show" invisible="1"/>
+                <group attrs="{'invisible': [('is_show', '=', True)]}">
                     <group>
                         <group>
                             <field name="tele_ids" attrs="{'readonly': [('state', '=', 'done')]}" nolabel="1">
@@ -175,6 +179,7 @@
 
     <menuitem id="return_stock_menu_view"
               name="Trả ế"
+              groups="group_tra_e"
               sequence="2"
               web_icon="lottery,static/src/img/icons/Expenses.png"
               action="return_stock_action_view"/>

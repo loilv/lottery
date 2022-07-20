@@ -71,6 +71,7 @@
 
     <menuitem id="purchase_inventory_menu_view"
               name="Nhập kho"
+              groups="group_nha_kho"
               sequence="3"
               web_icon="lottery,static/src/img/icons/Purchase.png"
               action="purchase_inventory_action_view"/>

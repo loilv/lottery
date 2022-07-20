@@ -11,6 +11,13 @@ class ReturnStock(models.Model):
     lines = fields.One2many('return.stock.line', 'return_stock_id')
     tele_ids = fields.One2many('return.stock.tele', 'return_stock_id')
     state = fields.Selection([('draft', 'Dự thảo'), ('done', 'Đã hoàn thành')], default='draft')
+    is_show = fields.Boolean(default=False)
+
+    def action_show(self):
+        if not self.is_show:
+            self.is_show = True
+        else:
+            self.is_show = False
 
     @api.model
     def default_get(self, fields_list):
@@ -557,28 +564,28 @@ class ReturnStockTele(models.Model):
     def _compute_tele_value(self):
         for r in self:
             if r.data_tele_id.code == 'slte':
-                r.HCM = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('HCM')) * 10000)
-                r.DT = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('DT')) * 10000)
-                r.CM = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('CM')) * 10000)
-                r.BL = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('BL')) * 10000)
-                r.BT = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('BT')) * 10000)
-                r.VT = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('VT')) * 10000)
-                r.ST = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('ST')) * 10000)
-                r.CT = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('CT')) * 10000)
-                r.DN = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('DN')) * 10000)
-                r.TN = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('TN')) * 10000)
-                r.AG = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('AG')) * 10000)
-                r.BTH = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('BTH')) * 10000)
-                r.BD = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('BD')) * 10000)
-                r.TV = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('TV')) * 10000)
-                r.VL = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('VL')) * 10000)
-                r.HCM_2 = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('HCM_2')) * 10000)
-                r.LA = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('LA')) * 10000)
-                r.BP = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('BP')) * 10000)
-                r.HG = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('HG')) * 10000)
-                r.KG = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('KG')) * 10000)
-                r.DL = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('DL')) * 10000)
-                r.TG = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('TG')) * 10000)
+                r.HCM = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('HCM')))
+                r.DT = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('DT')))
+                r.CM = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('CM')))
+                r.BL = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('BL')))
+                r.BT = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('BT')))
+                r.VT = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('VT')))
+                r.ST = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('ST')))
+                r.CT = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('CT')))
+                r.DN = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('DN')))
+                r.TN = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('TN')))
+                r.AG = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('AG')))
+                r.BTH = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('BTH')))
+                r.BD = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('BD')))
+                r.TV = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('TV')))
+                r.VL = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('VL')))
+                r.HCM_2 = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('HCM_2')))
+                r.LA = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('LA')))
+                r.BP = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('BP')))
+                r.HG = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('HG')))
+                r.KG = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('KG')))
+                r.DL = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('DL')))
+                r.TG = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('TG')))
             elif r.data_tele_id.code == 'tl':
                 quantities = self.env['purchase.inventory'].get_total(date=self.return_stock_id.date)
                 r.HCM = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('HCM')) * 10000 / quantities['HCM_1']) * 100) if quantities.get('HCM_1', 0)>0 else 0)

@@ -47,24 +47,25 @@ class PurchaseInventory(models.Model):
         return vals
 
     def cron_create_inventory(self):
-        old = self.search([('date', '=', datetime.now() - timedelta(days=1))], limit=1, order='id desc')
-        current = self.search([('date', '=', datetime.now())], limit=1, order='id desc')
-        if not old or current:
+        # old = self.search([('date', '=', datetime.now() - timedelta(days=1))], limit=1, order='id desc')
+        current = self.search([('date', '=', datetime.now().strftime('%Y-%m-%d'))], limit=1, order='id desc')
+        if not current:
             return False
-        province_ids = self.env['province.lottery'].search([('group', '=', datetime.now().weekday())])
+        exists = self.search([('date', '=', (datetime.now() + timedelta(days=7)).strftime('%Y-%m-%d'))], limit=1, order='id desc')
+        if exists:
+            return False
         val_lines = []
-        for p in province_ids:
-            for item in old.lines:
-                if item.province_id == p:
-                    val_lines.append((0, 0, {
-                        'province_id': p.id,
-                        'in_company': item.in_company,
-                        'in_province': item.in_province,
-                        'total': item.total,
-                    }))
+        for line in current.lines:
+            val_lines.append((0, 0, {
+                'province_id': line.id,
+                'in_company': line.in_company,
+                'in_province': line.in_province,
+                'total': line.total,
+            }))
+        date = (datetime.now() + timedelta(days=7))
         self.create({
-            'name': f'Nhập kho ngày: {datetime.now().strftime("%d-%m-%Y")}',
-            'date': datetime.now(),
+            'name': f"Nhập kho ngày: {date.strftime('%d-%m-%Y')}",
+            'date': date.strftime('%Y-%m-%d'),
             'lines': val_lines
         })
         return True
