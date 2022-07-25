@@ -53,6 +53,96 @@ class ReturnStock(models.Model):
                 raise ValidationError('Không thể xóa phiếu trả ế đã hoàn thành')
         return super(ReturnStock, self).unlink()
 
+    @api.onchange('tele_ids')
+    def _onchange_tele_ids(self):
+        self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').HCM = int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').HCM) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').HCM)
+
+        self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').DT = int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').DT) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').DT)
+
+        self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').CM = int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').CM) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').CM)
+
+        self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').BL = int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').BL) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').BL)
+
+        self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').BT = int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').BT) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').BT)
+
+        self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').VT = int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').VT) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').VT)
+
+        self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').ST = int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').ST) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').ST)
+
+        self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').CT = int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').CT) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').CT)
+
+        self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').DN = int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').DN) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').DN)
+
+        self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').TN = int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').TN) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').TN)
+
+        self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').AG = int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').AG) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').AG)
+
+        self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').BTH = int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').BTH) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').BTH)
+
+        self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').BD = int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').BD) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').BD)
+
+        self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').TV = int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').TV) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').TV)
+
+        self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').VL = int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').VL) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').VL)
+
+        self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').HCM_2 = int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').HCM_2) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').HCM_2)
+
+        self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').LA = int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').LA) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').LA)
+
+        self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').BP = int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').BP) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').BP)
+
+        self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').HG = int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').HG) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').HG)
+
+        self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').KG = int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').KG) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').KG)
+
+        self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').DL = int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').DL) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').DL)
+
+        self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').TG = int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').TG) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').TG)
+
 
 class ReturnStockLine(models.Model):
     _name = "return.stock.line"
@@ -480,29 +570,51 @@ class ReturnStockLine(models.Model):
                  'BTH', 'BD', 'TV', 'VL', 'HCM_2', 'LA', 'BP', 'HG', 'KG', 'DL', 'TG')
     def _compute_percent_back(self):
         for r in self:
-            planed = self.env['planed.line'].search([('planed_id.date', '=', r.return_stock_id.date), ('customer_id', '=', r.customer_id.id)], limit=1)
+            planed = self.env['planed.line'].search(
+                [('planed_id.date', '=', r.return_stock_id.date), ('customer_id', '=', r.customer_id.id)], limit=1)
             r.HCM_PC = ((r.HCM * 10000) / (r.customer_id.HCM + planed.HCM_PS)) * 100 if r.customer_id.HCM > 0 else 0
-            r.DT_PC = ((r.DT * 10000) / (r.customer_id.DT + planed.DT_PS)) * 100 if r.customer_id.DT > 0 or planed.DT_PS > 0 else 0
-            r.CM_PC = ((r.CM * 10000) / (r.customer_id.CM + planed.CM_PS)) * 100 if r.customer_id.CM > 0 or planed.CM_PS > 0 else 0
-            r.BL_PC = ((r.BL * 10000) / (r.customer_id.BL + planed.BL_PS)) * 100 if r.customer_id.BL > 0 or planed.BL_PS > 0 else 0
-            r.BT_PC = ((r.BT * 10000) / (r.customer_id.BT + planed.BT_PS)) * 100 if r.customer_id.BT > 0 or planed.BT_PS > 0 else 0
-            r.VT_PC = ((r.VT * 10000) / (r.customer_id.VT + planed.VT_PS)) * 100 if r.customer_id.VT > 0 or planed.VT_PS > 0 else 0
-            r.ST_PC = ((r.ST * 10000) / (r.customer_id.ST + planed.ST_PS)) * 100 if r.customer_id.ST > 0 or planed.ST_PS > 0 else 0
-            r.CT_PC = ((r.CT * 10000) / (r.customer_id.CT + planed.CT_PS)) * 100 if r.customer_id.CT > 0 or planed.CT_PS > 0 else 0
-            r.DN_PC = ((r.DN * 10000) / (r.customer_id.DN + planed.DN_PS)) * 100 if r.customer_id.DN > 0 or planed.DN_PS > 0 else 0
-            r.TN_PC = ((r.TN * 10000) / (r.customer_id.TN + planed.TN_PS)) * 100 if r.customer_id.TN > 0 or planed.TN_PS > 0 else 0
-            r.AG_PC = ((r.AG * 10000) / (r.customer_id.AG + planed.AG_PS)) * 100 if r.customer_id.AG > 0 or planed.AG_PS > 0 else 0
-            r.BTH_PC = ((r.BTH * 10000) / (r.customer_id.BTH + planed.BTH_PS)) * 100 if r.customer_id.BTH > 0 or planed.BTH_PS > 0 else 0
-            r.BD_PC = ((r.BD * 10000) / (r.customer_id.BD + planed.BD_PS)) * 100 if r.customer_id.BD > 0 or planed.BD_PS > 0 else 0
-            r.TV_PC = ((r.TV * 10000) / (r.customer_id.TV + planed.TV_PS)) * 100 if r.customer_id.TV > 0 or planed.TV_PS > 0 else 0
-            r.VL_PC = ((r.VL * 10000) / (r.customer_id.VL + planed.VL_PS)) * 100 if r.customer_id.VL > 0 or planed.VL_PS > 0 else 0
-            r.HCM_2_PC = ((r.HCM_2 * 10000) / (r.customer_id.HCM_2 + planed.HCM_2_PS)) * 100 if r.customer_id.HCM_2 > 0 or planed.HCM_2_PS > 0 else 0
-            r.LA_PC = ((r.LA * 10000) / (r.customer_id.LA + planed.LA_PS)) * 100 if r.customer_id.LA > 0 or planed.LA_PS > 0 else 0
-            r.BP_PC = ((r.BP * 10000) / (r.customer_id.BP + planed.BP_PS)) * 100 if r.customer_id.BP > 0 or planed.BP_PS > 0 else 0
-            r.HG_PC = ((r.HG * 10000) / (r.customer_id.HG + planed.HG_PS)) * 100 if r.customer_id.HG > 0 or planed.HG_PS > 0 else 0
-            r.KG_PC = ((r.KG * 10000) / (r.customer_id.KG + planed.KG_PS)) * 100 if r.customer_id.KG > 0 or planed.KG_PS > 0 else 0
-            r.DL_PC = ((r.DL * 10000) / (r.customer_id.DL + planed.DL_PS)) * 100 if r.customer_id.DL > 0 or planed.DL_PS > 0 else 0
-            r.TG_PC = ((r.TG * 10000) / (r.customer_id.TG + planed.TG_PS)) * 100 if r.customer_id.TG > 0 or planed.TG_PS > 0 else 0
+            r.DT_PC = ((r.DT * 10000) / (
+                        r.customer_id.DT + planed.DT_PS)) * 100 if r.customer_id.DT > 0 or planed.DT_PS > 0 else 0
+            r.CM_PC = ((r.CM * 10000) / (
+                        r.customer_id.CM + planed.CM_PS)) * 100 if r.customer_id.CM > 0 or planed.CM_PS > 0 else 0
+            r.BL_PC = ((r.BL * 10000) / (
+                        r.customer_id.BL + planed.BL_PS)) * 100 if r.customer_id.BL > 0 or planed.BL_PS > 0 else 0
+            r.BT_PC = ((r.BT * 10000) / (
+                        r.customer_id.BT + planed.BT_PS)) * 100 if r.customer_id.BT > 0 or planed.BT_PS > 0 else 0
+            r.VT_PC = ((r.VT * 10000) / (
+                        r.customer_id.VT + planed.VT_PS)) * 100 if r.customer_id.VT > 0 or planed.VT_PS > 0 else 0
+            r.ST_PC = ((r.ST * 10000) / (
+                        r.customer_id.ST + planed.ST_PS)) * 100 if r.customer_id.ST > 0 or planed.ST_PS > 0 else 0
+            r.CT_PC = ((r.CT * 10000) / (
+                        r.customer_id.CT + planed.CT_PS)) * 100 if r.customer_id.CT > 0 or planed.CT_PS > 0 else 0
+            r.DN_PC = ((r.DN * 10000) / (
+                        r.customer_id.DN + planed.DN_PS)) * 100 if r.customer_id.DN > 0 or planed.DN_PS > 0 else 0
+            r.TN_PC = ((r.TN * 10000) / (
+                        r.customer_id.TN + planed.TN_PS)) * 100 if r.customer_id.TN > 0 or planed.TN_PS > 0 else 0
+            r.AG_PC = ((r.AG * 10000) / (
+                        r.customer_id.AG + planed.AG_PS)) * 100 if r.customer_id.AG > 0 or planed.AG_PS > 0 else 0
+            r.BTH_PC = ((r.BTH * 10000) / (
+                        r.customer_id.BTH + planed.BTH_PS)) * 100 if r.customer_id.BTH > 0 or planed.BTH_PS > 0 else 0
+            r.BD_PC = ((r.BD * 10000) / (
+                        r.customer_id.BD + planed.BD_PS)) * 100 if r.customer_id.BD > 0 or planed.BD_PS > 0 else 0
+            r.TV_PC = ((r.TV * 10000) / (
+                        r.customer_id.TV + planed.TV_PS)) * 100 if r.customer_id.TV > 0 or planed.TV_PS > 0 else 0
+            r.VL_PC = ((r.VL * 10000) / (
+                        r.customer_id.VL + planed.VL_PS)) * 100 if r.customer_id.VL > 0 or planed.VL_PS > 0 else 0
+            r.HCM_2_PC = ((r.HCM_2 * 10000) / (
+                        r.customer_id.HCM_2 + planed.HCM_2_PS)) * 100 if r.customer_id.HCM_2 > 0 or planed.HCM_2_PS > 0 else 0
+            r.LA_PC = ((r.LA * 10000) / (
+                        r.customer_id.LA + planed.LA_PS)) * 100 if r.customer_id.LA > 0 or planed.LA_PS > 0 else 0
+            r.BP_PC = ((r.BP * 10000) / (
+                        r.customer_id.BP + planed.BP_PS)) * 100 if r.customer_id.BP > 0 or planed.BP_PS > 0 else 0
+            r.HG_PC = ((r.HG * 10000) / (
+                        r.customer_id.HG + planed.HG_PS)) * 100 if r.customer_id.HG > 0 or planed.HG_PS > 0 else 0
+            r.KG_PC = ((r.KG * 10000) / (
+                        r.customer_id.KG + planed.KG_PS)) * 100 if r.customer_id.KG > 0 or planed.KG_PS > 0 else 0
+            r.DL_PC = ((r.DL * 10000) / (
+                        r.customer_id.DL + planed.DL_PS)) * 100 if r.customer_id.DL > 0 or planed.DL_PS > 0 else 0
+            r.TG_PC = ((r.TG * 10000) / (
+                        r.customer_id.TG + planed.TG_PS)) * 100 if r.customer_id.TG > 0 or planed.TG_PS > 0 else 0
 
     @api.depends('HCM_PC', 'DT_PC', 'CM_PC', 'BL_PC', 'BT_PC', 'VT_PC', 'ST_PC', 'CT_PC', 'DN_PC', 'TN_PC', 'AG_PC',
                  'BTH_PC', 'BD_PC', 'TV_PC', 'VL_PC', 'HCM_2_PC', 'LA_PC', 'BP_PC', 'HG_PC', 'KG_PC', 'DL_PC', 'TG_PC')
@@ -537,28 +649,28 @@ class ReturnStockTele(models.Model):
     return_stock_id = fields.Many2one('return.stock')
     data_tele_id = fields.Many2one('data.tele', "Đài", readonly=1)
 
-    HCM = fields.Char(string='TP HCM', compute="_compute_tele_value")
-    DT = fields.Char(string='ĐT', compute="_compute_tele_value")
-    CM = fields.Char(string='CM', compute="_compute_tele_value")
-    BL = fields.Char(string='BL', compute="_compute_tele_value")
-    BT = fields.Char(string='BT', compute="_compute_tele_value")
-    VT = fields.Char(string='VT', compute="_compute_tele_value")
-    ST = fields.Char(string='ST', compute="_compute_tele_value")
-    CT = fields.Char(string='ST', compute="_compute_tele_value")
-    DN = fields.Char(string='ĐN', compute="_compute_tele_value")
-    TN = fields.Char(string='TN', compute="_compute_tele_value")
-    AG = fields.Char(string='AG', compute="_compute_tele_value")
-    BTH = fields.Char(string='BTH', compute="_compute_tele_value")
-    BD = fields.Char(string='BD', compute="_compute_tele_value")
-    TV = fields.Char(string='TV', compute="_compute_tele_value")
-    VL = fields.Char(string='VL', compute="_compute_tele_value")
-    HCM_2 = fields.Char(string='TP HCM', compute="_compute_tele_value")
-    LA = fields.Char(string='LA', compute="_compute_tele_value")
-    BP = fields.Char(string='BP', compute="_compute_tele_value")
-    HG = fields.Char(string='HG', compute="_compute_tele_value")
-    KG = fields.Char(string='KG', compute="_compute_tele_value")
-    DL = fields.Char(string='ĐL', compute="_compute_tele_value")
-    TG = fields.Char(string='TG', compute="_compute_tele_value")
+    HCM = fields.Char(string='TP HCM', compute="_compute_tele_value", readonly=False, store=True)
+    DT = fields.Char(string='ĐT', compute="_compute_tele_value", readonly=False, store=True)
+    CM = fields.Char(string='CM', compute="_compute_tele_value", readonly=False, store=True)
+    BL = fields.Char(string='BL', compute="_compute_tele_value", readonly=False, store=True)
+    BT = fields.Char(string='BT', compute="_compute_tele_value", readonly=False, store=True)
+    VT = fields.Char(string='VT', compute="_compute_tele_value", readonly=False, store=True)
+    ST = fields.Char(string='ST', compute="_compute_tele_value", readonly=False, store=True)
+    CT = fields.Char(string='ST', compute="_compute_tele_value", readonly=False, store=True)
+    DN = fields.Char(string='ĐN', compute="_compute_tele_value", readonly=False, store=True)
+    TN = fields.Char(string='TN', compute="_compute_tele_value", readonly=False, store=True)
+    AG = fields.Char(string='AG', compute="_compute_tele_value", readonly=False, store=True)
+    BTH = fields.Char(string='BTH', compute="_compute_tele_value", readonly=False, store=True)
+    BD = fields.Char(string='BD', compute="_compute_tele_value", readonly=False, store=True)
+    TV = fields.Char(string='TV', compute="_compute_tele_value", readonly=False, store=True)
+    VL = fields.Char(string='VL', compute="_compute_tele_value", readonly=False, store=True)
+    HCM_2 = fields.Char(string='TP HCM', compute="_compute_tele_value", readonly=False, store=True)
+    LA = fields.Char(string='LA', compute="_compute_tele_value", readonly=False, store=True)
+    BP = fields.Char(string='BP', compute="_compute_tele_value", readonly=False, store=True)
+    HG = fields.Char(string='HG', compute="_compute_tele_value", readonly=False, store=True)
+    KG = fields.Char(string='KG', compute="_compute_tele_value", readonly=False, store=True)
+    DL = fields.Char(string='ĐL', compute="_compute_tele_value", readonly=False, store=True)
+    TG = fields.Char(string='TG', compute="_compute_tele_value", readonly=False, store=True)
 
     @api.depends('return_stock_id', 'return_stock_id.lines')
     def _compute_tele_value(self):
@@ -587,49 +699,70 @@ class ReturnStockTele(models.Model):
                 r.DL = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('DL')))
                 r.TG = "{:,.0f}".format(sum(r.return_stock_id.lines.mapped('TG')))
             elif r.data_tele_id.code == 'tl':
-                quantities = self.env['purchase.inventory'].get_total(date=self.return_stock_id.date)
-                r.HCM = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('HCM')) * 10000 / quantities['HCM_1']) * 100) if quantities.get('HCM_1', 0)>0 else 0)
-                r.DT = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('DT')) * 10000 / quantities['DT']) * 100) if quantities.get('DT', 0)>0 else 0)
-                r.CM = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('CM')) * 10000 / quantities['CM']) * 100) if quantities.get('CM', 0)>0 else 0)
-                r.BL = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('BL')) * 10000 / quantities['BL']) * 100) if quantities.get('BL', 0)>0 else 0)
-                r.BT = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('BT')) * 10000 / quantities['BT']) * 100) if quantities.get('BT', 0)>0 else 0)
-                r.VT = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('VT')) * 10000 / quantities['VT']) * 100) if quantities.get('VT', 0)>0 else 0)
-                r.ST = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('ST')) * 10000 / quantities['ST']) * 100) if quantities.get('ST', 0)>0 else 0)
-                r.CT = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('CT')) * 10000 / quantities['CT']) * 100) if quantities.get('CT', 0)>0 else 0)
-                r.DN = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('DN')) * 10000 / quantities['DN']) * 100) if quantities.get('DN', 0)>0 else 0)
-                r.TN = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('TN')) * 10000 / quantities['TN']) * 100) if quantities.get('TN', 0)>0 else 0)
-                r.AG = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('AG')) * 10000 / quantities['AG']) * 100) if quantities.get('AG', 0)>0 else 0)
-                r.BTH = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('BTH')) * 10000 / quantities['BTH']) * 100) if quantities.get('BTH', 0)>0 else 0)
-                r.BD = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('BD')) * 10000 / quantities['BD']) * 100) if quantities.get('BD', 0)>0 else 0)
-                r.TV = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('TV')) * 10000 / quantities['TV']) * 100) if quantities.get('TV', 0)>0 else 0)
-                r.VL = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('VL')) * 10000 / quantities['VL']) * 100) if quantities.get('VL', 0)>0 else 0)
-                r.HCM_2 = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('HCM_2')) * 10000 / quantities['HCM_2']) * 100) if quantities.get('HCM_2', 0)>0 else 0)
-                r.LA = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('LA')) * 10000 / quantities['LA']) * 100) if quantities.get('LA', 0)>0 else 0)
-                r.BP = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('BP')) * 10000 / quantities['BP']) * 100) if quantities.get('BP', 0)>0 else 0)
-                r.HG = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('HG')) * 10000 / quantities['HG']) * 100) if quantities.get('HG', 0)>0 else 0)
-                r.KG = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('KG')) * 10000 / quantities['KG']) * 100) if quantities.get('KG', 0)>0 else 0)
-                r.DL = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('DL')) * 10000 / quantities['DL']) * 100) if quantities.get('DL', 0)>0 else 0)
-                r.TG = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('TG')) * 10000 / quantities['TG']) * 100) if quantities.get('TG', 0)>0 else 0)
-            else:
-                r.HCM = ''
-                r.DT = ''
-                r.CM = ''
-                r.BL = ''
-                r.BT = ''
-                r.VT = ''
-                r.ST = ''
-                r.CT = ''
-                r.DN = ''
-                r.TN = ''
-                r.AG = ''
-                r.BTH = ''
-                r.BD = ''
-                r.TV = ''
-                r.VL = ''
-                r.HCM_2 = ''
-                r.LA = ''
-                r.BP = ''
-                r.HG = ''
-                r.KG = ''
-                r.DL = ''
-                r.TG = ''
+                quantities = self.env['purchase.inventory'].get_total(date=r.return_stock_id.date)
+                r.HCM = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('HCM')) * 10000 / quantities[
+                    'HCM_1']) * 100) if quantities.get('HCM_1', 0) > 0 else 0)
+                r.DT = "{:,.3f}%".format(
+                    ((sum(r.return_stock_id.lines.mapped('DT')) * 10000 / quantities['DT']) * 100) if quantities.get(
+                        'DT', 0) > 0 else 0)
+                r.CM = "{:,.3f}%".format(
+                    ((sum(r.return_stock_id.lines.mapped('CM')) * 10000 / quantities['CM']) * 100) if quantities.get(
+                        'CM', 0) > 0 else 0)
+                r.BL = "{:,.3f}%".format(
+                    ((sum(r.return_stock_id.lines.mapped('BL')) * 10000 / quantities['BL']) * 100) if quantities.get(
+                        'BL', 0) > 0 else 0)
+                r.BT = "{:,.3f}%".format(
+                    ((sum(r.return_stock_id.lines.mapped('BT')) * 10000 / quantities['BT']) * 100) if quantities.get(
+                        'BT', 0) > 0 else 0)
+                r.VT = "{:,.3f}%".format(
+                    ((sum(r.return_stock_id.lines.mapped('VT')) * 10000 / quantities['VT']) * 100) if quantities.get(
+                        'VT', 0) > 0 else 0)
+                r.ST = "{:,.3f}%".format(
+                    ((sum(r.return_stock_id.lines.mapped('ST')) * 10000 / quantities['ST']) * 100) if quantities.get(
+                        'ST', 0) > 0 else 0)
+                r.CT = "{:,.3f}%".format(
+                    ((sum(r.return_stock_id.lines.mapped('CT')) * 10000 / quantities['CT']) * 100) if quantities.get(
+                        'CT', 0) > 0 else 0)
+                r.DN = "{:,.3f}%".format(
+                    ((sum(r.return_stock_id.lines.mapped('DN')) * 10000 / quantities['DN']) * 100) if quantities.get(
+                        'DN', 0) > 0 else 0)
+                r.TN = "{:,.3f}%".format(
+                    ((sum(r.return_stock_id.lines.mapped('TN')) * 10000 / quantities['TN']) * 100) if quantities.get(
+                        'TN', 0) > 0 else 0)
+                r.AG = "{:,.3f}%".format(
+                    ((sum(r.return_stock_id.lines.mapped('AG')) * 10000 / quantities['AG']) * 100) if quantities.get(
+                        'AG', 0) > 0 else 0)
+                r.BTH = "{:,.3f}%".format(
+                    ((sum(r.return_stock_id.lines.mapped('BTH')) * 10000 / quantities['BTH']) * 100) if quantities.get(
+                        'BTH', 0) > 0 else 0)
+                r.BD = "{:,.3f}%".format(
+                    ((sum(r.return_stock_id.lines.mapped('BD')) * 10000 / quantities['BD']) * 100) if quantities.get(
+                        'BD', 0) > 0 else 0)
+                r.TV = "{:,.3f}%".format(
+                    ((sum(r.return_stock_id.lines.mapped('TV')) * 10000 / quantities['TV']) * 100) if quantities.get(
+                        'TV', 0) > 0 else 0)
+                r.VL = "{:,.3f}%".format(
+                    ((sum(r.return_stock_id.lines.mapped('VL')) * 10000 / quantities['VL']) * 100) if quantities.get(
+                        'VL', 0) > 0 else 0)
+                r.HCM_2 = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('HCM_2')) * 10000 / quantities[
+                    'HCM_2']) * 100) if quantities.get('HCM_2', 0) > 0 else 0)
+                r.LA = "{:,.3f}%".format(
+                    ((sum(r.return_stock_id.lines.mapped('LA')) * 10000 / quantities['LA']) * 100) if quantities.get(
+                        'LA', 0) > 0 else 0)
+                r.BP = "{:,.3f}%".format(
+                    ((sum(r.return_stock_id.lines.mapped('BP')) * 10000 / quantities['BP']) * 100) if quantities.get(
+                        'BP', 0) > 0 else 0)
+                r.HG = "{:,.3f}%".format(
+                    ((sum(r.return_stock_id.lines.mapped('HG')) * 10000 / quantities['HG']) * 100) if quantities.get(
+                        'HG', 0) > 0 else 0)
+                r.KG = "{:,.3f}%".format(
+                    ((sum(r.return_stock_id.lines.mapped('KG')) * 10000 / quantities['KG']) * 100) if quantities.get(
+                        'KG', 0) > 0 else 0)
+                r.DL = "{:,.3f}%".format(
+                    ((sum(r.return_stock_id.lines.mapped('DL')) * 10000 / quantities['DL']) * 100) if quantities.get(
+                        'DL', 0) > 0 else 0)
+                r.TG = "{:,.3f}%".format(
+                    ((sum(r.return_stock_id.lines.mapped('TG')) * 10000 / quantities['TG']) * 100) if quantities.get(
+                        'TG', 0) > 0 else 0)
+            elif r.data_tele_id.code == 'lech':
+                r.HCM = r.HCM
