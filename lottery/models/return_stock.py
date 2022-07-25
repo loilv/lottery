@@ -324,7 +324,7 @@ class ReturnStockLine(models.Model):
                     p4 = (plan.HG + plan.HG_PS) * r.customer_id.HG_price
                 elif day_week == 6:
                     p1 = (plan.KG + plan.KG_PS) * r.customer_id.KG_price
-                    p2 = (plan.BL + plan.BL_PS) * r.customer_id.DL_price
+                    p2 = (plan.DL + plan.DL_PS) * r.customer_id.DL_price
                     p3 = (plan.TG + plan.TG_PS) * r.customer_id.TG_price
                 p1 = p1 - ((r.HCM * 10000) * r.customer_id.HCM_price)
                 p2 = p2 - ((r.DT * 10000) * r.customer_id.DT_price)
@@ -341,8 +341,8 @@ class ReturnStockLine(models.Model):
                     plan = planed_main
                 if day_week == 1:
                     p1 = (plan.ST + plan.ST_PS) * r.customer_id.ST_price
-                    p2 = (plan.CT + plan.BT_PS) * r.customer_id.CT_price
-                    p3 = (plan.DN + plan.VT_PS) * r.customer_id.DN_price
+                    p2 = (plan.CT + plan.CT_PS) * r.customer_id.CT_price
+                    p3 = (plan.DN + plan.DN_PS) * r.customer_id.DN_price
                 elif day_week == 2:
                     p1 = (plan.TN + plan.TN_PS) * r.customer_id.TN_price
                     p2 = (plan.AG + plan.AG_PS) * r.customer_id.AG_price
@@ -358,7 +358,7 @@ class ReturnStockLine(models.Model):
                     p4 = (plan.HG + plan.HG_PS) * r.customer_id.HG_price
                 elif day_week == 5:
                     p1 = (plan.KG + plan.KG_PS) * r.customer_id.KG_price
-                    p2 = (plan.BL + plan.BL_PS) * r.customer_id.DL_price
+                    p2 = (plan.DL + plan.DL_PS) * r.customer_id.DL_price
                     p3 = (plan.TG + plan.TG_PS) * r.customer_id.TG_price
                 elif day_week == 6:
                     p1 = (plan.HCM + plan.HCM_PS) * r.customer_id.HCM_price
@@ -370,7 +370,7 @@ class ReturnStockLine(models.Model):
                 p3 = p3 - ((r.VT * 10000) * r.customer_id.VT_price)
             if planed_main.planed_id.day_of_week == '2':
                 p1 = (planed_main.ST + planed_main.ST_PS) * r.customer_id.ST_price
-                p2 = (planed_main.CT + planed_main.BT_PS) * r.customer_id.CT_price
+                p2 = (planed_main.CT + planed_main.CT_PS) * r.customer_id.CT_price
                 p3 = (planed_main.DN + planed_main.DN_PS) * r.customer_id.DN_price
                 if day_week != 0:
                     plan = self.env['planed.line'].search(
@@ -393,7 +393,7 @@ class ReturnStockLine(models.Model):
                     p4 = (plan.HG + plan.HG_PS) * r.customer_id.HG_price
                 elif day_week == 4:
                     p1 = (plan.KG + plan.KG_PS) * r.customer_id.KG_price
-                    p2 = (plan.BL + plan.BL_PS) * r.customer_id.DL_price
+                    p2 = (plan.DL + plan.DL_PS) * r.customer_id.DL_price
                     p3 = (plan.TG + plan.TG_PS) * r.customer_id.TG_price
                 elif day_week == 5:
                     p1 = (plan.HCM + plan.HCM_PS) * r.customer_id.HCM_price
@@ -428,7 +428,7 @@ class ReturnStockLine(models.Model):
                     p4 = (plan.HG + plan.HG_PS) * r.customer_id.HG_price
                 elif day_week == 3:
                     p1 = (plan.KG + plan.KG_PS) * r.customer_id.KG_price
-                    p2 = (plan.BL + plan.BL_PS) * r.customer_id.DL_price
+                    p2 = (plan.DL + plan.DL_PS) * r.customer_id.DL_price
                     p3 = (plan.TG + plan.TG_PS) * r.customer_id.TG_price
                 elif day_week == 4:
                     p1 = (plan.HCM + plan.HCM_PS) * r.customer_id.HCM_price
@@ -463,7 +463,7 @@ class ReturnStockLine(models.Model):
                     p4 = (plan.HG + plan.HG_PS) * r.customer_id.HG_price
                 elif day_week == 2:
                     p1 = (plan.KG + plan.KG_PS) * r.customer_id.KG_price
-                    p2 = (plan.BL + plan.BL_PS) * r.customer_id.DL_price
+                    p2 = (plan.DL + plan.DL_PS) * r.customer_id.DL_price
                     p3 = (plan.TG + plan.TG_PS) * r.customer_id.TG_price
                 elif day_week == 3:
                     p1 = (plan.HCM + plan.HCM_PS) * r.customer_id.HCM_price
@@ -498,7 +498,7 @@ class ReturnStockLine(models.Model):
                     plan = planed_main
                 if day_week == 1:
                     p1 = (plan.KG + plan.KG_PS) * r.customer_id.KG_price
-                    p2 = (plan.BL + plan.BL_PS) * r.customer_id.DL_price
+                    p2 = (plan.DL + plan.DL_PS) * r.customer_id.DL_price
                     p3 = (plan.TG + plan.TG_PS) * r.customer_id.TG_price
                 elif day_week == 2:
                     p1 = (plan.HCM + plan.HCM_PS) * r.customer_id.HCM_price
@@ -527,7 +527,7 @@ class ReturnStockLine(models.Model):
                 p4 = p4 - ((r.HG * 10000) * r.customer_id.HG_price)
             if planed_main.planed_id.day_of_week == '6':
                 p1 = (planed_main.KG + planed_main.KG_PS) * r.customer_id.KG_price
-                p2 = (planed_main.BL + planed_main.BL_PS) * r.customer_id.DL_price
+                p2 = (planed_main.DL + planed_main.DL_PS) * r.customer_id.DL_price
                 p3 = (planed_main.TG + planed_main.TG_PS) * r.customer_id.TG_price
                 if day_week != 0:
                     plan = self.env['planed.line'].search(
@@ -562,7 +562,7 @@ class ReturnStockLine(models.Model):
                     p4 = (plan.HG + plan.HG_PS) * r.customer_id.HG_price
 
                 p1 = p1 - ((r.KG * 10000) * r.customer_id.KG_price)
-                p2 = p2 - ((r.BL * 10000) * r.customer_id.BL_price)
+                p2 = p2 - ((r.DL * 10000) * r.customer_id.DL_price)
                 p3 = p3 - ((r.TG * 10000) * r.customer_id.TG_price)
             r.revenues = (p1 + p2 + p3 + p4)
 
