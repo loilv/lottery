@@ -267,6 +267,7 @@ class ReturnStockLine(models.Model):
         for r in self:
             customer_plan = self.env['customer.plan'].get_val_customer_plan()
             day_week = customer_plan.get(r.customer_id.planed.code)
+            day_week += int(r.return_stock_id.day_of_week)
 
             if day_week == 0:
                 r.ticket_receive = (r.customer_id.HCM + r.customer_id.DT + r.customer_id.CM)
