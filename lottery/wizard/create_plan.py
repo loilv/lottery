@@ -1,12 +1,12 @@
 from odoo import fields, api, models, _
-from datetime import datetime
+from datetime import datetime, date
 from odoo.exceptions import RedirectWarning
 
 
 class CreatePlan(models.TransientModel):
     _name = 'create.plan'
 
-    date = fields.Date('Kế hoạch ngày', default=datetime.now())
+    date = fields.Date('Kế hoạch ngày', default=date.today())
 
     def create_plan(self):
         planed = self.env['planed'].search([('date', '=', self.date)], limit=1)
