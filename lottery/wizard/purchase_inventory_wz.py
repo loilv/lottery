@@ -1,11 +1,11 @@
 from odoo import fields, api, models, _
-from datetime import datetime
+from datetime import datetime, date
 from odoo.exceptions import RedirectWarning
 
 class PurchaseInventoryWZ(models.TransientModel):
     _name = 'purchase.inventory.wz'
 
-    date = fields.Date('Ngày nhập', default=datetime.now())
+    date = fields.Date('Ngày nhập', default=date.today())
 
     def create_purchase(self):
         purchase = self.env['purchase.inventory'].search([('date', '=', self.date)], limit=1)
