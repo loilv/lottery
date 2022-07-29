@@ -51,7 +51,7 @@ class PurchaseInventory(models.Model):
         current = self.search([('date', '=', datetime.now().strftime('%Y-%m-%d'))], limit=1, order='id desc')
         if not current:
             return False
-        exists = self.search([('date', '=', (datetime.now() + timedelta(days=7)).strftime('%Y-%m-%d'))], limit=1, order='id desc')
+        exists = self.search([('date', '=', (datetime.now() + timedelta(weeks=1)).strftime('%Y-%m-%d'))], limit=1, order='id desc')
         if exists:
             return False
         val_lines = []
