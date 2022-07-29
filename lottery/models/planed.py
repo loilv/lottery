@@ -49,14 +49,15 @@ class Planed(models.Model):
         for item in inventory.lines:
             vals = {
                 'province_id': item.province_id.id,
-                'quantity_in': quantities[item.province_id.code]
+                'quantity_in': quantities[item.province_id.code],
+                'quantity_out': quantities[item.province_id.code] - sum(customer_ids.mapped(item.province_id.code)),
             }
             stock_vals.append((0, 0, vals))
         res.update({'stock_info': stock_vals, 'lines': val_lines})
         return res
 
     name = fields.Char(string='Tên kế hoạch', default='')
-    date = fields.Date(string='Ngày', default=datetime.now())
+    date = fields.Date(string='Ngày', default=date.today())
     lines = fields.One2many('planed.line', 'planed_id', string='Chi tiết')
     state = fields.Selection([('draft', 'Dự thảo'), ('done', 'Đã hoàn thành')], default='draft')
     stock_info = fields.One2many('stock.information', 'planed_id', string='Tồn kho')
@@ -72,13 +73,13 @@ class Planed(models.Model):
     ])
 
     def update_state_lottery(self):
-        plan = self.search([('state', '!=', 'done'), ('date', '<', datetime.now().strftime('%Y-%m-%d'))])
+        plan = self.search([('state', '!=', 'done'), ('date', '<', date.today())])
         for item in plan:
             item.state = 'done'
-        purchase = self.env['purchase.inventory'].search([('state', '!=', 'done'), ('date', '<', datetime.now().strftime('%Y-%m-%d'))])
+        purchase = self.env['purchase.inventory'].search([('state', '!=', 'done'), ('date', '<', date.today())])
         for item in purchase:
             item.state = 'done'
-        re_stock = self.env['return.stock'].search([('state', '!=', 'done'), ('date', '<', datetime.now().strftime('%Y-%m-%d'))])
+        re_stock = self.env['return.stock'].search([('state', '!=', 'done'), ('date', '<', date.today())])
         for item in re_stock:
             item.state = 'done'
 
@@ -410,16 +411,16 @@ class StockInformation(models.Model):
     planed_id = fields.Many2one('planed', string='Kế hoạch')
     province_id = fields.Many2one('province.lottery', string='Tên đài', readonly=1)
     quantity_in = fields.Integer(string='Tổng nhập', readonly=1)
-    quantity_out = fields.Integer(string='Tồn cuối', readonly=1, compute='handle_quantity', store=True)
+    quantity_out = fields.Integer(string='Tồn cuối', readonly=1)
 
-    @api.depends('quantity_in')
-    def handle_quantity(self):
-        for item in self:
-            if item.planed_id:
-                try:
-                    sum_amount = sum(item.planed_id.lines.mapped(item.province_id.code))
-                    item.quantity_out = item.quantity_in - sum_amount
-                except Exception as e:
-                    item.quantity_out = 0
-            else:
-                item.quantity_out = 0
+    # @api.depends('quantity_in')
+    # def handle_quantity(self):
+    #     for item in self:
+    #         if item.planed_id:
+    #             try:
+    #                 sum_amount = sum(item.planed_id.lines.mapped(item.province_id.code))
+    #                 item.quantity_out = item.quantity_in - sum_amount
+    #             except Exception as e:
+    #                 item.quantity_out = 0
+    #         else:
+    #             item.quantity_out = 0

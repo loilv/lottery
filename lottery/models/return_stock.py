@@ -1,5 +1,5 @@
 from odoo import fields, api, models
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 from odoo.exceptions import UserError, ValidationError
 
 
@@ -7,7 +7,7 @@ class ReturnStock(models.Model):
     _name = 'return.stock'
 
     name = fields.Char('Tên chứng từ trả ế')
-    date = fields.Date(string='Ngày', default=datetime.now())
+    date = fields.Date(string='Ngày', default=date.today())
     lines = fields.One2many('return.stock.line', 'return_stock_id')
     tele_ids = fields.One2many('return.stock.tele', 'return_stock_id')
     state = fields.Selection([('draft', 'Dự thảo'), ('done', 'Đã hoàn thành')], default='draft')
@@ -232,7 +232,7 @@ class ReturnStockLine(models.Model):
         ('6', 'Chủ nhật')
     ])
 
-    date = fields.Date(string='Ngày', default=datetime.now())
+    date = fields.Date(string='Ngày', default=date.today())
 
     @api.depends('HCM', 'DT', 'CM', 'BL', 'BT', 'VT', 'ST', 'CT', 'DN', 'TN', 'AG',
                  'BTH', 'BD', 'TV', 'VL', 'HCM_2', 'LA', 'BP', 'HG', 'KG', 'DL', 'TG')

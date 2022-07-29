@@ -1,5 +1,5 @@
 from odoo import fields, api, models
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 from odoo.exceptions import UserError, ValidationError
 
 
@@ -48,24 +48,25 @@ class PurchaseInventory(models.Model):
 
     def cron_create_inventory(self):
         # old = self.search([('date', '=', datetime.now() - timedelta(days=1))], limit=1, order='id desc')
-        current = self.search([('date', '=', datetime.now().strftime('%Y-%m-%d'))], limit=1, order='id desc')
+        from datetime import date
+        current = self.search([('date', '=', date.today())], limit=1, order='id desc')
         if not current:
             return False
-        exists = self.search([('date', '=', (datetime.now() + timedelta(weeks=1)).strftime('%Y-%m-%d'))], limit=1, order='id desc')
+        exists = self.search([('date', '=', (date.today() + timedelta(weeks=1)))], limit=1, order='id desc')
         if exists:
             return False
         val_lines = []
         for line in current.lines:
             val_lines.append((0, 0, {
-                'province_id': line.id,
+                'province_id': line.province_id.id,
                 'in_company': line.in_company,
                 'in_province': line.in_province,
                 'total': line.total,
             }))
-        date = (datetime.now() + timedelta(days=7))
+        create_date = (date.today() + timedelta(weeks=1))
         self.create({
-            'name': f"Nhập kho ngày: {date.strftime('%d-%m-%Y')}",
-            'date': date.strftime('%Y-%m-%d'),
+            'name': f"Nhập kho ngày: {create_date}",
+            'date': create_date,
             'lines': val_lines
         })
         return True
