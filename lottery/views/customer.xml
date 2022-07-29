@@ -212,7 +212,7 @@
                                         <td>THỨ 7:</td>
                                         <td>
                                             <div class="d-flex justify-content-between justify-content-between">
-                                                <label for="HCM_2" string="HCM_2"/>
+                                                <label for="HCM_2" string="TP HCM"/>
                                                 <label for="HCM_2_price" string="Đơn giá"/>
                                             </div>
                                             <div class="d-flex justify-content-between">
