@@ -268,6 +268,10 @@ class ReturnStockLine(models.Model):
             customer_plan = self.env['customer.plan'].get_val_customer_plan()
             day_week = customer_plan.get(r.customer_id.planed.code)
             day_week += int(r.return_stock_id.day_of_week)
+            if (day_week - 6) >= 1:
+                day_week = customer_plan.get(r.customer_id.planed.code) - 1
+            print(r.customer_id.planed.name)
+            print(day_week)
 
             if day_week == 0:
                 r.ticket_receive = (r.customer_id.HCM + r.customer_id.DT + r.customer_id.CM)
@@ -702,7 +706,7 @@ class ReturnStockTele(models.Model):
             elif r.data_tele_id.code == 'tl':
                 quantities = self.env['purchase.inventory'].get_total(date=r.return_stock_id.date)
                 r.HCM = "{:,.3f}%".format(((sum(r.return_stock_id.lines.mapped('HCM')) * 10000 / quantities[
-                    'HCM_1']) * 100) if quantities.get('HCM_1', 0) > 0 else 0)
+                    'HCM_2']) * 100) if quantities.get('HCM_2', 0) > 0 else 0)
                 r.DT = "{:,.3f}%".format(
                     ((sum(r.return_stock_id.lines.mapped('DT')) * 10000 / quantities['DT']) * 100) if quantities.get(
                         'DT', 0) > 0 else 0)

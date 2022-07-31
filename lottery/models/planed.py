@@ -47,10 +47,11 @@ class Planed(models.Model):
         stock_vals = []
         quantities = self.env['purchase.inventory'].get_total(date=self._context.get('default_date'))
         for item in inventory.lines:
+            code = item.province_id.code
             vals = {
                 'province_id': item.province_id.id,
-                'quantity_in': quantities[item.province_id.code],
-                'quantity_out': quantities[item.province_id.code] - sum(customer_ids.mapped(item.province_id.code)),
+                'quantity_in': quantities[code],
+                'quantity_out': quantities[code] - sum(customer_ids.mapped(code)),
             }
             stock_vals.append((0, 0, vals))
         res.update({'stock_info': stock_vals, 'lines': val_lines})

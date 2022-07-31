@@ -3,7 +3,7 @@
     <data noupdate="1">
         <record id="HCM" model="province.lottery">
             <field name="name">TP HCM</field>
-            <field name="code">HCM_1</field>
+            <field name="code">HCM</field>
             <field name="group">0</field>
         </record>
 
