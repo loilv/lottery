@@ -56,92 +56,92 @@ class ReturnStock(models.Model):
     @api.onchange('tele_ids')
     def _onchange_tele_ids(self):
         self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').HCM = int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').HCM) - int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').HCM)
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').HCM.replace(',', '')) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').HCM.replace(',', ''))
 
         self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').DT = int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').DT) - int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').DT)
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').DT.replace(',', '')) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').DT.replace(',', ''))
 
         self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').CM = int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').CM) - int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').CM)
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').CM.replace(',', '')) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').CM.replace(',', ''))
 
         self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').BL = int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').BL) - int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').BL)
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').BL.replace(',', '')) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').BL.replace(',', ''))
 
         self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').BT = int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').BT) - int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').BT)
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').BT.replace(',', '')) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').BT.replace(',', ''))
 
         self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').VT = int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').VT) - int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').VT)
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').VT.replace(',', '')) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').VT.replace(',', ''))
 
         self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').ST = int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').ST) - int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').ST)
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').ST.replace(',', '')) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').ST.replace(',', ''))
 
         self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').CT = int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').CT) - int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').CT)
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').CT.replace(',', '')) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').CT.replace(',', ''))
 
         self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').DN = int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').DN) - int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').DN)
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').DN.replace(',', '')) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').DN.replace(',', ''))
 
         self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').TN = int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').TN) - int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').TN)
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').TN.replace(',', '')) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').TN.replace(',', ''))
 
         self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').AG = int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').AG) - int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').AG)
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').AG.replace(',', '')) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').AG.replace(',', ''))
 
         self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').BTH = int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').BTH) - int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').BTH)
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').BTH.replace(',', '')) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').BTH.replace(',', ''))
 
         self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').BD = int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').BD) - int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').BD)
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').BD.replace(',', '')) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').BD.replace(',', ''))
 
         self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').TV = int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').TV) - int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').TV)
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').TV.replace(',', '')) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').TV.replace(',', ''))
 
         self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').VL = int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').VL) - int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').VL)
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').VL.replace(',', '')) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').VL.replace(',', ''))
 
         self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').HCM_2 = int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').HCM_2) - int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').HCM_2)
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').HCM_2.replace(',', '')) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').HCM_2.replace(',', ''))
 
         self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').LA = int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').LA) - int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').LA)
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').LA.replace(',', '')) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').LA.replace(',', ''))
 
         self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').BP = int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').BP) - int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').BP)
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').BP.replace(',', '')) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').BP.replace(',', ''))
 
         self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').HG = int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').HG) - int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').HG)
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').HG.replace(',', '')) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').HG.replace(',', ''))
 
         self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').KG = int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').KG) - int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').KG)
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').KG.replace(',', '')) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').KG.replace(',', ''))
 
         self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').DL = int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').DL) - int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').DL)
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').DL.replace(',', '')) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').DL.replace(',', ''))
 
         self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'lech').TG = int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').TG) - int(
-            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').TG)
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'tt').TG.replace(',', '')) - int(
+            self.tele_ids.filtered(lambda x: x.data_tele_id.code == 'slte').TG.replace(',', ''))
 
 
 class ReturnStockLine(models.Model):
@@ -771,3 +771,26 @@ class ReturnStockTele(models.Model):
                         'TG', 0) > 0 else 0)
             elif r.data_tele_id.code == 'lech':
                 r.HCM = r.HCM
+            else:
+                r.HCM = '0'
+                r.DT = '0'
+                r.CM = '0'
+                r.BL = '0'
+                r.BT = '0'
+                r.VT = '0'
+                r.ST = '0'
+                r.CT = '0'
+                r.DN = '0'
+                r.TN = '0'
+                r.AG = '0'
+                r.BTH = '0'
+                r.BD = '0'
+                r.TV = '0'
+                r.VL = '0'
+                r.HCM_2 = '0'
+                r.LA = '0'
+                r.BP = '0'
+                r.HG = '0'
+                r.KG = '0'
+                r.DL = '0'
+                r.TG = '0'
