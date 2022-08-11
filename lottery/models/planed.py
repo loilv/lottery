@@ -44,6 +44,8 @@ class Planed(models.Model):
             }
             val_lines.append((0, 0, vals))
         inventory = self.env['purchase.inventory'].search([('date', '=', self._context.get('default_date'))], limit=1)
+        if not inventory:
+            raise ValidationError('Chưa có phiếu nhập kho, không thể tạo kế hoạch.')
         stock_vals = []
         quantities = self.env['purchase.inventory'].get_total(date=self._context.get('default_date'))
         for item in inventory.lines:
