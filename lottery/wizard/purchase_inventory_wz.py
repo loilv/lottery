@@ -5,7 +5,7 @@ from odoo.exceptions import RedirectWarning
 class PurchaseInventoryWZ(models.TransientModel):
     _name = 'purchase.inventory.wz'
 
-    date = fields.Date('Ngày nhập', default=date.today())
+    date = fields.Date('Ngày nhập', default=lambda self: fields.Datetime.now())
 
     def create_purchase(self):
         purchase = self.env['purchase.inventory'].search([('date', '=', self.date)], limit=1)

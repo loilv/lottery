@@ -6,7 +6,7 @@ from odoo.exceptions import RedirectWarning
 class CreatePlan(models.TransientModel):
     _name = 'create.plan'
 
-    date = fields.Date('Kế hoạch ngày', default=date.today())
+    date = fields.Date('Kế hoạch ngày', default=lambda self: fields.Datetime.now())
 
     def create_plan(self):
         planed = self.env['planed'].search([('date', '=', self.date)], limit=1)

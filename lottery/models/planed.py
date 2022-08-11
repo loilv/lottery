@@ -58,7 +58,7 @@ class Planed(models.Model):
         return res
 
     name = fields.Char(string='Tên kế hoạch', default='')
-    date = fields.Date(string='Ngày', default=date.today())
+    date = fields.Date(string='Ngày', default=lambda self: fields.Datetime.now())
     lines = fields.One2many('planed.line', 'planed_id', string='Chi tiết')
     state = fields.Selection([('draft', 'Dự thảo'), ('done', 'Đã hoàn thành')], default='draft')
     stock_info = fields.One2many('stock.information', 'planed_id', string='Tồn kho')
