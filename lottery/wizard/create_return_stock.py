@@ -6,7 +6,7 @@ from odoo.exceptions import RedirectWarning
 class CreateReturnStock(models.TransientModel):
     _name = 'create.return.stock'
 
-    date = fields.Date('Trả ế ngày', default=date.today())
+    date = fields.Date('Trả ế ngày', default=lambda self: fields.Datetime.now())
 
     def create_return_stock(self):
         return_stock = self.env['return.stock'].search([('date', '=', self.date)], limit=1)

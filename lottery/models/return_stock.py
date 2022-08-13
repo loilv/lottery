@@ -171,7 +171,7 @@ class ReturnStockLine(models.Model):
     ST = fields.Integer(string='ST (Tờ)')
     ST_PC = fields.Float(string='ST', readonly=1, compute="_compute_percent_back", store=True)
 
-    CT = fields.Integer(string='ST (Tờ)')
+    CT = fields.Integer(string='CT (Tờ)')
     CT_PC = fields.Float(string='CT', readonly=1, compute="_compute_percent_back", store=True)
 
     DN = fields.Integer(string='ĐN (Tờ)')
