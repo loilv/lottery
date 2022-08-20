@@ -269,10 +269,7 @@ class ReturnStockLine(models.Model):
             day_week = customer_plan.get(r.customer_id.planed.code)
             day_week += int(r.return_stock_id.day_of_week)
             if (day_week - 6) >= 1:
-                day_week = customer_plan.get(r.customer_id.planed.code) - (7 - int(r.day_of_week))
-            print(customer_plan.get(r.customer_id.planed.code))
-            print(r.customer_id.planed.name)
-            print(day_week)
+                day_week = customer_plan.get(r.customer_id.planed.code) - (7 - int(r.return_stock_id.day_of_week))
 
             if day_week == 0:
                 r.ticket_receive = (r.customer_id.HCM + r.customer_id.DT + r.customer_id.CM)
