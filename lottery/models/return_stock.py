@@ -150,70 +150,70 @@ class ReturnStockLine(models.Model):
     return_stock_id = fields.Many2one('return.stock')
     customer_id = fields.Many2one('customer', string='Khách hàng', readonly=1)
 
-    HCM = fields.Integer(string='TP HCM (Tờ)', default=0)
+    HCM = fields.Integer(string='TP HCM', default=0)
     HCM_PC = fields.Float(string='TP HCM', readonly=1, compute="_compute_percent_back", store=True)
 
-    DT = fields.Integer(string='ĐT (Tờ)', sum="Tổng số")
+    DT = fields.Integer(string='ĐT', sum="Tổng số")
     DT_PC = fields.Float(string='ĐT', readonly=1, compute="_compute_percent_back", store=True)
 
-    CM = fields.Integer(string='CM (Tờ)')
+    CM = fields.Integer(string='CM')
     CM_PC = fields.Float(string='CM', readonly=1, compute="_compute_percent_back", store=True)
 
-    BL = fields.Integer(string='BL (Tờ)')
+    BL = fields.Integer(string='BL')
     BL_PC = fields.Float(string='BL', readonly=1, compute="_compute_percent_back", store=True)
 
-    BT = fields.Integer(string='BT (Tờ)')
+    BT = fields.Integer(string='BT')
     BT_PC = fields.Float(string='BT', readonly=1, compute="_compute_percent_back", store=True)
 
-    VT = fields.Integer(string='VT (Tờ)')
+    VT = fields.Integer(string='VT')
     VT_PC = fields.Float(string='VT', readonly=1, compute="_compute_percent_back", store=True)
 
-    ST = fields.Integer(string='ST (Tờ)')
+    ST = fields.Integer(string='ST')
     ST_PC = fields.Float(string='ST', readonly=1, compute="_compute_percent_back", store=True)
 
-    CT = fields.Integer(string='CT (Tờ)')
+    CT = fields.Integer(string='CT')
     CT_PC = fields.Float(string='CT', readonly=1, compute="_compute_percent_back", store=True)
 
-    DN = fields.Integer(string='ĐN (Tờ)')
+    DN = fields.Integer(string='ĐN')
     DN_PC = fields.Float(string='ĐN', readonly=1, compute="_compute_percent_back", store=True)
 
-    TN = fields.Integer(string='TN (Tờ)')
+    TN = fields.Integer(string='TN')
     TN_PC = fields.Float(string='TN', readonly=1, compute="_compute_percent_back", store=True)
 
-    AG = fields.Integer(string='AG (Tờ)')
+    AG = fields.Integer(string='AG')
     AG_PC = fields.Float(string='AG', readonly=1, compute="_compute_percent_back", store=True)
 
-    BTH = fields.Integer(string='BTH (Tờ)')
+    BTH = fields.Integer(string='BTH')
     BTH_PC = fields.Float(string='BTH', readonly=1, compute="_compute_percent_back", store=True)
 
-    BD = fields.Integer(string='BD (Tờ)')
+    BD = fields.Integer(string='BD')
     BD_PC = fields.Float(string='BD', readonly=1, compute="_compute_percent_back", store=True)
 
-    TV = fields.Integer(string='TV (Tờ)')
+    TV = fields.Integer(string='TV')
     TV_PC = fields.Float(string='TV', readonly=1, compute="_compute_percent_back", store=True)
 
-    VL = fields.Integer(string='VL (Tờ)')
+    VL = fields.Integer(string='VL')
     VL_PC = fields.Float(string='VL', readonly=1, compute="_compute_percent_back", store=True)
 
-    HCM_2 = fields.Integer(string='TP HCM (Tờ)')
+    HCM_2 = fields.Integer(string='TP HCM')
     HCM_2_PC = fields.Float(string='TP HCM', readonly=1, compute="_compute_percent_back", store=True)
 
-    LA = fields.Integer(string='LA (Tờ)')
+    LA = fields.Integer(string='LA')
     LA_PC = fields.Float(string='LA', readonly=1, compute="_compute_percent_back", store=True)
 
-    BP = fields.Integer(string='BP (Tờ)')
+    BP = fields.Integer(string='BP')
     BP_PC = fields.Float(string='BP', readonly=1, compute="_compute_percent_back", store=True)
 
-    HG = fields.Integer(string='HG (Tờ)')
+    HG = fields.Integer(string='HG')
     HG_PC = fields.Float(string='HG', readonly=1, compute="_compute_percent_back", store=True)
 
-    KG = fields.Integer(string='KG (Tờ)')
+    KG = fields.Integer(string='KG')
     KG_PC = fields.Float(string='KG', readonly=1, compute="_compute_percent_back", store=True)
 
-    DL = fields.Integer(string='ĐL (Tờ)')
+    DL = fields.Integer(string='ĐL')
     DL_PC = fields.Float(string='ĐL', readonly=1, compute="_compute_percent_back", store=True)
 
-    TG = fields.Integer(string='TG (Tờ)')
+    TG = fields.Integer(string='TG')
     TG_PC = fields.Float(string='TG', readonly=1, compute="_compute_percent_back", store=True)
 
     percent = fields.Float("%", compute="_compute_percent", store=True)

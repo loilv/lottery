@@ -1635,3 +1635,12 @@ div.dropdown-menu.bootstrap-datetimepicker-widget {
 .o_form_view .oe_button_box + .oe_title, .o_form_view .oe_button_box + .oe_avatar + .oe_title {
     width: 100% !important;
 }
+
+.o_optional_columns_dropdown_toggle {
+        cursor: pointer;
+        padding: 0 5px;
+        text-align: center;
+        font-size: 24px !important;
+        line-height: 50px !important;
+        z-index: 1; // must be over the resize handle
+    }

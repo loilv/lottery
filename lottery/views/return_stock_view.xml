@@ -84,11 +84,11 @@
                         <field name="DL_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '6')]}"/>
                         <field name="TG_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '6')]}"/>
 
-                        <field name="percent"/>
+                        <field name="percent" optional="hide"/>
                         <field name="sum_return"/>
                         <field name="consume"/>
                         <field name="ticket_receive"/>
-                        <field name="du_thieu"/>
+                        <field name="du_thieu" optional="hide"/>
                         <field name="revenues"/>
                     </tree>
                 </field>
