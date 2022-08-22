@@ -17,79 +17,79 @@
                     <tree editable="bottom" create="false" delete="false" limit="150">
                         <field name="customer_id" force_save="1"/>
                         <field name="HCM" force_save="1"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '0')]}"/>
+                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '0')]}" optional="hide"/>
                         <field name="DT" force_save="1"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '0')]}"/>
+                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '0')]}" optional="hide"/>
                         <field name="CM" force_save="1"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '0')]}"/>
+                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '0')]}" optional="hide"/>
                         <field name="BL" force_save="1"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '1')]}"/>
+                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '1')]}" optional="hide"/>
                         <field name="BT" force_save="1"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '1')]}"/>
+                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '1')]}" optional="hide"/>
                         <field name="VT" force_save="1"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '1')]}"/>
+                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '1')]}" optional="hide"/>
                         <field name="ST" force_save="1"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '2')]}"/>
+                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '2')]}" optional="hide"/>
                         <field name="CT" force_save="1"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '2')]}"/>
+                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '2')]}" optional="hide"/>
                         <field name="DN" force_save="1"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '2')]}"/>
+                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '2')]}" optional="hide"/>
                         <field name="TN" force_save="1"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '3')]}"/>
+                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '3')]}" optional="hide"/>
                         <field name="AG" force_save="1"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '3')]}"/>
+                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '3')]}" optional="hide"/>
                         <field name="BTH" force_save="1"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '3')]}"/>
+                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '3')]}" optional="hide"/>
                         <field name="BD" force_save="1"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '4')]}"/>
+                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '4')]}" optional="hide"/>
                         <field name="TV" force_save="1"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '4')]}"/>
+                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '4')]}" optional="hide"/>
                         <field name="VL" force_save="1"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '4')]}"/>
+                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '4')]}" optional="hide"/>
                         <field name="HCM_2" force_save="1"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '5')]}"/>
+                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '5')]}" optional="hide"/>
                         <field name="LA" force_save="1"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '5')]}"/>
+                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '5')]}" optional="hide"/>
                         <field name="BP" force_save="1"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '5')]}"/>
+                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '5')]}" optional="hide"/>
                         <field name="HG" force_save="1"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '5')]}"/>
+                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '5')]}" optional="hide"/>
                         <field name="KG" force_save="1"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '6')]}"/>
+                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '6')]}" optional="hide"/>
                         <field name="DL" force_save="1"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '6')]}"/>
+                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '6')]}" optional="hide"/>
                         <field name="TG" force_save="1"
-                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '6')]}"/>
+                               attrs="{'column_invisible': [('parent.day_of_week', '!=', '6')]}" optional="hide"/>
                         <!-- Phát sinh-->
-                        <field name="HCM_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '0')]}"/>
-                        <field name="DT_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '0')]}"/>
-                        <field name="CM_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '0')]}"/>
-                        <field name="BL_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '1')]}"/>
-                        <field name="BT_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '1')]}"/>
-                        <field name="VT_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '1')]}"/>
-                        <field name="ST_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '2')]}"/>
-                        <field name="CT_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '2')]}"/>
-                        <field name="DN_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '2')]}"/>
-                        <field name="TN_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '3')]}"/>
-                        <field name="AG_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '3')]}"/>
-                        <field name="BTH_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '3')]}"/>
-                        <field name="BD_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '4')]}"/>
-                        <field name="TV_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '4')]}"/>
-                        <field name="VL_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '4')]}"/>
-                        <field name="HCM_2_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '5')]}"/>
-                        <field name="LA_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '5')]}"/>
-                        <field name="BP_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '5')]}"/>
-                        <field name="HG_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '5')]}"/>
-                        <field name="KG_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '6')]}"/>
-                        <field name="DL_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '6')]}"/>
-                        <field name="TG_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '6')]}"/>
-
-                        <field name="percent" optional="hide"/>
+                        <field name="HCM_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '0')]}" optional="hide"/>
+                        <field name="DT_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '0')]}" optional="hide"/>
+                        <field name="CM_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '0')]}" optional="hide"/>
+                        <field name="BL_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '1')]}" optional="hide"/>
+                        <field name="BT_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '1')]}" optional="hide"/>
+                        <field name="VT_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '1')]}" optional="hide"/>
+                        <field name="ST_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '2')]}" optional="hide"/>
+                        <field name="CT_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '2')]}" optional="hide"/>
+                        <field name="DN_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '2')]}" optional="hide"/>
+                        <field name="TN_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '3')]}" optional="hide"/>
+                        <field name="AG_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '3')]}" optional="hide"/>
+                        <field name="BTH_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '3')]}" optional="hide"/>
+                        <field name="BD_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '4')]}" optional="hide"/>
+                        <field name="TV_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '4')]}" optional="hide"/>
+                        <field name="VL_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '4')]}" optional="hide"/>
+                        <field name="HCM_2_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '5')]}" optional="hide"/>
+                        <field name="LA_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '5')]}" optional="hide"/>
+                        <field name="BP_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '5')]}" optional="hide"/>
+                        <field name="HG_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '5')]}" optional="hide"/>
+                        <field name="KG_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '6')]}" optional="hide"/>
+                        <field name="DL_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '6')]}" optional="hide"/>
+                        <field name="TG_PC" attrs="{'column_invisible': [('parent.day_of_week', '!=', '6')]}" optional="hide"/>
+                        <field name="percent" />
+                        <field name="revenues"/>
                         <field name="sum_return"/>
                         <field name="consume"/>
                         <field name="ticket_receive"/>
                         <field name="du_thieu" optional="hide"/>
-                        <field name="revenues"/>
+
                     </tree>
                 </field>
                 <field name="is_show" invisible="1"/>
