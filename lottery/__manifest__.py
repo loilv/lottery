@@ -10,7 +10,7 @@
     'company': '',
     'maintainer': '',
     'website': "",
-    "depends": ['base', 'mail'],
+    "depends": ['base', 'web', 'mail'],
     "data": [
         'security/ir.model.access.csv',
         'data/res_group.xml',
@@ -29,22 +29,20 @@
         'views/res_users.xml',
     ],
     'assets': {
-        'web.assets_backend': {
+        'web.assets_frontend': [
+            'code_backend_theme/static/src/scss/login.scss',
+        ],
+        'web.assets_backend': [
+            'lottery/static/src/js/customer.js',
+            'lottery/static/src/js/custom_option_field.js',
+        ],
+        'web.assets_qweb': [
 
-        },
-        'web.assets_frontend': {
-
-        },
-        'web.assets_qweb': {
-
-        },
+        ],
     },
     'images': [
 
     ],
-    'license': 'LGPL-3',
-    # 'pre_init_hook': 'test_pre_init_hook',
-    # 'post_init_hook': 'test_post_init_hook',
     'installable': True,
     'application': True,
     'auto_install': True,
