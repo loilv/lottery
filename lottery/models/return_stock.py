@@ -462,8 +462,8 @@ class ReturnStockLine(models.Model):
                     p4 = 0
                 elif day_week == 6:
                     p1 = (plan.ST + plan.ST_PS) * r.customer_id.ST_price
-                    p2 = (plan.BT + plan.BT_PS) * r.customer_id.BT_price
-                    p3 = (plan.VT + plan.VT_PS) * r.customer_id.VT_price
+                    p2 = (plan.CT + plan.CT_PS) * r.customer_id.CT_price
+                    p3 = (plan.DN + plan.DN_PS) * r.customer_id.DN_price
                     p4 = 0
 
                 p1 = p1 - ((r.TN * 10000) * r.customer_id.TN_price)
@@ -502,8 +502,8 @@ class ReturnStockLine(models.Model):
                     p4 = 0
                 elif day_week == 5:
                     p1 = (plan.ST + plan.ST_PS) * r.customer_id.ST_price
-                    p2 = (plan.BT + plan.BT_PS) * r.customer_id.BT_price
-                    p3 = (plan.VT + plan.VT_PS) * r.customer_id.VT_price
+                    p2 = (plan.CT + plan.CT_PS) * r.customer_id.CT_price
+                    p3 = (plan.DN + plan.DN_PS) * r.customer_id.DN_price
                     p4 = 0
                 elif day_week == 6:
                     p1 = (plan.TN + plan.TN_PS) * r.customer_id.TN_price
@@ -542,8 +542,8 @@ class ReturnStockLine(models.Model):
                     p4 = 0
                 elif day_week == 4:
                     p1 = (plan.ST + plan.ST_PS) * r.customer_id.ST_price
-                    p2 = (plan.BT + plan.BT_PS) * r.customer_id.BT_price
-                    p3 = (plan.VT + plan.VT_PS) * r.customer_id.VT_price
+                    p2 = (plan.CT + plan.CT_PS) * r.customer_id.CT_price
+                    p3 = (plan.DN + plan.DN_PS) * r.customer_id.DN_price
                     p4 = 0
                 elif day_week == 5:
                     p1 = (plan.TN + plan.TN_PS) * r.customer_id.TN_price
@@ -580,14 +580,14 @@ class ReturnStockLine(models.Model):
                     p3 = (plan.VT + plan.VT_PS) * r.customer_id.VT_price
                     p4 = 0
                 elif day_week == 3:
-                    p1 = (plan.BL + plan.BL_PS) * r.customer_id.BL_price
-                    p2 = (plan.BT + plan.BT_PS) * r.customer_id.BT_price
-                    p3 = (plan.VT + plan.VT_PS) * r.customer_id.VT_price
+                    p1 = (plan.ST + plan.ST_PS) * r.customer_id.ST_price
+                    p2 = (plan.CT + plan.CT_PS) * r.customer_id.CT_price
+                    p3 = (plan.DN + plan.DN_PS) * r.customer_id.DN_price
                     p4 = 0
                 elif day_week == 4:
-                    p1 = (plan.ST + plan.ST_PS) * r.customer_id.ST_price
-                    p2 = (plan.BT + plan.BT_PS) * r.customer_id.BT_price
-                    p3 = (plan.VT + plan.VT_PS) * r.customer_id.VT_price
+                    p1 = (plan.TN + plan.TN_PS) * r.customer_id.TN_price
+                    p2 = (plan.AG + plan.AG_PS) * r.customer_id.AG_price
+                    p3 = (plan.BTH + plan.BTH_PS) * r.customer_id.BTH_price
                     p4 = 0
                 elif day_week == 5:
                     p1 = (plan.BD + plan.BD_PS) * r.customer_id.BD_price
