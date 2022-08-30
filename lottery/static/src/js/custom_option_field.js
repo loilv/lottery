@@ -14,14 +14,19 @@ var CustomOptionField = BasicController.include({
      * @private
      */
     _onSaveOptionalFields: function (ev) {
+        var data = []
         var old_data = this.call(
             'local_storage',
             'getItem',
             this._getOptionalFieldsLocalStorageKey(ev.data.keyParts)
         );
-        var data = old_data.concat(ev.data.optionalColumnsEnabled)
-        if (old_data.indexOf(ev.data.del_index) != -1){
-            data.splice(old_data.indexOf(ev.data.del_index), 1);
+        if (old_data) {
+            data = old_data.concat(ev.data.optionalColumnsEnabled)
+            if (old_data.indexOf(ev.data.del_index) != -1){
+                data.splice(old_data.indexOf(ev.data.del_index), 1);
+            }
+        } else {
+            data = ev.data.optionalColumnsEnabled
         }
         this.call(
             'local_storage',
