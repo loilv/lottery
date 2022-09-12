@@ -37,6 +37,32 @@ class ReturnStock(models.Model):
         res.update({'lines': val_lines})
         return res
 
+    @api.model
+    def auto_return_stock(self):
+        res = self.env['return.stock'].search([('date', '=', datetime.now())], limit=1)
+        if res:
+            return False
+        stock_ids = self.env['data.tele'].search([])
+        data = []
+        for p in stock_ids:
+            data.append((0, 0, {'data_tele_id': p.id}))
+        res.update({'tele_ids': data})
+        customer_ids = self.env['customer'].search([('status', '=', 'active')])
+        val_lines = []
+        for customer in customer_ids:
+            vals = {
+                'customer_id': customer.id,
+            }
+            val_lines.append((0, 0, vals))
+        vals = {
+            'lines': val_lines,
+            'name': f'Trả ế ngày {datetime.now().strftime("%d-%m-%Y")}',
+            'date': datetime.now(),
+            'day_of_week': str(datetime.now().weekday()),
+        }
+        res.create(vals)
+        return res
+
     day_of_week = fields.Selection([
         ('0', 'Thứ 2'),
         ('1', 'Thứ 3'),

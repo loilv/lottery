@@ -27,5 +27,34 @@
             <field name="state">code</field>
             <field name="code">model.cron_create_inventory()</field>
         </record>
+
+
+        <record id="schedule_auto_return_lottery_everydays" model="ir.cron">
+            <field name="name">Schedule create return : Every Days</field>
+            <field name="active" eval="True"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="priority">1</field>
+            <field name="nextcall" eval="(DateTime.now() + timedelta(days=0)).strftime('%Y-%m-%d 17:01:00')"/>
+            <field name="model_id" ref="lottery.model_return_stock"/>
+            <field name="state">code</field>
+            <field name="code">model.auto_return_stock()</field>
+        </record>
+
+        <record id="schedule_auto_planed_lottery_everydays" model="ir.cron">
+            <field name="name">Schedule create planed : Every Days</field>
+            <field name="active" eval="True"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="priority">1</field>
+            <field name="nextcall" eval="(DateTime.now() + timedelta(days=0)).strftime('%Y-%m-%d 17:01:00')"/>
+            <field name="model_id" ref="lottery.model_planed"/>
+            <field name="state">code</field>
+            <field name="code">model.action_auto_planed()</field>
+        </record>
     </data>
 </odoo>
