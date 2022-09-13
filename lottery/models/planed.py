@@ -1,7 +1,7 @@
 import json
 
 from lxml import etree
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 from odoo.exceptions import UserError, ValidationError
 from odoo import fields, api, models, _
 
@@ -61,7 +61,8 @@ class Planed(models.Model):
 
     @api.model
     def action_auto_planed(self):
-        res = self.env['planed'].search([('date', '=', datetime.now())], limit=1)
+        now = datetime.now() + timedelta(hours=8)
+        res = self.env['planed'].search([('date', '=', now)], limit=1)
         if res:
             return False
         customer_ids = self.env['customer'].search([('status', '=', 'active')])
@@ -93,11 +94,11 @@ class Planed(models.Model):
                 'TG': customer.TG,
             }
             val_lines.append((0, 0, vals))
-        inventory = self.env['purchase.inventory'].search([('date', '=', datetime.now())], limit=1)
+        inventory = self.env['purchase.inventory'].search([('date', '=', now)], limit=1)
         if not inventory:
             raise ValidationError('Chưa có phiếu nhập kho, không thể tạo kế hoạch.')
         stock_vals = []
-        quantities = self.env['purchase.inventory'].get_total(date=datetime.now())
+        quantities = self.env['purchase.inventory'].get_total(date=now)
         for item in inventory.lines:
             code = item.province_id.code
             vals = {
@@ -108,11 +109,11 @@ class Planed(models.Model):
             stock_vals.append((0, 0, vals))
         vals = {
             'stock_info': stock_vals, 'lines': val_lines,
-            'name': f'Kế hoạch lãnh vé ngày: {datetime.now().strftime("%d-%m-%Y")}',
+            'name': f'Kế hoạch lãnh vé ngày: {now.strftime("%d-%m-%Y")}',
             'date': datetime.now(),
-            'day_of_week': str(datetime.now().weekday()),
+            'day_of_week': str(now.weekday()),
         }
-        res.with_context(default_date=datetime.now()).create(vals)
+        res.with_context(default_date=now).create(vals)
         return res
 
     name = fields.Char(string='Tên kế hoạch', default='')

@@ -39,7 +39,8 @@ class ReturnStock(models.Model):
 
     @api.model
     def auto_return_stock(self):
-        res = self.env['return.stock'].search([('date', '=', datetime.now())], limit=1)
+        now = datetime.now() + timedelta(hours=8)
+        res = self.env['return.stock'].search([('date', '=', now)], limit=1)
         if res:
             return False
         stock_ids = self.env['data.tele'].search([])
@@ -56,9 +57,9 @@ class ReturnStock(models.Model):
             val_lines.append((0, 0, vals))
         vals = {
             'lines': val_lines,
-            'name': f'Trả ế ngày {datetime.now().strftime("%d-%m-%Y")}',
-            'date': datetime.now(),
-            'day_of_week': str(datetime.now().weekday()),
+            'name': f'Trả ế ngày {now.strftime("%d-%m-%Y")}',
+            'date': now,
+            'day_of_week': str(now.weekday()),
         }
         res.create(vals)
         return res
