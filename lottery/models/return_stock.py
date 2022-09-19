@@ -686,20 +686,49 @@ class ReturnStockLine(models.Model):
                  'BTH_PC', 'BD_PC', 'TV_PC', 'VL_PC', 'HCM_2_PC', 'LA_PC', 'BP_PC', 'HG_PC', 'KG_PC', 'DL_PC', 'TG_PC')
     def _compute_percent(self):
         for r in self:
+            list_raw = []
+            r.percent = 0
             if r.return_stock_id.day_of_week == '0':
-                r.percent = (r.HCM_PC + r.DT_PC + r.CM_PC) / 3
+                list_raw = [r.HCM_PC, r.DT_PC, r.CM_PC]
+                list_raw_done = [x for x in list_raw if x != 0]
+                if len(list_raw_done) >= 1:
+                    r.percent = sum(list_raw) / len(list_raw_done)
             elif r.return_stock_id.day_of_week == '1':
-                r.percent = (r.BL_PC + r.BT_PC + r.VT_PC) / 3
+                list_raw = [r.BL_PC, r.BT_PC, r.VT_PC]
+                list_raw_done = [x for x in list_raw if x != 0]
+                if len(list_raw_done) >= 1:
+                    r.percent = sum(list_raw) / len(list_raw_done)
+                # r.percent = (r.BL_PC + r.BT_PC + r.VT_PC) / 3
             elif r.return_stock_id.day_of_week == '2':
-                r.percent = (r.ST_PC + r.CT_PC + r.DN_PC) / 3
+                list_raw = [r.ST_PC, r.CT_PC, r.DN_PC]
+                list_raw_done = [x for x in list_raw if x != 0]
+                if len(list_raw_done) >= 1:
+                    r.percent = sum(list_raw) / len(list_raw_done)
+                # r.percent = (r.ST_PC + r.CT_PC + r.DN_PC) / 3
             elif r.return_stock_id.day_of_week == '3':
-                r.percent = (r.TN_PC + r.AG_PC + r.BTH_PC) / 3
+                list_raw = [r.TN_PC, r.AG_PC, r.BTH_PC]
+                list_raw_done = [x for x in list_raw if x != 0]
+                if len(list_raw_done) >= 1:
+                    r.percent = sum(list_raw) / len(list_raw_done)
+                # r.percent = (r.TN_PC + r.AG_PC + r.BTH_PC) / 3
             elif r.return_stock_id.day_of_week == '4':
-                r.percent = (r.BD_PC + r.TV_PC + r.VL_PC) / 3
+                list_raw = [r.BD_PC, r.TV_PC, r.VL_PC]
+                list_raw_done = [x for x in list_raw if x != 0]
+                if len(list_raw_done) >= 1:
+                    r.percent = sum(list_raw) / len(list_raw_done)
+                # r.percent = (r.BD_PC + r.TV_PC + r.VL_PC) / 3
             elif r.return_stock_id.day_of_week == '5':
-                r.percent = (r.HCM_2_PC + r.LA_PC + r.BP_PC + r.HG_PC) / 3
-            else:
-                r.percent = (r.KG_PC + r.DL_PC + r.TG_PC) / 3
+                list_raw = [r.HCM_2_PC, r.LA_PC, r.BP_PC, r.HG_PC]
+                list_raw_done = [x for x in list_raw if x != 0]
+                if len(list_raw_done) >= 1:
+                    r.percent = sum(list_raw) / len(list_raw_done)
+                # r.percent = (r.HCM_2_PC + r.LA_PC + r.BP_PC + r.HG_PC) / 3
+            elif r.return_stock_id.day_of_week == '6':
+                list_raw = [r.KG_PC, r.DL_PC, r.TG_PC]
+                list_raw_done = [x for x in list_raw if x != 0]
+                if len(list_raw_done) >= 1:
+                    r.percent = sum(list_raw) / len(list_raw_done)
+                # r.percent = (r.KG_PC + r.DL_PC + r.TG_PC) / 3
 
 
 class DataTele(models.Model):
