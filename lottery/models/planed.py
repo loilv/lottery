@@ -61,60 +61,63 @@ class Planed(models.Model):
 
     @api.model
     def action_auto_planed(self):
-        now = datetime.now() + timedelta(hours=8)
-        res = self.env['planed'].search([('date', '=', now)], limit=1)
-        if res:
-            return False
-        customer_ids = self.env['customer'].search([('status', '=', 'active')])
-        val_lines = []
-        for customer in customer_ids:
+        current = datetime.now() + timedelta(hours=8)
+        for i in range(0, 8):
+            now = current + timedelta(days=i)
+            print(now)
+            res = self.env['planed'].search([('date', '=', now)], limit=1)
+            if res:
+                continue
+            customer_ids = self.env['customer'].search([('status', '=', 'active')])
+            val_lines = []
+            for customer in customer_ids:
+                vals = {
+                    'customer_id': customer.id,
+                    'HCM': customer.HCM,
+                    'DT': customer.DT,
+                    'CM': customer.CM,
+                    'BL': customer.BL,
+                    'BT': customer.BT,
+                    'VT': customer.VT,
+                    'ST': customer.ST,
+                    'CT': customer.CT,
+                    'DN': customer.DN,
+                    'TN': customer.TN,
+                    'AG': customer.AG,
+                    'BTH': customer.BTH,
+                    'BD': customer.BD,
+                    'TV': customer.TV,
+                    'VL': customer.VL,
+                    'HCM_2': customer.HCM_2,
+                    'LA': customer.LA,
+                    'BP': customer.BP,
+                    'HG': customer.HG,
+                    'KG': customer.KG,
+                    'DL': customer.DL,
+                    'TG': customer.TG,
+                }
+                val_lines.append((0, 0, vals))
+            inventory = self.env['purchase.inventory'].search([('date', '=', now)], limit=1)
+            if not inventory:
+                continue
+            stock_vals = []
+            quantities = self.env['purchase.inventory'].get_total(date=now)
+            for item in inventory.lines:
+                code = item.province_id.code
+                vals = {
+                    'province_id': item.province_id.id,
+                    'quantity_in': quantities[code],
+                    'quantity_out': quantities[code] - sum(customer_ids.mapped(code)),
+                }
+                stock_vals.append((0, 0, vals))
             vals = {
-                'customer_id': customer.id,
-                'HCM': customer.HCM,
-                'DT': customer.DT,
-                'CM': customer.CM,
-                'BL': customer.BL,
-                'BT': customer.BT,
-                'VT': customer.VT,
-                'ST': customer.ST,
-                'CT': customer.CT,
-                'DN': customer.DN,
-                'TN': customer.TN,
-                'AG': customer.AG,
-                'BTH': customer.BTH,
-                'BD': customer.BD,
-                'TV': customer.TV,
-                'VL': customer.VL,
-                'HCM_2': customer.HCM_2,
-                'LA': customer.LA,
-                'BP': customer.BP,
-                'HG': customer.HG,
-                'KG': customer.KG,
-                'DL': customer.DL,
-                'TG': customer.TG,
+                'stock_info': stock_vals, 'lines': val_lines,
+                'name': f'Kế hoạch lãnh vé ngày: {now.strftime("%d-%m-%Y")}',
+                'date': now,
+                'day_of_week': str(now.weekday()),
             }
-            val_lines.append((0, 0, vals))
-        inventory = self.env['purchase.inventory'].search([('date', '=', now)], limit=1)
-        if not inventory:
-            raise ValidationError('Chưa có phiếu nhập kho, không thể tạo kế hoạch.')
-        stock_vals = []
-        quantities = self.env['purchase.inventory'].get_total(date=now)
-        for item in inventory.lines:
-            code = item.province_id.code
-            vals = {
-                'province_id': item.province_id.id,
-                'quantity_in': quantities[code],
-                'quantity_out': quantities[code] - sum(customer_ids.mapped(code)),
-            }
-            stock_vals.append((0, 0, vals))
-        vals = {
-            'stock_info': stock_vals, 'lines': val_lines,
-            'name': f'Kế hoạch lãnh vé ngày: {now.strftime("%d-%m-%Y")}',
-            'date': datetime.now(),
-            'day_of_week': str(now.weekday()),
-        }
-        res.with_context(default_date=now).create(vals)
-        return res
+            res.with_context(default_date=now).create(vals)
+        return True
 
     name = fields.Char(string='Tên kế hoạch', default='')
     date = fields.Date(string='Ngày', default=lambda self: fields.Datetime.now())
